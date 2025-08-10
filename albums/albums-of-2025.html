@@ -182,7 +182,7 @@ main ol {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-size: 16px; /* change the size of unhovered text in the album box */
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
   user-select: none;
   line-height: 1;
   transition: all 0.4s ease;
@@ -190,7 +190,7 @@ main ol {
 
 .album:hover .album-text {
   white-space: normal;
-  font-size: 18px; /* change the size of hovered text in the album box*/
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
   line-height: 1;
   transform: translateX(10px);
   text-overflow: unset;
@@ -204,14 +204,14 @@ main ol {
 
 .site-banner {
   background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
-  color: #fff;                    /* white text */
-  padding: 0px 0;                 /* top/bottom spacing */
-  text-align: center;             /* center the title */
-  border-bottom: 1px solid #242424;  /* subtle line under banner */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
   position: sticky;
   top: 10;
   z-index: 100;
-  width: 100%; /* ensures background spans full page */
+  width: 100%;                             /* ensures background spans full page */
 }
 
 .site-title {
@@ -234,7 +234,7 @@ main ol {
 .nav-links a { /* LINK TO OTHER YEARS SETTINGS */
   display: inline-block;                   /* make the link behave like a box */
   padding: 4px 8px;                        /* space inside the box */
-  border: 1px solid #242424;               /* border color */
+  border: 1px solid #242424;             /* border color */
   border-radius: 1px;                      /* rounded corners */
   background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
   color: #ccc;                             /* text color */
@@ -243,12 +243,12 @@ main ol {
   font-size: 14px;
   font-style: normal;
   font-weight: 300;
-  text-decoration: none;       /* remove underline */
+  text-decoration: none;                   /* remove underline */
   transition: background-color 2s, border-color 1s, color 0.3s;
 }
 .nav-links a:hover {
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
-  background-color: #444;      /* highlight on hover */
+  background-color: #444;                            /* highlight on hover */
   border-color: #ccc;
   color: #fff;
 }
@@ -298,16 +298,15 @@ main ol {
 
 </style></head><body>
 
-<header><h1 class="site-title">In Authority</h1>
+<header><div class="site-banner"><h1 class="site-title">The In Authority</h1></div>
 <nav><ul class="nav-links">
   <li><a href="../index.html">Home</a></a></li>
   <li><a href="albums-of-2024.html">Previous Year</a></a></li>
 	<li><a href="albums-of-2026.html">Next Year</a></a></li>
 </ul></nav></header>
     
-<main>
+<main><ol>
 <h1>2025: Albums of the Year</h1>
-<ol>
 
 <!-- ALBUM LIST STARTS HERE -->
 
@@ -2892,8 +2891,7 @@ main ol {
     <h3>0</h3>
       </div></div></li>
 
-</ol>
-</main>
+</ol></main>
 
 
 <!-- Modal -->
@@ -2906,7 +2904,7 @@ main ol {
 
 
   <footer>
-    <p>© 2025 In Authority. All rights reserved.</p>
+    <p>© 2025 The In Authority. All rights reserved.</p>
   </footer>
 
   <script>
