@@ -85,19 +85,6 @@ nav {
   margin-bottom: 80px;
 }
 
-.nav-links { /* LINK TO OTHER YEARS SETTINGS */
-  list-style-type: none;  /* remove bullet points */
-  padding-left: 0;        /* remove left padding */
-  margin-left: 0;         /* remove left margin if any */
-}
-.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
-  text-align: center;
-  font-size: 16px;
-  margin-bottom: 0px;
-  font-style: normal;
-  font-weight: 300;
-}
-
 nav a {
   display: block;
   font-size: 16px;
@@ -112,7 +99,7 @@ main h1 {
   text-align: center;
   margin-top: -60px;
   margin-bottom: 20px;
-  font-size: 20px;
+  font-size: 16px;
   font-style: oblique;
   font-weight: 300;
 }
@@ -129,18 +116,18 @@ main ol {
   align-items: flex-start;
   margin-bottom: -55px;
   padding: 12px 20px;
-  border-top: 1px solid #242424; /* thickness and colour of box's top border */
-  border-bottom: 1px solid #444; /* thickness and colour of box's bottom border */
-  gap: 24px; /* gap between the album cover and the text to the right of it */
-  height: 100px; /* the height of the unhovered box */
-  overflow: hidden; /* hides the text that overflows the box */
-  cursor: pointer; /* changes the cursor when hovering over the album box */
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
   position: relative;
-  background-color: #111; /* changes the colour of the unhovered box */
-  border-radius: 8px; /* rounds the box corners for a soft vignette effect */
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
   z-index: 1;
-  width: 100%; /* the width of the album container box */
-  margin-left: 0%; /* offset of the album container box to make it centered */
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
   box-sizing: border-box;
   transition: 
     height 1s ease, /* how low it takes for the hovered box to expand */
@@ -149,12 +136,12 @@ main ol {
 }
 
 .album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
-  height: 146px; /* the height of the hovered box */
-  margin-bottom: 10px; /* how much space is left from the bottom of the hovered box until the next box */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
   z-index: 10;
-  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223); /* changes the size and colour of the hovered box's shadow */
-  border: 1px solid #ccc; /* changes the thickness and colour of the hovered box's border */
-  background-color: #333; /* changes the colour of the hovered box */
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
 }
 
 .album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
@@ -215,12 +202,63 @@ main ol {
   cursor: pointer;
 }
 
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                    /* white text */
+  padding: 0px 0;                 /* top/bottom spacing */
+  text-align: center;             /* center the title */
+  border-bottom: 1px solid #242424;  /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%; /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;               /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;       /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;      /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
 <!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
-/* .modal-overlay {
+/*.modal-overlay {
+  display: none;
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
   background: rgba(0, 0, 0, 0.75);
-  display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
@@ -2899,7 +2937,6 @@ main ol {
   </script>
 </body>
 </html>
-
 
 
 
