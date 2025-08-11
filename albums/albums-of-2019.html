@@ -1,900 +1,1317 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2025 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-2018.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-2020.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-2021.html">Previous Year</a></a></li>
+	<li><a href="albums-of-2023.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>2019: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="Images/2019/Solange2019.jpg" width="100" height="100" alt=""/>
-        <h3>Solange</h3>
-        <h3>When I Get Home</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="Images/2019/Clipping2019.jpg" width="100" height="100" alt=""/>
-        <h3>Clipping</h3>
-        <h3>There Existed an Addiction to Blood</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="Images/2019/FKATwigs2019.jpg" width="100" height="100" alt=""/>
-        <h3>FKA twigs</h3>
-        <h3>Magdalene</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="Images/2019/ArianaGrande2019.jpg" width="100" height="100" alt=""/>
-        <h3>Ariana Grande</h3>
-        <h3>Thank U, Next</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="Images/2019/TylerTheCreator2019.jpg" width="100" height="100" alt=""/>
-        <h3>Tyler, the Creator</h3>
-        <h3>Igor</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="Images/2019/DorianElectra2019.jpg" width="100" height="100" alt=""/>
-        <h3>Dorian Electra</h3>
-        <h3>Flamboyant</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="Images/2019/LanaDelRey2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lana Del Rey</h3>
-        <h3>Norman Fucking Rockwell!</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="Images/2019/Dave2019.jpg" width="100" height="100" alt=""/>
-        <h3>Dave</h3>
-        <h3>Psychodrama</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="Images/2019/Slowthai2019.jpg" width="100" height="100" alt=""/>
-        <h3>Slowthai</h3>
-        <h3>Nothing Great About Britain</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="Images/2019/InjuryReserve2019.jpg" width="100" height="100" alt=""/>
-        <h3>Injury Reserve</h3>
-        <h3>Injury Reserve</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="Images/2019/BloodIncantation2019.jpg" width="100" height="100" alt=""/>
-        <h3>Blood Incantation</h3>
-        <h3>Hidden History of the Human Race</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="Images/2019/FreddieGibbsMadlib2019.jpg" width="100" height="100" alt=""/>
-        <h3>Freddie Gibbs / Madlib</h3>
-        <h3>Bandana</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="Images/2019/FayeWebster2019.jpg" width="100" height="100" alt=""/>
-        <h3>Faye Webster</h3>
-        <h3>Atlanta Millionaires Club</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="Images/2019/FontainesDC2019.jpg" width="100" height="100" alt=""/>
-        <h3>Fontaines D.C.</h3>
-        <h3>Dogrel</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="Images/2019/NiluferYanya2019.jpg" width="100" height="100" alt=""/>
-        <h3>Nilüfer Yanya</h3>
-        <h3>Miss Universe</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="Images/2019/TheseNewPuritans2019.jpg" width="100" height="100" alt=""/>
-        <h3>These New Puritans</h3>
-        <h3>Inside the Rose</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/LittleSimz2019.jpg" width="100" height="100" alt=""/>
-        <h3>Little Simz</h3>
-        <h3>Grey Area</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/BonIver2019.jpg" width="100" height="100" alt=""/>
-        <h3>Bon Iver</h3>
-        <h3>i,i</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/Cherushii2019.jpg" width="100" height="100" alt=""/>
-        <h3>Cherushii / Maria Minerva</h3>
-        <h3>Cherushii & Maria Minerva</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/HeladoNegro2019.jpg" width="100" height="100" alt=""/>
-        <h3>Helado Negro</h3>
-        <h3>This Is How You Smile</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/BlackMidi2019.jpg" width="100" height="100" alt=""/>
-        <h3>Black Midi</h3>
-        <h3>Schlagenheim</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/BabyKeem2019.jpg" width="100" height="100" alt=""/>
-        <h3>Baby Keem</h3>
-        <h3>Die for My Bitch</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="Images/2019/MJLenderman2019.jpg" width="100" height="100" alt=""/>
-        <h3>MJ Lenderman</h3>
-        <h3>MJ Lenderman</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="Images/2019/Lifafa2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lifafa</h3>
-        <h3>Jaago</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="Images/2019/Kitty2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kitty</h3>
-        <h3>Rose Gold</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="Images/2019/Moodymann2019.jpg" width="100" height="100" alt=""/>
-        <h3>Moodymann</h3>
-        <h3>Sinner</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="Images/2019/MorMor2019.jpg" width="100" height="100" alt=""/>
-        <h3>MorMor</h3>
-        <h3>Some Place Else</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="Images/2019/AldousHarding2019.jpg" width="100" height="100" alt=""/>
-        <h3>Aldous Harding</h3>
-        <h3>Designer</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="Images/2019/QuelleChris2019.jpg" width="100" height="100" alt=""/>
-        <h3>Quelle Chris</h3>
-        <h3>Guns</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="Images/2019/BigMomma2019.jpg" width="100" height="100" alt=""/>
-        <h3>Big Momma</h3>
-        <h3>MILF</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="Images/2019/BigThief2019.jpg" width="100" height="100" alt=""/>
-        <h3>Big Thief</h3>
-        <h3>U.F.O.F.</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Plaid2019.jpg" width="100" height="100" alt=""/>
-        <h3>Plaid</h3>
-        <h3>Polymer</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/CFCF2019.jpg" width="100" height="100" alt=""/>
-        <h3>CFCF</h3>
-        <h3>Liquid Colours</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Mike2019.jpg" width="100" height="100" alt=""/>
-        <h3>Mike</h3>
-        <h3>Tears of Joy</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Lankum2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lankum</h3>
-        <h3>The Livelong Day</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Coldplay2019.jpg" width="100" height="100" alt=""/>
-        <h3>Coldplay</h3>
-        <h3>Everyday Life</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/ZelooperZ2019.jpg" width="100" height="100" alt=""/>
-        <h3>ZelooperZ</h3>
-        <h3>Dyn-o-mite</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Maxo2019.jpg" width="100" height="100" alt=""/>
-        <h3>Maxo</h3>
-        <h3>Lil Big Man</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/ErikaDeCasier2019.jpg" width="100" height="100" alt=""/>
-        <h3>Erika de Casier</h3>
-        <h3>Essentials</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/TimHecker2019.jpg" width="100" height="100" alt=""/>
-        <h3>Tim Hecker</h3>
-        <h3>Anoyo</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/SeeYouSpaceCowboy2019.jpg" width="100" height="100" alt=""/>
-        <h3>SeeYouSpaceCowboy</h3>
-        <h3>The Correlation Between Entrance and Exit Wounds</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/Squid2019.jpg" width="100" height="100" alt=""/>
-        <h3>Squid</h3>
-        <h3>Town Centre</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/MalibuKen2019.jpg" width="100" height="100" alt=""/>
-        <h3>Malibu Ken</h3>
-        <h3>Malibu Ken</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/LittleBrother2019.jpg" width="100" height="100" alt=""/>
-        <h3>Little Brother</h3>
-        <h3>May the Lord Watch</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/AmericanFootball2019.jpg" width="100" height="100" alt=""/>
-        <h3>American Football</h3>
-        <h3>American Football (LP3)</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/AveyTare2019.jpg" width="100" height="100" alt=""/>
-        <h3>Avey Tare</h3>
-        <h3>Cows on Hourglass Pond</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/DosMonos2019.jpg" width="100" height="100" alt=""/>
-        <h3>Dos Monos</h3>
-        <h3>Dos City</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/JessicaPratt2019.jpg" width="100" height="100" alt=""/>
-        <h3>Jessica Pratt</h3>
-        <h3>Quiet Signs</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="Images/2019/BlanckMass2019.jpg" width="100" height="100" alt=""/>
-        <h3>Blanck Mass</h3>
-        <h3>Animated Violence Mild</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/DrabMajesty2019.jpg" width="100" height="100" alt=""/>
-        <h3>Drab Majesty</h3>
-        <h3>Modern Mirror</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/ShinichiroYokota2019.jpg" width="100" height="100" alt=""/>
-        <h3>Shinichiro Yokota</h3>
-        <h3>I Know You Like It</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/JamilaWoods2019.jpg" width="100" height="100" alt=""/>
-        <h3>Jamila Woods</h3>
-        <h3>Legacy! Legacy!</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/Weatherday2019.jpg" width="100" height="100" alt=""/>
-        <h3>Weatherday</h3>
-        <h3>Come In</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/KishiBashi2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kishi Bashi</h3>
-        <h3>Omoiyari</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/BringMeTheHorizon2019.jpg" width="100" height="100" alt=""/>
-        <h3>Bring Me the Horizon</h3>
-        <h3>Amo</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/CultOfLuna2019.jpg" width="100" height="100" alt=""/>
-        <h3>Cult of Luna</h3>
-        <h3>A Dawn to Fear</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="Images/2019/TheCometIsComing2019.jpg" width="100" height="100" alt=""/>
-        <h3>The Comet Is Coming</h3>
-        <h3>Trust in the Lifeforce of the Deep Mystery</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Jpegmafia2019.jpg" width="100" height="100" alt=""/>
-        <h3>Jpegmafia</h3>
-        <h3>All My Heroes Are Cornballs</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Slayyyter2019.jpg" width="100" height="100" alt=""/>
-        <h3>Slayyyter</h3>
-        <h3>Slayyyter</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Avenade2019.jpg" width="100" height="100" alt=""/>
-        <h3>Avenade</h3>
-        <h3>It's a Whimsical Afterlife</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Sadness2019-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Sadness</h3>
-        <h3>Circle of Veins</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/CocoBryce2019.jpg" width="100" height="100" alt=""/>
-        <h3>Coco Bryce</h3>
-        <h3>Night on Earth</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Twice2019.jpg" width="100" height="100" alt=""/>
-        <h3>Twice</h3>
-        <h3>&Twice</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Mavi2019.jpg" width="100" height="100" alt=""/>
-        <h3>Mavi</h3>
-        <h3>Let the Sun Talk</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/TheTwilightSad2019.jpg" width="100" height="100" alt=""/>
-        <h3>The Twilight Sad</h3>
-        <h3>It Won/t Be Like This All the Time</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/Madonna2019.jpg" width="100" height="100" alt=""/>
-        <h3>Madonna</h3>
-        <h3>Madame X</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/KanyeWest2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kanye West</h3>
-        <h3>Jesus Is King</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/StellaDonnelly2019.jpg" width="100" height="100" alt=""/>
-        <h3>Stella Donnelly</h3>
-        <h3>Beware of the Dogs</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/BloodOrange2019.jpg" width="100" height="100" alt=""/>
-        <h3>Blood Orange</h3>
-        <h3>Angel's Pulse</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/FlyingLotus2019.jpg" width="100" height="100" alt=""/>
-        <h3>Flying Lotus</h3>
-        <h3>Flamagra</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="Images/2019/PeterCatRecordingCo2019.jpg" width="100" height="100" alt=""/>
-        <h3>Peter Cat Recording Co.</h3>
-        <h3>Bismillah</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/EXO2019.jpg" width="100" height="100" alt=""/>
-        <h3>EXO</h3>
-        <h3>Obsession</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/RichardYoungs2019.jpg" width="100" height="100" alt=""/>
-        <h3>Richard Youngs / Raül Refree</h3>
-        <h3>All Hands Around the Moment</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/BreeRunway2019.jpg" width="100" height="100" alt=""/>
-        <h3>Bree Runway</h3>
-        <h3>Be Runway</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/CharliXCX2019.jpg" width="100" height="100" alt=""/>
-        <h3>Charli XCX</h3>
-        <h3>Charli</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/SudanArchives2019.jpg" width="100" height="100" alt=""/>
-        <h3>Sudan Archives</h3>
-        <h3>Athena</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Beck2019.jpg" width="100" height="100" alt=""/>
-        <h3>Beck</h3>
-        <h3>Hyperspace</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/LucyRose2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lucy Rose</h3>
-        <h3>No Words Left</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/SoYoon2019.jpg" width="100" height="100" alt=""/>
-        <h3>So!YoON!</h3>
-        <h3>So!YoON!</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Nuvolascura2019.jpg" width="100" height="100" alt=""/>
-        <h3>Nuvolascura</h3>
-        <h3>Nuvolascura</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/BennyTheButcher2019.jpg" width="100" height="100" alt=""/>
-        <h3>Benny the Butcher</h3>
-        <h3>The Plugs I Met</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/BillyWoods2019.jpg" width="100" height="100" alt=""/>
-        <h3>Billy Woods / Kenny Segal</h3>
-        <h3>Hiding Places</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Jambinai2019.jpg" width="100" height="100" alt=""/>
-        <h3>Jambinai</h3>
-        <h3>Onda</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/CarolinePolachek2019.jpg" width="100" height="100" alt=""/>
-        <h3>Caroline Polachek</h3>
-        <h3>Pang</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/OsoOso2019.jpg" width="100" height="100" alt=""/>
-        <h3>Oso Oso</h3>
-        <h3>Basking in the Glow</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/NickCave2019.jpg" width="100" height="100" alt=""/>
-        <h3>Nick Cave & The Bad Seeds</h3>
-        <h3>Ghosteen</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/WestsideGunn2019.jpg" width="100" height="100" alt=""/>
-        <h3>Westside Gunn</h3>
-        <h3>Hitler Wears Hermes 7</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/MdouMoctar2019.jpg" width="100" height="100" alt=""/>
-        <h3>Mdou Moctar</h3>
-        <h3>Ilana: The Creator</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/KelseyLu2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kelsey Lu</h3>
-        <h3>Blood</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/SturgillSimpson2019.jpg" width="100" height="100" alt=""/>
-        <h3>Sturgill Simpson</h3>
-        <h3>Sound & Fury</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/LeonardCohen2019.jpg" width="100" height="100" alt=""/>
-        <h3>Leonard Cohen</h3>
-        <h3>Thanks for the Dance</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/DurandJones2019.jpg" width="100" height="100" alt=""/>
-        <h3>Durand Jones & The Indications</h3>
-        <h3>American Love Call</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/BigThief2019-2.jpg" width="100" height="100" alt=""/>
-        <h3>Big Thief</h3>
-        <h3>Two Hands</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Uboa2019.jpg" width="100" height="100" alt=""/>
-        <h3>Uboa</h3>
-        <h3>The Origin of My Depression</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/DannyBrown2019.jpg" width="100" height="100" alt=""/>
-        <h3>Danny Brown</h3>
-        <h3>Uknowhatimsayin¿</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Griselda2019.jpg" width="100" height="100" alt=""/>
-        <h3>Griselda</h3>
-        <h3>WWCD</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/LoloZouai2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lolo Zouaï</h3>
-        <h3>High Highs to Low Lows</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/MabeFratti2019.jpg" width="100" height="100" alt=""/>
-        <h3>Mabe Fratti</h3>
-        <h3>Pies Sobre la Tierra</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/FireOrchestra2019.jpg" width="100" height="100" alt=""/>
-        <h3>Fire! Orchestra</h3>
-        <h3>Arrival</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Skepta2019.jpg" width="100" height="100" alt=""/>
-        <h3>Skepta</h3>
-        <h3>Ignorance Is Bliss</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/AndersonPaak2019.jpg" width="100" height="100" alt=""/>
-        <h3>Anderson .Paak</h3>
-        <h3>Ventura</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/ShinGuard2019.jpg" width="100" height="100" alt=""/>
-        <h3>Shin Guard</h3>
-        <h3>2020</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Saor2019.jpg" width="100" height="100" alt=""/>
-        <h3>Saor</h3>
-        <h3>Forgotten Paths</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="Images/2019/Matmos2019.jpg" width="100" height="100" alt=""/>
-        <h3>Matmos</h3>
-        <h3>Plastic Anniversary</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/EarlSweatshirt2019.jpg" width="100" height="100" alt=""/>
-        <h3>Earl Sweatshirt</h3>
-        <h3>Feet of Clay</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Barker2019.jpg" width="100" height="100" alt=""/>
-        <h3>Barker</h3>
-        <h3>Utility</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/JamesBlake2019.jpg" width="100" height="100" alt=""/>
-        <h3>James Blake</h3>
-        <h3>Assume Form</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/PopSmoke2019.jpg" width="100" height="100" alt=""/>
-        <h3>Pop Smoke</h3>
-        <h3>Meet the Woo</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/ClariceFalcao2019.jpg" width="100" height="100" alt=""/>
-        <h3>Clarice Falcão</h3>
-        <h3>Tem Conserto</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/PurpleMountains2019.jpg" width="100" height="100" alt=""/>
-        <h3>Purple Mountains</h3>
-        <h3>Purple Mountains</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/DenzelCurry2019.jpg" width="100" height="100" alt=""/>
-        <h3>Denzel Curry</h3>
-        <h3>Zuu</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/ThomYorke2019.jpg" width="100" height="100" alt=""/>
-        <h3>Thom Yorke</h3>
-        <h3>Anima</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/SandyAlexG2019.jpg" width="100" height="100" alt=""/>
-        <h3>(Sandy) Alex G</h3>
-        <h3>House of Sugar</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/KiloKish2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kilo Kish</h3>
-        <h3>Redux</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/MyssKeta2019.jpg" width="100" height="100" alt=""/>
-        <h3>Myss Keta</h3>
-        <h3>Paprika</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/RiotCity2019.jpg" width="100" height="100" alt=""/>
-        <h3>Riot City</h3>
-        <h3>Burn the Night</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Drake2019.jpg" width="100" height="100" alt=""/>
-        <h3>Drake</h3>
-        <h3>Care Package</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/WilmaVritra2019.jpg" width="100" height="100" alt=""/>
-        <h3>Wilma Vritra</h3>
-        <h3>Burd</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/TamiT2019.jpg" width="100" height="100" alt=""/>
-        <h3>Tami T</h3>
-        <h3>High Pitched and Moist</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/DryCleaning2019.jpg" width="100" height="100" alt=""/>
-        <h3>Dry Cleaning</h3>
-        <h3>Boundary Road Snacks and Drinks</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/HakushiHasegawa2019.jpg" width="100" height="100" alt=""/>
-        <h3>Hakushi Hasegawa</h3>
-        <h3>Air Ni Ni</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/BentKnee2019.jpg" width="100" height="100" alt=""/>
-        <h3>Bent Knee</h3>
-        <h3>You Know What They Mean</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Pouya2019.jpg" width="100" height="100" alt=""/>
-        <h3>Pouya</h3>
-        <h3>The South Got Something to Say</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Flume2019.jpg" width="100" height="100" alt=""/>
-        <h3>Flume</h3>
-        <h3>Hi This Is Flume</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/BillieEilish2019.jpg" width="100" height="100" alt=""/>
-        <h3>Billie Eilish</h3>
-        <h3>When We All Fall Asleep, Where Do We Go?</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/BabyTron2019.jpg" width="100" height="100" alt=""/>
-        <h3>BabyTron</h3>
-        <h3>Bin Reaper</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Ansome2019.jpg" width="100" height="100" alt=""/>
-        <h3>Ansome</h3>
-        <h3>Hounds of the Harbour</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/HotChip2019.jpg" width="100" height="100" alt=""/>
-        <h3>Hot Chip</h3>
-        <h3>A Bath Full of Ecstasy</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Foals2019.jpg" width="100" height="100" alt=""/>
-        <h3>Foals</h3>
-        <h3>Everything Not Saved Will Be Lost Part 1</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/Brockhampton2019.jpg" width="100" height="100" alt=""/>
-        <h3>Brockhampton</h3>
-        <h3>Ginger</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/LightningBolt2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lightning Bolt</h3>
-        <h3>Sonic Citadel</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/FrailBody2019.jpg" width="100" height="100" alt=""/>
-        <h3>Frail Body</h3>
-        <h3>A Brief Memoriam</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/SunnO2019.jpg" width="100" height="100" alt=""/>
-        <h3>Sunn O)))</h3>
-        <h3>Life Metal</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/BoyHarsher2019.jpg" width="100" height="100" alt=""/>
-        <h3>Boy Harsher</h3>
-        <h3>Careful</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="Images/2019/PorticoQuartet2019.jpg" width="100" height="100" alt=""/>
-        <h3>Portico Quartet</h3>
-        <h3>Memory Streams</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/PandaBear2019.jpg" width="100" height="100" alt=""/>
-        <h3>Panda Bear</h3>
-        <h3>Buoys</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Yonaka2019.jpg" width="100" height="100" alt=""/>
-        <h3>Yonaka</h3>
-        <h3>Don't Wait 'Til Tomorrow</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/AltinGun2019.jpg" width="100" height="100" alt=""/>
-        <h3>Altın Gün</h3>
-        <h3>Gece</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/SeeYouSpaceCowboy2019-2.jpg" width="100" height="100" alt=""/>
-        <h3>SeeYouSpaceCowboy</h3>
-        <h3>Songs for the Firing Squad</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/IssamHajali2019.jpg" width="100" height="100" alt=""/>
-        <h3>Issam Hajali</h3>
-        <h3>Mouasalat ila Jacad el Ard</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/IDK2019.jpg" width="100" height="100" alt=""/>
-        <h3>IDK</h3>
-        <h3>Is He Real?</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Sault2019.jpg" width="100" height="100" alt=""/>
-        <h3>Sault</h3>
-        <h3>5</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Nerija2019.jpg" width="100" height="100" alt=""/>
-        <h3>Nérija</h3>
-        <h3>Blume</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/BewhY2019.jpg" width="100" height="100" alt=""/>
-        <h3>BewhY</h3>
-        <h3>The Movie Star</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/LimKim2019.jpg" width="100" height="100" alt=""/>
-        <h3>Lim Kim</h3>
-        <h3>Generasian</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/YungGravy2019.jpg" width="100" height="100" alt=""/>
-        <h3>Yung Gravy</h3>
-        <h3>Sensational</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/TanyaTagaq2019.jpg" width="100" height="100" alt=""/>
-        <h3>Tanya Tagaq</h3>
-        <h3>Toothsayer</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Senza2019.jpg" width="100" height="100" alt=""/>
-        <h3>Senza</h3>
-        <h3>Even a Worm Will Turn</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/WhiteLies2019.jpg" width="100" height="100" alt=""/>
-        <h3>White Lies</h3>
-        <h3>Five</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/MisterLies2019.jpg" width="100" height="100" alt=""/>
-        <h3>Mister Lies</h3>
-        <h3>Mister Lies</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/RichardDawson2019.jpg" width="100" height="100" alt=""/>
-        <h3>Richard Dawson</h3>
-        <h3>2020</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Tinashe2019.jpg" width="100" height="100" alt=""/>
-        <h3>Tinashe</h3>
-        <h3>Songs for You</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/RichBrian2019.jpg" width="100" height="100" alt=""/>
-        <h3>Rich Brian</h3>
-        <h3>The Sailor</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Kokoroko2019.jpg" width="100" height="100" alt=""/>
-        <h3>Kokoroko</h3>
-        <h3>Kokoroko</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/MichaelKiwanuka2019.jpg" width="100" height="100" alt=""/>
-        <h3>Michael Kiwanuka</h3>
-        <h3>Kiwanuka</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/CarlyRaeJepsen2019.jpg" width="100" height="100" alt=""/>
-        <h3>Carly Rae Jepsen</h3>
-        <h3>Dedicated</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Rhye2019.jpg" width="100" height="100" alt=""/>
-        <h3>Rhye</h3>
-        <h3>Spirit</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Fennesz2019.jpg" width="100" height="100" alt=""/>
-        <h3>Fennesz</h3>
-        <h3>Agora</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/MauriceLouca2019.jpg" width="100" height="100" alt=""/>
-        <h3>Maurice Louca</h3>
-        <h3>Elephantine</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/ControlTop2019.jpg" width="100" height="100" alt=""/>
-        <h3>Control Top</h3>
-        <h3>Covert Contracts</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/FloatingPoints2019.jpg" width="100" height="100" alt=""/>
-        <h3>Floating Points</h3>
-        <h3>Crush</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/TheFlamingLips2019.jpg" width="100" height="100" alt=""/>
-        <h3>The Flaming Lips</h3>
-        <h3>King's Mouth: Music and Songs</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Florist2019.jpg" width="100" height="100" alt=""/>
-        <h3>Florist</h3>
-        <h3>Emily Alone</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Teitanblood2019.jpg" width="100" height="100" alt=""/>
-        <h3>Teitanblood</h3>
-        <h3>The Baneful Choir</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/UraniumClub2019.jpg" width="100" height="100" alt=""/>
-        <h3>Uranium Club</h3>
-        <h3>The Cosmo Cleaners</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/Untell2019.jpg" width="100" height="100" alt=""/>
-        <h3>Untell / Shinyujinssi</h3>
-        <h3>Do You Still Wanna Lie?</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="Images/2019/AndrewBird2019.jpg" width="100" height="100" alt=""/>
-        <h3>Andrew Bird</h3>
-        <h3>My Finest Work Yet</h3>
-	    <h3>3½</h3>
+<main><ol>
+<h1>2022: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="Images/2019/Solange2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Solange</h3>
+    <h3>When I Get Home</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="Images/2019/Clipping2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Clipping</h3>
+    <h3>There Existed an Addiction to Blood</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="Images/2019/FKATwigs2019.jpg" alt="" /></div><div class="album-text">
+    <h3>FKA twigs</h3>
+    <h3>Magdalene</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="Images/2019/ArianaGrande2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Ariana Grande</h3>
+    <h3>Thank U, Next</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="Images/2019/TylerTheCreator2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Tyler, the Creator</h3>
+    <h3>Igor</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="Images/2019/DorianElectra2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Dorian Electra</h3>
+    <h3>Flamboyant</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="Images/2019/LanaDelRey2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lana Del Rey</h3>
+    <h3>Norman Fucking Rockwell!</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="Images/2019/Dave2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Dave</h3>
+    <h3>Psychodrama</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="Images/2019/Slowthai2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Slowthai</h3>
+    <h3>Nothing Great About Britain</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="Images/2019/InjuryReserve2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Injury Reserve</h3>
+    <h3>Injury Reserve</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="Images/2019/BloodIncantation2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Blood Incantation</h3>
+    <h3>Hidden History of the Human Race</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="Images/2019/FreddieGibbsMadlib2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Freddie Gibbs / Madlib</h3>
+    <h3>Bandana</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="Images/2019/FayeWebster2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Faye Webster</h3>
+    <h3>Atlanta Millionaires Club</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="Images/2019/FontainesDC2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Fontaines D.C.</h3>
+    <h3>Dogrel</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="Images/2019/NiluferYanya2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Nilüfer Yanya</h3>
+    <h3>Miss Universe</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/TheseNewPuritans2019.jpg" alt="" /></div><div class="album-text">
+    <h3>These New Puritans</h3>
+    <h3>Inside the Rose</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/LittleSimz2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Little Simz</h3>
+    <h3>Grey Area</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/BonIver2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Bon Iver</h3>
+    <h3>i,i</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/Cherushii2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Cherushii / Maria Minerva</h3>
+    <h3>Cherushii & Maria Minerva</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/HeladoNegro2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Helado Negro</h3>
+    <h3>This Is How You Smile</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/BlackMidi2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Black Midi</h3>
+    <h3>Schlagenheim</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="Images/2019/BabyKeem2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Baby Keem</h3>
+    <h3>Die for My Bitch</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="Images/2019/MJLenderman2019.jpg" alt="" /></div><div class="album-text">
+    <h3>MJ Lenderman</h3>
+    <h3>MJ Lenderman</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="Images/2019/Lifafa2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lifafa</h3>
+    <h3>Jaago</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="Images/2019/Kitty2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kitty</h3>
+    <h3>Rose Gold</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="Images/2019/Moodymann2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Moodymann</h3>
+    <h3>Sinner</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="Images/2019/MorMor2019.jpg" alt="" /></div><div class="album-text">
+    <h3>MorMor</h3>
+    <h3>Some Place Else</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="Images/2019/AldousHarding2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Aldous Harding</h3>
+    <h3>Designer</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="Images/2019/QuelleChris2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Quelle Chris</h3>
+    <h3>Guns</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="Images/2019/BigMomma2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Big Momma</h3>
+    <h3>MILF</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/BigThief2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Big Thief</h3>
+    <h3>U.F.O.F.</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Plaid2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Plaid</h3>
+    <h3>Polymer</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/CFCF2019.jpg" alt="" /></div><div class="album-text">
+    <h3>CFCF</h3>
+    <h3>Liquid Colours</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Mike2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Mike</h3>
+    <h3>Tears of Joy</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Lankum2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lankum</h3>
+    <h3>The Livelong Day</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Coldplay2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Coldplay</h3>
+    <h3>Everyday Life</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/ZelooperZ2019.jpg" alt="" /></div><div class="album-text">
+    <h3>ZelooperZ</h3>
+    <h3>Dyn-o-mite</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Maxo2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Maxo</h3>
+    <h3>Lil Big Man</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/ErikaDeCasier2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Erika de Casier</h3>
+    <h3>Essentials</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/TimHecker2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Tim Hecker</h3>
+    <h3>Anoyo</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/SeeYouSpaceCowboy2019.jpg" alt="" /></div><div class="album-text">
+    <h3>SeeYouSpaceCowboy</h3>
+    <h3>The Correlation Between Entrance and Exit Wounds</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/Squid2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Squid</h3>
+    <h3>Town Centre</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/MalibuKen2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Malibu Ken</h3>
+    <h3>Malibu Ken</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/LittleBrother2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Little Brother</h3>
+    <h3>May the Lord Watch</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/AmericanFootball2019.jpg" alt="" /></div><div class="album-text">
+    <h3>American Football</h3>
+    <h3>American Football (LP3)</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/AveyTare2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Avey Tare</h3>
+    <h3>Cows on Hourglass Pond</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/DosMonos2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Dos Monos</h3>
+    <h3>Dos City</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="Images/2019/JessicaPratt2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Jessica Pratt</h3>
+    <h3>Quiet Signs</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/BlanckMass2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Blanck Mass</h3>
+    <h3>Animated Violence Mild</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/DrabMajesty2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Drab Majesty</h3>
+    <h3>Modern Mirror</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/ShinichiroYokota2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Shinichiro Yokota</h3>
+    <h3>I Know You Like It</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/JamilaWoods2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Jamila Woods</h3>
+    <h3>Legacy! Legacy!</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/Weatherday2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Weatherday</h3>
+    <h3>Come In</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/KishiBashi2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kishi Bashi</h3>
+    <h3>Omoiyari</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/BringMeTheHorizon2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Bring Me the Horizon</h3>
+    <h3>Amo</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="Images/2019/CultOfLuna2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Cult of Luna</h3>
+    <h3>A Dawn to Fear</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/TheCometIsComing2019.jpg" alt="" /></div><div class="album-text">
+    <h3>The Comet Is Coming</h3>
+    <h3>Trust in the Lifeforce of the Deep Mystery</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Jpegmafia2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Jpegmafia</h3>
+    <h3>All My Heroes Are Cornballs</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Slayyyter2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Slayyyter</h3>
+    <h3>Slayyyter</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Avenade2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Avenade</h3>
+    <h3>It's a Whimsical Afterlife</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Sadness2019-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sadness</h3>
+    <h3>Circle of Veins</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/CocoBryce2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Coco Bryce</h3>
+    <h3>Night on Earth</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Twice2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Twice</h3>
+    <h3>&Twice</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Mavi2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Mavi</h3>
+    <h3>Let the Sun Talk</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/TheTwilightSad2019.jpg" alt="" /></div><div class="album-text">
+    <h3>The Twilight Sad</h3>
+    <h3>It Won/t Be Like This All the Time</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/Madonna2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Madonna</h3>
+    <h3>Madame X</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/KanyeWest2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kanye West</h3>
+    <h3>Jesus Is King</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/StellaDonnelly2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Stella Donnelly</h3>
+    <h3>Beware of the Dogs</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/BloodOrange2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Blood Orange</h3>
+    <h3>Angel's Pulse</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="Images/2019/FlyingLotus2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Flying Lotus</h3>
+    <h3>Flamagra</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/PeterCatRecordingCo2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Peter Cat Recording Co.</h3>
+    <h3>Bismillah</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/EXO2019.jpg" alt="" /></div><div class="album-text">
+    <h3>EXO</h3>
+    <h3>Obsession</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/RichardYoungs2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Richard Youngs / Raül Refree</h3>
+    <h3>All Hands Around the Moment</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/BreeRunway2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Bree Runway</h3>
+    <h3>Be Runway</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/CharliXCX2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Charli XCX</h3>
+    <h3>Charli</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/SudanArchives2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Sudan Archives</h3>
+    <h3>Athena</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Beck2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Beck</h3>
+    <h3>Hyperspace</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/LucyRose2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lucy Rose</h3>
+    <h3>No Words Left</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/SoYoon2019.jpg" alt="" /></div><div class="album-text">
+    <h3>So!YoON!</h3>
+    <h3>So!YoON!</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Nuvolascura2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Nuvolascura</h3>
+    <h3>Nuvolascura</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/BennyTheButcher2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Benny the Butcher</h3>
+    <h3>The Plugs I Met</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/BillyWoods2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Billy Woods / Kenny Segal</h3>
+    <h3>Hiding Places</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Jambinai2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Jambinai</h3>
+    <h3>Onda</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/CarolinePolachek2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Caroline Polachek</h3>
+    <h3>Pang</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/OsoOso2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Oso Oso</h3>
+    <h3>Basking in the Glow</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/NickCave2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Nick Cave & The Bad Seeds</h3>
+    <h3>Ghosteen</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/WestsideGunn2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Westside Gunn</h3>
+    <h3>Hitler Wears Hermes 7</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/MdouMoctar2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Mdou Moctar</h3>
+    <h3>Ilana: The Creator</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/KelseyLu2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kelsey Lu</h3>
+    <h3>Blood</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/SturgillSimpson2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Sturgill Simpson</h3>
+    <h3>Sound & Fury</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/LeonardCohen2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Leonard Cohen</h3>
+    <h3>Thanks for the Dance</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/DurandJones2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Durand Jones & The Indications</h3>
+    <h3>American Love Call</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/BigThief2019-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Big Thief</h3>
+    <h3>Two Hands</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Uboa2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Uboa</h3>
+    <h3>The Origin of My Depression</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/DannyBrown2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Danny Brown</h3>
+    <h3>Uknowhatimsayin¿</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Griselda2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Griselda</h3>
+    <h3>WWCD</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/LoloZouai2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lolo Zouaï</h3>
+    <h3>High Highs to Low Lows</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/MabeFratti2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Mabe Fratti</h3>
+    <h3>Pies Sobre la Tierra</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/FireOrchestra2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Fire! Orchestra</h3>
+    <h3>Arrival</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Skepta2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Skepta</h3>
+    <h3>Ignorance Is Bliss</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/AndersonPaak2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Anderson .Paak</h3>
+    <h3>Ventura</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/ShinGuard2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Shin Guard</h3>
+    <h3>2020</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="Images/2019/Saor2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Saor</h3>
+    <h3>Forgotten Paths</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Matmos2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Matmos</h3>
+    <h3>Plastic Anniversary</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/EarlSweatshirt2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Earl Sweatshirt</h3>
+    <h3>Feet of Clay</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Barker2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Barker</h3>
+    <h3>Utility</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/JamesBlake2019.jpg" alt="" /></div><div class="album-text">
+    <h3>James Blake</h3>
+    <h3>Assume Form</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/PopSmoke2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Pop Smoke</h3>
+    <h3>Meet the Woo</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/ClariceFalcao2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Clarice Falcão</h3>
+    <h3>Tem Conserto</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/PurpleMountains2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Purple Mountains</h3>
+    <h3>Purple Mountains</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/DenzelCurry2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Denzel Curry</h3>
+    <h3>Zuu</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/ThomYorke2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Thom Yorke</h3>
+    <h3>Anima</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/SandyAlexG2019.jpg" alt="" /></div><div class="album-text">
+    <h3>(Sandy) Alex G</h3>
+    <h3>House of Sugar</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/KiloKish2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kilo Kish</h3>
+    <h3>Redux</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/MyssKeta2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Myss Keta</h3>
+    <h3>Paprika</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/RiotCity2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Riot City</h3>
+    <h3>Burn the Night</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Drake2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Drake</h3>
+    <h3>Care Package</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/WilmaVritra2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Wilma Vritra</h3>
+    <h3>Burd</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/TamiT2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Tami T</h3>
+    <h3>High Pitched and Moist</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/DryCleaning2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Dry Cleaning</h3>
+    <h3>Boundary Road Snacks and Drinks</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/HakushiHasegawa2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Hakushi Hasegawa</h3>
+    <h3>Air Ni Ni</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/BentKnee2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Bent Knee</h3>
+    <h3>You Know What They Mean</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Pouya2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Pouya</h3>
+    <h3>The South Got Something to Say</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Flume2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Flume</h3>
+    <h3>Hi This Is Flume</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/BillieEilish2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Billie Eilish</h3>
+    <h3>When We All Fall Asleep, Where Do We Go?</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/BabyTron2019.jpg" alt="" /></div><div class="album-text">
+    <h3>BabyTron</h3>
+    <h3>Bin Reaper</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Ansome2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Ansome</h3>
+    <h3>Hounds of the Harbour</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/HotChip2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Hot Chip</h3>
+    <h3>A Bath Full of Ecstasy</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Foals2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Foals</h3>
+    <h3>Everything Not Saved Will Be Lost Part 1</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/Brockhampton2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Brockhampton</h3>
+    <h3>Ginger</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/LightningBolt2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lightning Bolt</h3>
+    <h3>Sonic Citadel</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/FrailBody2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Frail Body</h3>
+    <h3>A Brief Memoriam</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/SunnO2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Sunn O)))</h3>
+    <h3>Life Metal</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="Images/2019/BoyHarsher2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Boy Harsher</h3>
+    <h3>Careful</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/PorticoQuartet2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Portico Quartet</h3>
+    <h3>Memory Streams</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/PandaBear2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Panda Bear</h3>
+    <h3>Buoys</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Yonaka2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Yonaka</h3>
+    <h3>Don't Wait 'Til Tomorrow</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/AltinGun2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Altın Gün</h3>
+    <h3>Gece</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/SeeYouSpaceCowboy2019-2.jpg" alt="" /></div><div class="album-text">
+    <h3>SeeYouSpaceCowboy</h3>
+    <h3>Songs for the Firing Squad</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/IssamHajali2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Issam Hajali</h3>
+    <h3>Mouasalat ila Jacad el Ard</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/IDK2019.jpg" alt="" /></div><div class="album-text">
+    <h3>IDK</h3>
+    <h3>Is He Real?</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Sault2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Sault</h3>
+    <h3>5</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Nerija2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Nérija</h3>
+    <h3>Blume</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/BewhY2019.jpg" alt="" /></div><div class="album-text">
+    <h3>BewhY</h3>
+    <h3>The Movie Star</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/LimKim2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Lim Kim</h3>
+    <h3>Generasian</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/YungGravy2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Yung Gravy</h3>
+    <h3>Sensational</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/TanyaTagaq2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Tanya Tagaq</h3>
+    <h3>Toothsayer</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Senza2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Senza</h3>
+    <h3>Even a Worm Will Turn</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/WhiteLies2019.jpg" alt="" /></div><div class="album-text">
+    <h3>White Lies</h3>
+    <h3>Five</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/MisterLies2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Mister Lies</h3>
+    <h3>Mister Lies</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/RichardDawson2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Richard Dawson</h3>
+    <h3>2020</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Tinashe2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Tinashe</h3>
+    <h3>Songs for You</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/RichBrian2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Rich Brian</h3>
+    <h3>The Sailor</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Kokoroko2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Kokoroko</h3>
+    <h3>Kokoroko</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/MichaelKiwanuka2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Michael Kiwanuka</h3>
+    <h3>Kiwanuka</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/CarlyRaeJepsen2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Carly Rae Jepsen</h3>
+    <h3>Dedicated</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Rhye2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Rhye</h3>
+    <h3>Spirit</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Fennesz2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Fennesz</h3>
+    <h3>Agora</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/MauriceLouca2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Maurice Louca</h3>
+    <h3>Elephantine</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/ControlTop2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Control Top</h3>
+    <h3>Covert Contracts</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/FloatingPoints2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Floating Points</h3>
+    <h3>Crush</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/TheFlamingLips2019.jpg" alt="" /></div><div class="album-text">
+    <h3>The Flaming Lips</h3>
+    <h3>King's Mouth: Music and Songs</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Florist2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Florist</h3>
+    <h3>Emily Alone</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Teitanblood2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Teitanblood</h3>
+    <h3>The Baneful Choir</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/UraniumClub2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Uranium Club</h3>
+    <h3>The Cosmo Cleaners</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/Untell2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Untell / Shinyujinssi</h3>
+    <h3>Do You Still Wanna Lie?</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="Images/2019/AndrewBird2019.jpg" alt="" /></div><div class="album-text">
+    <h3>Andrew Bird</h3>
+    <h3>My Finest Work Yet</h3>
+    <h3>3½</h3>
+      </div></div></li>
       <li> 
 		<img src="Images/2019/ToroYMoi2019.jpg" width="100" height="100" alt=""/>
         <h3>Toro y Moi</h3>
@@ -6819,3 +7236,4 @@
 </footer>
 </body>
 </html>
+
