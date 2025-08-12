@@ -1,860 +1,1269 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2011 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-2010.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-2012.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-2010.html">Previous Year</a></a></li>
+  <li><a href="albums-of-2012.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>2011: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/2011/Drake2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Drake</h3>
-        <h3>Take Care</h3>
-	    <h3>8¾</h3>
-      <li> 
-		<img src="images/2011/JamesBlake2011.jpeg" width="100" height="100" alt=""/>
-        <h3>James Blake</h3>
-        <h3>James Blake</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/2011/PJHarvey2011.jpeg" width="100" height="100" alt=""/>
-        <h3>PJ Harvey</h3>
-        <h3>Let England Shake</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/2011/ShabazzPalaces2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Shabazz Palaces</h3>
-        <h3>Black Up</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/2011/DannyBrown2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Danny Brown</h3>
-        <h3>XXX</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/2011/TheWeeknd2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Weeknd</h3>
-        <h3>House of Balloons</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/2011/ASAPRocky2011.jpeg" width="100" height="100" alt=""/>
-        <h3>A$AP Rocky</h3>
-        <h3>LiveLoveA$AP</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/2011/OneohtrixPointNever2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Oneohtrix Point Never</h3>
-        <h3>Replica</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/2011/JamieWoon2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Jamie Woon</h3>
-        <h3>Mirrorwriting</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/2011/KurtVile2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Kurt Vile</h3>
-        <h3>Smoke Ring for My Halo</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/2011/NicolasJaar2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Nicolás Jaar</h3>
-        <h3>Space Is Only Noise</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2011/KendrickLamar2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Kendrick Lamar</h3>
-        <h3>Section.80</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2011/Rustie2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Rustie</h3>
-        <h3>Glass Swords</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2011/GirlsGeneration2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Girls' Generation</h3>
-        <h3>Girls' Generation</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2011/TheField2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Field</h3>
-        <h3>Looping State of Mind</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2011/Liturgy2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Liturgy</h3>
-        <h3>Aesthethica</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2011/ChelseaWolfe2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Chelsea Wolfe</h3>
-        <h3>Apokalypsis</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2011/WildBeasts2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Wild Beasts</h3>
-        <h3>Smother</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2011/SBTRKT2011.jpeg" width="100" height="100" alt=""/>
-        <h3>SBTRKT</h3>
-        <h3>SBTRKT</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2011/TheAntlers2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Antlers</h3>
-        <h3>Burst Apart</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2011/MacintoshPlus2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Macintosh Plus</h3>
-        <h3>Floral Shoppe</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2011/TuneYards2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Tune-Yards</h3>
-        <h3>Whokill</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/AndyStott2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Andy Stott</h3>
-        <h3>Passed Me By</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/TheWeeknd2011-2.jpeg" width="100" height="100" alt=""/>
-        <h3>The Weeknd</h3>
-        <h3>Echoes of Silence</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/Kuedo2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Kuedo</h3>
-        <h3>Severant</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/Radiohead2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Radiohead</h3>
-        <h3>The King of Limbs</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/JayZKanyeWest2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Jay-Z / Kanye West</h3>
-        <h3>Watch the Throne</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/TylerTheCreator2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Tyler, the Creator</h3>
-        <h3>Goblin</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2011/GangGangDance2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Gang Gang Dance</h3>
-        <h3>Eye Contact</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2011/GilScottHeron2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Gil Scott-Heron / Jamie xx</h3>
-        <h3>We're New Here</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2011/KateBush2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Kate Bush</h3>
-        <h3>50 Words for Snow</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2011/ClamsCasino2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Clams Casino</h3>
-        <h3>Instrumentals</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2011/TheNecks2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Necks</h3>
-        <h3>Mindset</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2011/Destroyer2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Destroyer</h3>
-        <h3>Kaputt</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/IchikoAoba2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Ichiko Aoba</h3>
-        <h3>Origami</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/2NE12011.jpeg" width="100" height="100" alt=""/>
-        <h3>2NE1</h3>
-        <h3>2NE1 2nd Mini Album</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/FlorenceAndTheMachine2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Florence + The Machine</h3>
-        <h3>Ceremonials</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/MatanaRoberts2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Matana Roberts</h3>
-        <h3>Coin Coin Chapter One: Gens de Couleur Libres</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/StVincent2011.jpeg" width="100" height="100" alt=""/>
-        <h3>St. Vincent</h3>
-        <h3>Strange Mercy</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/Sepalcure2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Sepalcure</h3>
-        <h3>Fleur</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2011/LilB2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Lil B</h3>
-        <h3>I'm Gay</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/FleetFoxes2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Fleet Foxes</h3>
-        <h3>Helplessness Blues</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/DeathGrips2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Death Grips</h3>
-        <h3>Exmilitary</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/CutCopy2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Cut Copy</h3>
-        <h3>Zonoscope</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/FosterThePeople2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Foster the People</h3>
-        <h3>Torches</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/BBNG2011.jpg" width="100" height="100" alt=""/>
-        <h3>BadBadNotGood</h3>
-        <h3>BBNG</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/Vektor2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Vektor</h3>
-        <h3>Outer Isolation</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/ToroYMoi2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Toro y Moi</h3>
-        <h3>Freaking Out</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/2011/Girls2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Girls</h3>
-        <h3>Father, Son, Holy Ghost</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/AndyStott2011-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Andy Stott</h3>
-        <h3>We Stay Together</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/BillCallahan2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Bill Callahan</h3>
-        <h3>Apocalypse</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/TheWeeknd2011-3.jpeg" width="100" height="100" alt=""/>
-        <h3>The Weeknd</h3>
-        <h3>Thursday</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/TwinSister2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Twin Sister</h3>
-        <h3>In Heaven</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/HolyGhost2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Holy Ghost!</h3>
-        <h3>Holy Ghost!</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/Tenhi2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Tenhi</h3>
-        <h3>Salvo</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/OpenMikeEagle2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Open Mike Eagle</h3>
-        <h3>Rappers Will Die of Natural Causes</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/LaDispute2011.jpeg" width="100" height="100" alt=""/>
-        <h3>La Dispute</h3>
-        <h3>Wildlife</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/Cults2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Cults</h3>
-        <h3>Cults</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/Metronomy2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Metronomy</h3>
-        <h3>The English Riviera</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/Burial2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Burial</h3>
-        <h3>Street Halo</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/BenHoward2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Ben Howard</h3>
-        <h3>Every Kingdom</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/ToroYMoi2011-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Toro y Moi</h3>
-        <h3>Underneath the Pine</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/LadyGaga2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Lady Gaga</h3>
-        <h3>Born This Way</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/ThurstonMoore2011.jpg" width="100" height="100" alt=""/>
-        <h3>Thurston Moore</h3>
-        <h3>Demolished Thoughts</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/Araabmuzik2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Araabmuzik</h3>
-        <h3>Electronic Dream</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2011/TheHorrors2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Horrors</h3>
-        <h3>Skying</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/DangerMouse2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Danger Mouse / Daniele Luppi</h3>
-        <h3>Rome</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/FriendlyFires2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Friendly Fires</h3>
-        <h3>Pala</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/KatyB2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Katy B</h3>
-        <h3>On a Mission</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/MacMiller2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Mac Miller</h3>
-        <h3>K.I.D.S. (Kickin' Incredibly Dope Shit)</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/TheBlackKeys2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Black Keys</h3>
-        <h3>El Camino</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/BlutAusNord2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Blut aus Nord</h3>
-        <h3>777 - Sect(s)</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/GilesCorey2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Giles Corey</h3>
-        <h3>Giles Corey</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/NeonIndian2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Neon Indian</h3>
-        <h3>Era Extraña</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/WhiteDenim2011.jpeg" width="100" height="100" alt=""/>
-        <h3>White Denim</h3>
-        <h3>D</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/Bjork2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Björk</h3>
-        <h3>Biophilia</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/BigKRIT2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Big K.R.I.T.</h3>
-        <h3>Return of 4eva</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/KingCreosote2011.jpeg" width="100" height="100" alt=""/>
-        <h3>King Creosote / Jon Hopkins</h3>
-        <h3>Diamond Mine</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/SandroPerri2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Sandro Perri</h3>
-        <h3>Impossible Spaces</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/FrankOcean2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Frank Ocean</h3>
-        <h3>Nostalgia, Ultra</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/CassMcCombs2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Cass McCombs</h3>
-        <h3>Wit's End</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/CarSeatHeadrest2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Car Seat Headrest</h3>
-        <h3>Twin Fantasy</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/TheGoTeam2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Go! Team</h3>
-        <h3>Rolling Blackouts</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/TheRapture2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Rapture</h3>
-        <h3>In the Grace of Your Love</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/TropicOfCancer2011.jpg" width="100" height="100" alt=""/>
-        <h3>Tropic of Cancer</h3>
-        <h3>The End of All Things</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/CatsEyes2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Cat's Eyes</h3>
-        <h3>Cat's Eyes</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/LittleDragon2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Little Dragon</h3>
-        <h3>Ritual Union</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/Elder2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Elder</h3>
-        <h3>Dead Roots Stirring</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2011/MassiveAttackBurial2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Massive Attack / Burial</h3>
-        <h3>Four Walls / Paradise Circus</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/RealEstate2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Real Estate</h3>
-        <h3>Days</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/ArcticMonkeys2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Arctic Monkeys</h3>
-        <h3>Suck It and See</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/TheWarOnDrugs2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The War on Drugs</h3>
-        <h3>Slave Ambient</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/NewLook2011.jpeg" width="100" height="100" alt=""/>
-        <h3>New Look</h3>
-        <h3>New Look</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Sepalcure2011-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Sepalcure</h3>
-        <h3>Sepalcure</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Disclosure2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Disclosure</h3>
-        <h3>Carnival EP</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/TheeOhSees2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Thee Oh Sees</h3>
-        <h3>Carrion Crawler / The Dream EP</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/CunninLynguists2011.jpeg" width="100" height="100" alt=""/>
-        <h3>CunninLynguists</h3>
-        <h3>Oneirology</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Gridlink2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Gridlink</h3>
-        <h3>Orphan</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Machinedrum2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Machinedrum</h3>
-        <h3>Room(s)</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/LaurelHalo2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Laurel Halo</h3>
-        <h3>Hour Logic</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Skrillex2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Skrillex</h3>
-        <h3>Bangarang</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/FredFalke2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Fred Falke</h3>
-        <h3>Part IV</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/MayaJaneColes2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Maya Jane Coles</h3>
-        <h3>Focus Now</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/PeakingLights2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Peaking Lights</h3>
-        <h3>936</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/VivianGirls2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Vivian Girls</h3>
-        <h3>Share the Joy</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Thundercat2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Thundercat</h3>
-        <h3>The Golden Age of Apocalypse</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/JensLekman2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Jens Lekman</h3>
-        <h3>An Argument With Myself</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/PartTime2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Part Time</h3>
-        <h3>What Would You Say?</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/FuckedUp2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Fucked Up</h3>
-        <h3>David Comes to Life</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/TheCaretaker2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Caretaker</h3>
-        <h3>An Empty Bliss Beyond This World</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/DirtyBeaches2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Dirty Beaches</h3>
-        <h3>Badlands</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/GusGus2011.jpeg" width="100" height="100" alt=""/>
-        <h3>GusGus</h3>
-        <h3>Arabian Horse</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Beirut2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Beirut</h3>
-        <h3>The Rip Tide</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/AndYouWillKnowUsByTheTrailOfDead2011.jpeg" width="100" height="100" alt=""/>
-        <h3>And You Will Know Us by the Trail of Dead</h3>
-        <h3>Tao of the Dead</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/AlgernonCadwallader2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Algernon Cadwallader</h3>
-        <h3>Parrot Flies</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/GillianWelch2011.jpg" width="100" height="100" alt=""/>
-        <h3>Gillian Welch</h3>
-        <h3>The Harrow & the Harvest</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/UnknownMortalOrchestra2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Unknown Mortal Orchestra</h3>
-        <h3>Unknown Mortal Orchestra</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/DJDiamond2011.jpeg" width="100" height="100" alt=""/>
-        <h3>DJ Diamond</h3>
-        <h3>Flight Muzik</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/Lenka2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Lenka</h3>
-        <h3>Two</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2011/TimHecker2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Tim Hecker</h3>
-        <h3>Ravedeath, 1972</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/UncleAcid2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Uncle Acid & The Deadbeats</h3>
-        <h3>Blood Lust</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/PandaBear2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Panda Bear</h3>
-        <h3>Tomboy</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/AlvaNoto2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Alva Noto / Ryuichi Sakamoto</h3>
-        <h3>Summvs</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Boris2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Boris</h3>
-        <h3>Heavy Rocks</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/JamesBlake2011-2.jpg" width="100" height="100" alt=""/>
-        <h3>James Blake</h3>
-        <h3>Enough Thunder</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Ladytron2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Ladytron</h3>
-        <h3>Gravity the Seducer</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/JulioBashmore2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Julio Bashmore</h3>
-        <h3>Everyone Needs a Theme Tune</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Emika2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Emika</h3>
-        <h3>Emika</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/ConnanMockasin2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Connan Mockasin</h3>
-        <h3>Forever Dolphin Love</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Krallice2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Krallice</h3>
-        <h3>Diotima</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/DeathspellOmega2011.jpg" width="100" height="100" alt=""/>
-        <h3>Deathspell Omega</h3>
-        <h3>Diabolus Absconditus</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/NadiaOh2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Nadia Oh</h3>
-        <h3>Colours</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/AfricaHitech2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Africa Hitech</h3>
-        <h3>93 Million Miles</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/SeaLions2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Sea Lions</h3>
-        <h3>Everything You Always Wanted to Know About the Sea Lions But Were Afraid to Ask</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Zomby2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Zomby</h3>
-        <h3>Dedication</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/DumDumGirls2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Dum Dum Girls</h3>
-        <h3>Only in Dreams</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/AndrewJacksonJihad2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Andrew Jackson Jihad</h3>
-        <h3>Knife Man</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Symmetry2011.jpg" width="100" height="100" alt=""/>
-        <h3>Symmetry</h3>
-        <h3>Themes for an Imaginary Film</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Disasterpeace2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Disasterpeace</h3>
-        <h3>Rise of the Obsidian Interstellar</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Insomnium2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Insomnium</h3>
-        <h3>One for Sorrow</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Common2011.jpg" width="100" height="100" alt=""/>
-        <h3>Common</h3>
-        <h3>The Dreamer / The Believer</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Adele2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Adele</h3>
-        <h3>21</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/FaltyDL2011.jpeg" width="100" height="100" alt=""/>
-        <h3>FaltyDL</h3>
-        <h3>You Stand Uncertain</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/HerculesAndLoveAffair2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Hercules & Love Affair</h3>
-        <h3>Blue Songs</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/SeaOleena2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Sea Oleena</h3>
-        <h3>Sleeplessness</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/KingKrule2011.jpeg" width="100" height="100" alt=""/>
-        <h3>King Krule</h3>
-        <h3>King Krule</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/ThePainsOfBeingPureAtHeart2011.jpeg" width="100" height="100" alt=""/>
-        <h3>The Pains of Being Pure at Heart</h3>
-        <h3>Belong</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/HowToDressWell2011.jpeg" width="100" height="100" alt=""/>
-        <h3>How to Dress Well</h3>
-        <h3>Just Once</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/BrightEyes2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Bright Eyes</h3>
-        <h3>The People's Key</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/ToucheAmore2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Touché Amoré</h3>
-        <h3>Parting the Sea Between Brightness and Me</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Wilco2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Wilco</h3>
-        <h3>The Whole Love</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Glassjaw2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Glassjaw</h3>
-        <h3>Our Color Green (The Singles)</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/ComTruise2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Com Truise</h3>
-        <h3>Galactic Melt</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2011/Iceage2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Iceage</h3>
-        <h3>New Brigade</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2011/Elbow2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Elbow</h3>
-        <h3>Build a Rocket Boys!</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2011/JohnMaus2011.jpeg" width="100" height="100" alt=""/>
-        <h3>John Maus</h3>
-        <h3>We Must Become the Pitiless Censors of Ourselves</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2011/AtlasSound2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Atlas Sound</h3>
-        <h3>Parallax</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2011/Battles2011.jpeg" width="100" height="100" alt=""/>
-        <h3>Battles</h3>
-        <h3>Gloss Drop</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2011/40WattSun2011.jpeg" width="100" height="100" alt=""/>
-        <h3>40 Watt Sun</h3>
-        <h3>The Inside Room</h3>
-	    <h3>3¾</h3>
+<main><ol>
+<h1>2011: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">8¾</div>
+  <div class="album-cover"><img src="images/2011/Drake2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Drake</h3>
+    <h3>Take Care</h3>
+    <h3>8¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/2011/JamesBlake2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>James Blake</h3>
+    <h3>James Blake</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/2011/PJHarvey2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>PJ Harvey</h3>
+    <h3>Let England Shake</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/2011/ShabazzPalaces2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Shabazz Palaces</h3>
+    <h3>Black Up</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/2011/DannyBrown2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Danny Brown</h3>
+    <h3>XXX</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/2011/TheWeeknd2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Weeknd</h3>
+    <h3>House of Balloons</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/2011/ASAPRocky2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>A$AP Rocky</h3>
+    <h3>LiveLoveA$AP</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/2011/OneohtrixPointNever2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Oneohtrix Point Never</h3>
+    <h3>Replica</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/2011/JamieWoon2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jamie Woon</h3>
+    <h3>Mirrorwriting</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/2011/KurtVile2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kurt Vile</h3>
+    <h3>Smoke Ring for My Halo</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2011/NicolasJaar2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Nicolás Jaar</h3>
+    <h3>Space Is Only Noise</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2011/KendrickLamar2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kendrick Lamar</h3>
+    <h3>Section.80</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2011/Rustie2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Rustie</h3>
+    <h3>Glass Swords</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2011/GirlsGeneration2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Girls' Generation</h3>
+    <h3>Girls' Generation</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2011/TheField2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Field</h3>
+    <h3>Looping State of Mind</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2011/Liturgy2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Liturgy</h3>
+    <h3>Aesthethica</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2011/ChelseaWolfe2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Chelsea Wolfe</h3>
+    <h3>Apokalypsis</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2011/WildBeasts2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Wild Beasts</h3>
+    <h3>Smother</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2011/SBTRKT2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>SBTRKT</h3>
+    <h3>SBTRKT</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2011/TheAntlers2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Antlers</h3>
+    <h3>Burst Apart</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2011/MacintoshPlus2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Macintosh Plus</h3>
+    <h3>Floral Shoppe</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/TuneYards2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tune-Yards</h3>
+    <h3>Whokill</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/AndyStott2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Andy Stott</h3>
+    <h3>Passed Me By</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/TheWeeknd2011-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Weeknd</h3>
+    <h3>Echoes of Silence</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/Kuedo2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kuedo</h3>
+    <h3>Severant</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/Radiohead2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Radiohead</h3>
+    <h3>The King of Limbs</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/JayZKanyeWest2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jay-Z / Kanye West</h3>
+    <h3>Watch the Throne</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2011/TylerTheCreator2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tyler, the Creator</h3>
+    <h3>Goblin</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2011/GangGangDance2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gang Gang Dance</h3>
+    <h3>Eye Contact</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2011/GilScottHeron2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gil Scott-Heron / Jamie xx</h3>
+    <h3>We're New Here</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2011/KateBush2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kate Bush</h3>
+    <h3>50 Words for Snow</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2011/ClamsCasino2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Clams Casino</h3>
+    <h3>Instrumentals</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2011/TheNecks2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Necks</h3>
+    <h3>Mindset</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/Destroyer2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Destroyer</h3>
+    <h3>Kaputt</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/IchikoAoba2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ichiko Aoba</h3>
+    <h3>Origami</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/2NE12011.jpeg" alt="" /></div><div class="album-text">
+    <h3>2NE1</h3>
+    <h3>2NE1 2nd Mini Album</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/FlorenceAndTheMachine2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Florence + The Machine</h3>
+    <h3>Ceremonials</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/MatanaRoberts2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Matana Roberts</h3>
+    <h3>Coin Coin Chapter One: Gens de Couleur Libres</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/StVincent2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>St. Vincent</h3>
+    <h3>Strange Mercy</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2011/Sepalcure2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sepalcure</h3>
+    <h3>Fleur</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/LilB2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Lil B</h3>
+    <h3>I'm Gay</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/FleetFoxes2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fleet Foxes</h3>
+    <h3>Helplessness Blues</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/DeathGrips2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Death Grips</h3>
+    <h3>Exmilitary</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/CutCopy2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cut Copy</h3>
+    <h3>Zonoscope</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/FosterThePeople2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Foster the People</h3>
+    <h3>Torches</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/BBNG2011.jpg" alt="" /></div><div class="album-text">
+    <h3>BadBadNotGood</h3>
+    <h3>BBNG</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/Vektor2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Vektor</h3>
+    <h3>Outer Isolation</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/2011/ToroYMoi2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Toro y Moi</h3>
+    <h3>Freaking Out</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Girls2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Girls</h3>
+    <h3>Father, Son, Holy Ghost</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/AndyStott2011-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Andy Stott</h3>
+    <h3>We Stay Together</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/BillCallahan2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bill Callahan</h3>
+    <h3>Apocalypse</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/TheWeeknd2011-3.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Weeknd</h3>
+    <h3>Thursday</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/TwinSister2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Twin Sister</h3>
+    <h3>In Heaven</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/HolyGhost2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Holy Ghost!</h3>
+    <h3>Holy Ghost!</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Tenhi2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tenhi</h3>
+    <h3>Salvo</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/OpenMikeEagle2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Open Mike Eagle</h3>
+    <h3>Rappers Will Die of Natural Causes</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/LaDispute2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>La Dispute</h3>
+    <h3>Wildlife</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Cults2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cults</h3>
+    <h3>Cults</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Metronomy2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Metronomy</h3>
+    <h3>The English Riviera</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Burial2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Burial</h3>
+    <h3>Street Halo</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/BenHoward2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ben Howard</h3>
+    <h3>Every Kingdom</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/ToroYMoi2011-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Toro y Moi</h3>
+    <h3>Underneath the Pine</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/LadyGaga2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Lady Gaga</h3>
+    <h3>Born This Way</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/ThurstonMoore2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Thurston Moore</h3>
+    <h3>Demolished Thoughts</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2011/Araabmuzik2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Araabmuzik</h3>
+    <h3>Electronic Dream</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/TheHorrors2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Horrors</h3>
+    <h3>Skying</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/DangerMouse2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Danger Mouse / Daniele Luppi</h3>
+    <h3>Rome</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/FriendlyFires2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Friendly Fires</h3>
+    <h3>Pala</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/KatyB2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Katy B</h3>
+    <h3>On a Mission</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/MacMiller2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Mac Miller</h3>
+    <h3>K.I.D.S. (Kickin' Incredibly Dope Shit)</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/TheBlackKeys2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Black Keys</h3>
+    <h3>El Camino</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/BlutAusNord2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Blut aus Nord</h3>
+    <h3>777 - Sect(s)</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/GilesCorey2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Giles Corey</h3>
+    <h3>Giles Corey</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/NeonIndian2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Neon Indian</h3>
+    <h3>Era Extraña</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/WhiteDenim2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>White Denim</h3>
+    <h3>D</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/Bjork2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Björk</h3>
+    <h3>Biophilia</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/BigKRIT2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Big K.R.I.T.</h3>
+    <h3>Return of 4eva</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/KingCreosote2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>King Creosote / Jon Hopkins</h3>
+    <h3>Diamond Mine</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/SandroPerri2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sandro Perri</h3>
+    <h3>Impossible Spaces</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/FrankOcean2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Frank Ocean</h3>
+    <h3>Nostalgia, Ultra</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/CassMcCombs2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cass McCombs</h3>
+    <h3>Wit's End</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/CarSeatHeadrest2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Car Seat Headrest</h3>
+    <h3>Twin Fantasy</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/TheGoTeam2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Go! Team</h3>
+    <h3>Rolling Blackouts</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/TheRapture2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Rapture</h3>
+    <h3>In the Grace of Your Love</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/TropicOfCancer2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Tropic of Cancer</h3>
+    <h3>The End of All Things</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/CatsEyes2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cat's Eyes</h3>
+    <h3>Cat's Eyes</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/LittleDragon2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Little Dragon</h3>
+    <h3>Ritual Union</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2011/Elder2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Elder</h3>
+    <h3>Dead Roots Stirring</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/MassiveAttackBurial2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Massive Attack / Burial</h3>
+    <h3>Four Walls / Paradise Circus</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/RealEstate2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Real Estate</h3>
+    <h3>Days</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/ArcticMonkeys2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Arctic Monkeys</h3>
+    <h3>Suck It and See</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/TheWarOnDrugs2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The War on Drugs</h3>
+    <h3>Slave Ambient</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/NewLook2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>New Look</h3>
+    <h3>New Look</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Sepalcure2011-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sepalcure</h3>
+    <h3>Sepalcure</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Disclosure2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Disclosure</h3>
+    <h3>Carnival EP</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/TheeOhSees2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Thee Oh Sees</h3>
+    <h3>Carrion Crawler / The Dream EP</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/CunninLynguists2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>CunninLynguists</h3>
+    <h3>Oneirology</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Gridlink2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gridlink</h3>
+    <h3>Orphan</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Machinedrum2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Machinedrum</h3>
+    <h3>Room(s)</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/LaurelHalo2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Laurel Halo</h3>
+    <h3>Hour Logic</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Skrillex2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Skrillex</h3>
+    <h3>Bangarang</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/FredFalke2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fred Falke</h3>
+    <h3>Part IV</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/MayaJaneColes2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Maya Jane Coles</h3>
+    <h3>Focus Now</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/PeakingLights2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Peaking Lights</h3>
+    <h3>936</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/VivianGirls2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Vivian Girls</h3>
+    <h3>Share the Joy</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Thundercat2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Thundercat</h3>
+    <h3>The Golden Age of Apocalypse</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/JensLekman2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jens Lekman</h3>
+    <h3>An Argument With Myself</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/PartTime2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Part Time</h3>
+    <h3>What Would You Say?</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/FuckedUp2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fucked Up</h3>
+    <h3>David Comes to Life</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/TheCaretaker2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Caretaker</h3>
+    <h3>An Empty Bliss Beyond This World</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/DirtyBeaches2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dirty Beaches</h3>
+    <h3>Badlands</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/GusGus2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>GusGus</h3>
+    <h3>Arabian Horse</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Beirut2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Beirut</h3>
+    <h3>The Rip Tide</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/AndYouWillKnowUsByTheTrailOfDead2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>And You Will Know Us by the Trail of Dead</h3>
+    <h3>Tao of the Dead</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/AlgernonCadwallader2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Algernon Cadwallader</h3>
+    <h3>Parrot Flies</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/GillianWelch2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Gillian Welch</h3>
+    <h3>The Harrow & the Harvest</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/UnknownMortalOrchestra2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Unknown Mortal Orchestra</h3>
+    <h3>Unknown Mortal Orchestra</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/DJDiamond2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>DJ Diamond</h3>
+    <h3>Flight Muzik</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2011/Lenka2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Lenka</h3>
+    <h3>Two</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/TimHecker2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tim Hecker</h3>
+    <h3>Ravedeath, 1972</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/UncleAcid2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Uncle Acid & The Deadbeats</h3>
+    <h3>Blood Lust</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/PandaBear2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Panda Bear</h3>
+    <h3>Tomboy</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/AlvaNoto2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Alva Noto / Ryuichi Sakamoto</h3>
+    <h3>Summvs</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Boris2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Boris</h3>
+    <h3>Heavy Rocks</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/JamesBlake2011-2.jpg" alt="" /></div><div class="album-text">
+    <h3>James Blake</h3>
+    <h3>Enough Thunder</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Ladytron2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ladytron</h3>
+    <h3>Gravity the Seducer</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/JulioBashmore2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Julio Bashmore</h3>
+    <h3>Everyone Needs a Theme Tune</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Emika2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Emika</h3>
+    <h3>Emika</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/ConnanMockasin2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Connan Mockasin</h3>
+    <h3>Forever Dolphin Love</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Krallice2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Krallice</h3>
+    <h3>Diotima</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/DeathspellOmega2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Deathspell Omega</h3>
+    <h3>Diabolus Absconditus</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/NadiaOh2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Nadia Oh</h3>
+    <h3>Colours</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/AfricaHitech2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Africa Hitech</h3>
+    <h3>93 Million Miles</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/SeaLions2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sea Lions</h3>
+    <h3>Everything You Always Wanted to Know About the Sea Lions But Were Afraid to Ask</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Zomby2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Zomby</h3>
+    <h3>Dedication</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/DumDumGirls2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dum Dum Girls</h3>
+    <h3>Only in Dreams</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/AndrewJacksonJihad2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Andrew Jackson Jihad</h3>
+    <h3>Knife Man</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Symmetry2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Symmetry</h3>
+    <h3>Themes for an Imaginary Film</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Disasterpeace2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Disasterpeace</h3>
+    <h3>Rise of the Obsidian Interstellar</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Insomnium2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Insomnium</h3>
+    <h3>One for Sorrow</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Common2011.jpg" alt="" /></div><div class="album-text">
+    <h3>Common</h3>
+    <h3>The Dreamer / The Believer</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Adele2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Adele</h3>
+    <h3>21</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/FaltyDL2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>FaltyDL</h3>
+    <h3>You Stand Uncertain</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/HerculesAndLoveAffair2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Hercules & Love Affair</h3>
+    <h3>Blue Songs</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/SeaOleena2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sea Oleena</h3>
+    <h3>Sleeplessness</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/KingKrule2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>King Krule</h3>
+    <h3>King Krule</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/ThePainsOfBeingPureAtHeart2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Pains of Being Pure at Heart</h3>
+    <h3>Belong</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/HowToDressWell2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>How to Dress Well</h3>
+    <h3>Just Once</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/BrightEyes2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bright Eyes</h3>
+    <h3>The People's Key</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/ToucheAmore2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Touché Amoré</h3>
+    <h3>Parting the Sea Between Brightness and Me</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Wilco2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Wilco</h3>
+    <h3>The Whole Love</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/Glassjaw2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Glassjaw</h3>
+    <h3>Our Color Green (The Singles)</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2011/ComTruise2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Com Truise</h3>
+    <h3>Galactic Melt</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/Iceage2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Iceage</h3>
+    <h3>New Brigade</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/Elbow2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Elbow</h3>
+    <h3>Build a Rocket Boys!</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/JohnMaus2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>John Maus</h3>
+    <h3>We Must Become the Pitiless Censors of Ourselves</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/AtlasSound2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Atlas Sound</h3>
+    <h3>Parallax</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/Battles2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>Battles</h3>
+    <h3>Gloss Drop</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2011/40WattSun2011.jpeg" alt="" /></div><div class="album-text">
+    <h3>40 Watt Sun</h3>
+    <h3>The Inside Room</h3>
+    <h3>3¾</h3>
+      </div></div></li>
       <li> 
 		<img src="images/2011/TheVaccines2011.jpeg" width="100" height="100" alt=""/>
         <h3>The Vaccines</h3>
