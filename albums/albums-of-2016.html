@@ -1,1190 +1,1665 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>2025 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-2015.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-2017.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-2015.html">Previous Year</a></a></li>
+  <li><a href="albums-of-2017.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>2016: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/2016/FrankOcean2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Frank Ocean</h3>
-        <h3>Blonde</h3>
-	    <h3>9¼</h3>
-      <li> 
-		<img src="images/2016/NickCave2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Nick Cave & The Bad Seeds</h3>
-        <h3>Skeleton Tree</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/2016/DavidBowie2016.jpeg" width="100" height="100" alt=""/>
-        <h3>David Bowie</h3>
-        <h3>Blackstar</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/2016/Radiohead2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Radiohead</h3>
-        <h3>A Moon Shaped Pool</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/2016/KanyeWest2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kanye West</h3>
-        <h3>The Life of Pablo</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/2016/BonIver2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Bon Iver</h3>
-        <h3>22, a Million</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/2016/The19752016.jpeg" width="100" height="100" alt=""/>
-        <h3>The 1975</h3>
-        <h3>I Like It When You Sleep for You Are So Beautiful...</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/2016/KendrickLamar2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kendrick Lamar</h3>
-        <h3>Untitled Unmastered</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/2016/DannyBrown2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Danny Brown</h3>
-        <h3>Atrocity Exhibition</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/2016/FrankOcean2016-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Frank Ocean</h3>
-        <h3>Endless</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/2016/YoungThug2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Young Thug</h3>
-        <h3>No, My Name Is Jeffery</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/NicolasJaar2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Nicolás Jaar</h3>
-        <h3>Sirens</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/JennyHval2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jenny Hval</h3>
-        <h3>Blood Bitch</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/TheAvalanches2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Avalanches</h3>
-        <h3>Wildflower</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/RunTheJewels2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Run the Jewels</h3>
-        <h3>Run the Jewels 3</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/DenzelCurry2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Denzel Curry</h3>
-        <h3>Imperial</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/Alcest2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Alecst</h3>
-        <h3>Kodama</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/2016/InjuryReserve2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Injury Reserve</h3>
-        <h3>Floss</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2016/JeffRosenstock2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jeff Rosenstock</h3>
-        <h3>Worry</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2016/Ka2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ka</h3>
-        <h3>Honor Killed the Samurai</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/2016/Beyonce2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Beyoncé</h3>
-        <h3>Lemonade</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2016/ATribeCalledQuest2016.jpeg" width="100" height="100" alt=""/>
-        <h3>A Tribe Called Quest</h3>
-        <h3>We Got It From Here… Thank You 4 Your Service</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2016/ParkJiha2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Park Jiha</h3>
-        <h3>Communion</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2016/BTS2016.jpeg" width="100" height="100" alt=""/>
-        <h3>BTS</h3>
-        <h3>Young Forever</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/2016/Solange2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Solange</h3>
-        <h3>A Seat at the Table</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2016/TimHecker2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tim Hecker</h3>
-        <h3>Love Streams</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2016/LeonVynehall2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Leon Vynehall</h3>
-        <h3>Rojus (Designed to Dance)</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/2016/LeonardCohen2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Leonard Cohen</h3>
-        <h3>You Want It Darker</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2016/MinhwiLee2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Minhwi Lee</h3>
-        <h3>Borrowed Tongue</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2016/40WattSun2016.jpeg" width="100" height="100" alt=""/>
-        <h3>40 Watt Sun</h3>
-        <h3>Wider Than the Sky</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/2016/BigBang2016.jpeg" width="100" height="100" alt=""/>
-        <h3>BigBang</h3>
-        <h3>Made</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2016/KeroKeroBonito2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kero Kero Bonito</h3>
-        <h3>Bonito Generation</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/2016/SturgillSimpson2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Sturgill Simpson</h3>
-        <h3>A Sailor's Guide to Earth</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2016/Deakin2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Deakin</h3>
-        <h3>Sleep Cycle</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2016/Arca2016.jpg" width="100" height="100" alt=""/>
-        <h3>Arca</h3>
-        <h3>Entrañas</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2016/Matmos2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Matmos</h3>
-        <h3>Ultimate Care II</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2016/MarieDavidson2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Marie Davidson</h3>
-        <h3>Adieux au Dancefloor</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/2016/Skepta2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Skepta</h3>
-        <h3>Konnichiwa</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/AndersonPaak2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Anderson .Paak</h3>
-        <h3>Malibu</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/BatForLashes2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Bat for Lashes</h3>
-        <h3>The Bride</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/Preoccupations2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Preoccupations</h3>
-        <h3>Preoccupations</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/AndyShauf2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Andy Shauf</h3>
-        <h3>The Party</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/Furia2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Furia</h3>
-        <h3>Księżyc Milczy Luty</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/Babymetal2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Babymetal</h3>
-        <h3>Metal Resistance</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/HikaruUtada2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Hikaru Utada</h3>
-        <h3>Fantôme</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/LilUziVert2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Lil Uzi Vert</h3>
-        <h3>Lil Uzi Vert vs. the World</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/AmnesiaScanner2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Amnesia Scanner</h3>
-        <h3>AS</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/Tindersticks2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tindersticks</h3>
-        <h3>The Waiting Room</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/BJTheChicagoKid2016.jpeg" width="100" height="100" alt=""/>
-        <h3>BJ the Chicago Kid</h3>
-        <h3>In My Mind</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/2016/CharliXCX2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Charli XCX</h3>
-        <h3>Vroom Vroom</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Rihanna2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Rihanna</h3>
-        <h3>Anti</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Syringe2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Syringe</h3>
-        <h3>Anti-World</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/ChanceTheRapper2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Chance the Rapper</h3>
-        <h3>Coloring Book</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/BloodOrange2017.jpeg" width="100" height="100" alt=""/>
-        <h3>Blood Orange</h3>
-        <h3>Freetown Sound</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/JohannJohannson2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jóhann Jóhannsson</h3>
-        <h3>Orphée</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/PJHarvey2016.jpeg" width="100" height="100" alt=""/>
-        <h3>PJ Harvey</h3>
-        <h3>The Hope Six Demolition Project</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/MattElliott2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Matt Elliott</h3>
-        <h3>The Calm Before</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Tinashe2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tinashe</h3>
-        <h3>Nightride</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/DeathGrips2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Death Grips</h3>
-        <h3>Bottomless Pit</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Maxwell2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Maxwell</h3>
-        <h3>blackSUMMERS'night</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/WilliamTyler2016.jpeg" width="100" height="100" alt=""/>
-        <h3>William Tyler</h3>
-        <h3>Modern Country</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Swans2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Swans</h3>
-        <h3>The Glowing Man</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Suede2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Suede</h3>
-        <h3>Night Thoughts</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/ManicSheep2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Manic Sheep</h3>
-        <h3>Brooklyn</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/NxWorries2016.jpeg" width="100" height="100" alt=""/>
-        <h3>NxWorries</h3>
-        <h3>Yes Lawd!</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/DeathspellOmega2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Deathspell Omega</h3>
-        <h3>The Synarchy of Molten Bones</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/DIIV2016.jpeg" width="100" height="100" alt=""/>
-        <h3>DIIV</h3>
-        <h3>Is the Is Are</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Anohni2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Anohni</h3>
-        <h3>Hopelessness</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/Chairlift2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Chairlift</h3>
-        <h3>Moth</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/IchikoAoba2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ichiko Aoba</h3>
-        <h3>Mahoroboshiya</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/2016/HuercoS2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Huerco S.</h3>
-        <h3>For Those of You Who Have Never (And Also Those Who Have)</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Crush2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Crush</h3>
-        <h3>Interlude</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Abra2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Abra</h3>
-        <h3>Princess</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Pangaea2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Pangaea</h3>
-        <h3>In Drum Play</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/JamesBlake2016.jpeg" width="100" height="100" alt=""/>
-        <h3>James Blake</h3>
-        <h3>The Colour in Anything</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Niechec2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Niechęć</h3>
-        <h3>Niechęć</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/AesopRock2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Aesop Rock</h3>
-        <h3>The Impossible Kid</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Vektor2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Vektor</h3>
-        <h3>Terminal Redux</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Autechre2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Autechre</h3>
-        <h3>Elseq 1–5</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Powell2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Powell</h3>
-        <h3>Sport</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/BrunoPernadas2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Bruno Pernadas</h3>
-        <h3>Those Who Throw Objects at the Crocodiles...</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/Angel lsen2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Angel Olsen</h3>
-        <h3>My Woman</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/StevenWilson2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Steven Wilson</h3>
-        <h3>4 ½</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/2016/JessyLanza2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jessy Lanza</h3>
-        <h3>Oh No</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/UyamaHiroto2017.jpeg" width="100" height="100" alt=""/>
-        <h3>Uyama Hiroto</h3>
-        <h3>Freeform Jazz</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/KevinAbstract2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kevin Abstract</h3>
-        <h3>American Boyfriend: A Suburban Love Story</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/BloodIncantation2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Blood Incantation</h3>
-        <h3>Starspawn</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Noisia2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Noisia</h3>
-        <h3>Outer Edges</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/ArianaGrande2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ariana Grande</h3>
-        <h3>Dangerous Woman</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/JustinHurwitz2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Justin Hurwitz</h3>
-        <h3>La La Land OST</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Noname2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Noname</h3>
-        <h3>Telephone</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Drake2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Drake</h3>
-        <h3>Views</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/SarathyKorwar2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Sarathy Korwar</h3>
-        <h3>Day to Day</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/KikiHitomi2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kiki Hitomi</h3>
-        <h3>Karma no Kusari</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/JefreCantuLedesma2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jefre Cantu-Ledesma</h3>
-        <h3>In Summer</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/AestheticsPlease2016.jpg" width="100" height="100" alt=""/>
-        <h3>Aesthetics Please</h3>
-        <h3>Righteous Groove</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Auktyon2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Аукцыон</h3>
-        <h3>На Cолнце</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Lone2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Lone</h3>
-        <h3>Levitate</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/DMAs2016.jpeg" width="100" height="100" alt=""/>
-        <h3>DMA's</h3>
-        <h3>Hills End</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Smerz2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Smerz</h3>
-        <h3>Okey</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/HeadWoundCity2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Head Wound City</h3>
-        <h3>A New Wave of Violence</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/BTS2016-2.jpeg" width="100" height="100" alt=""/>
-        <h3>BTS</h3>
-        <h3>Wings</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Kamaiyah2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kamaiyah</h3>
-        <h3>A Good Night in the Ghetto</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/TheField2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Field</h3>
-        <h3>The Follower</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Deftones2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Deftones</h3>
-        <h3>Gore</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/2016/Saba2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Saba</h3>
-        <h3>Bucket List Project</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/BrailleFace2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Braille Face</h3>
-        <h3>Kōya</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/Kemba2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kemba</h3>
-        <h3>Negus</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/HorseLords2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Horse Lords</h3>
-        <h3>Interventions</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/Shinee2016.jpeg" width="100" height="100" alt=""/>
-        <h3>SHINee</h3>
-        <h3>1 of 1</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/JBalvin2016.jpeg" width="100" height="100" alt=""/>
-        <h3>J Balvin</h3>
-        <h3>Energía</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/RavynLenae2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ravyn Lenae</h3>
-        <h3>Moon Shoes</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/RedHotChiliPeppers2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Red Hot Chili Peppers</h3>
-        <h3>The Getaway</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/AcidArab2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Acid Arab</h3>
-        <h3>Musique de France</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/Luh2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Luh</h3>
-        <h3>Spiritual Songs for Lovers to Sing</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/Digitalism2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Digitalism</h3>
-        <h3>Mirage</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/SwetShopBoys2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Swet Shop Boys</h3>
-        <h3>Cashmere</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/WildNothing2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Wild Nothing</h3>
-        <h3>Life of Pause</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/TheDrones2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Drones</h3>
-        <h3>Feelin Kinda Free</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/Clipping2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Clipping.</h3>
-        <h3>Wriggle</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/JuliannaBarwick2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Julianna Barwick</h3>
-        <h3>Will</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/OpenMikeEagle2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Open Mike Eagle / Paul White</h3>
-        <h3>Hella Personal Film Festival</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/CarnivalYouth2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Carnival Youth</h3>
-        <h3>Propeller</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/2016/WeyesBlood2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Weyes Blood</h3>
-        <h3>Front Row Seat to Earth</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Fennesz2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Fennesz / Jim O'Rourke</h3>
-        <h3>It's Hard for Me to Say I'm Sorry</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Wormrot2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Wormrot</h3>
-        <h3>Voices</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Tomppabeats2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tomppabeats</h3>
-        <h3>Harbor</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/IsaiahRashad2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Isaiah Rashad</h3>
-        <h3>The Sun's Tirade</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/AnimalCollective2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Animal Collective</h3>
-        <h3>Painting With</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/SkeeMask2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Skee Mask</h3>
-        <h3>Shred</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Sepalcure2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Sepalcure</h3>
-        <h3>Folding Time</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Omni2016.jpg" width="100" height="100" alt=""/>
-        <h3>Omni</h3>
-        <h3>Deluxe</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/MIA2016.jpeg" width="100" height="100" alt=""/>
-        <h3>M.I.A.</h3>
-        <h3>AIM</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Trim2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Trim</h3>
-        <h3>1-800 Dinosaur Presents Trim</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Clipping2016-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Clipping.</h3>
-        <h3>Splendor & Misery</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Gojira2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Gojira</h3>
-        <h3>Magma</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/DamienJurado2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Damien Jurado</h3>
-        <h3>Visions of Us on the Land</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Djwwww2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Djwwww</h3>
-        <h3>Arigato</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/JuteGyte2016.jpg" width="100" height="100" alt=""/>
-        <h3>Jute Gyte</h3>
-        <h3>Perdurance</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Weezer2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Weezer</h3>
-        <h3>Weezer (White Album)</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/LaFemme2016.jpeg" width="100" height="100" alt=""/>
-        <h3>La Femme</h3>
-        <h3>Mystère</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/FrightenedRabbit2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Frightened Rabbit</h3>
-        <h3>Painting of a Panic Attack</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/2016/Baauer2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Baauer</h3>
-        <h3>Aa</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/RaeSremmurd2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Rae Sremmurd</h3>
-        <h3>SremmLife 2</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/YG2016.jpeg" width="100" height="100" alt=""/>
-        <h3>YG</h3>
-        <h3>Still Brazy</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/KnockedLoose2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Knocked Loose</h3>
-        <h3>Laugh Tracks</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/DRAM2016.jpeg" width="100" height="100" alt=""/>
-        <h3>D.R.A.M.</h3>
-        <h3>Big Baby D.R.A.M.</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/BigThief2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Big Thief</h3>
-        <h3>Masterpiece</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/KashiwaDaisuke2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kashiwa Daisuke</h3>
-        <h3>Program Music II</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/MachHommy2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Mach-Hommy</h3>
-        <h3>HBO (Haitian Body Odor)</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Glintshake2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Glintshake</h3>
-        <h3>Оэщ Магзиу</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/MargoPrice2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Margo Price</h3>
-        <h3>Midwest Farmer's Daughter</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Goat2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Goat</h3>
-        <h3>Requiem</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Brockhampton2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Brockhampton</h3>
-        <h3>All-American Trash</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Neurosis2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Neurosis</h3>
-        <h3>Fires Within Fires</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/DaddyWasAMilkman2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Daddy Was a Milkman</h3>
-        <h3>Daydreaming</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/TheFallOfTroy2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Fall of Troy</h3>
-        <h3>OK</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Dvsn2016.jpeg" width="100" height="100" alt=""/>
-        <h3>dvsn</h3>
-        <h3>Sept. 5th</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/MoorMother2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Moor Mother</h3>
-        <h3>Fetish Bones</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/GFOTY2016.jpeg" width="100" height="100" alt=""/>
-        <h3>GFOTY</h3>
-        <h3>Call Him a Doctor</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/VinceStaples2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Vince Staples</h3>
-        <h3>Prima Donna</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/JesuSunKilMoon2016.jpg" width="100" height="100" alt=""/>
-        <h3>Jesu / Sun Kil Moon</h3>
-        <h3>Jesu / Sun Kil Moon</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Sia2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Sia</h3>
-        <h3>This Is Acting</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Shura2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Shura</h3>
-        <h3>Nothing's Real</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Tiffany2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tiffany</h3>
-        <h3>I Just Wanna Dance</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Mitski2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Mitski</h3>
-        <h3>Puberty 2</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Serpentwithfeet2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Serpentwithfeet</h3>
-        <h3>Blisters</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/KloPelgag2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Klô Pelgag</h3>
-        <h3>L'étoile Thoracique</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Nails2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Nails</h3>
-        <h3>You Will Never Be One of Us</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/TravisScott2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Travis Scott</h3>
-        <h3>Birds in the Trap Sing McKnight</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/BrunoMars2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Bruno Mars</h3>
-        <h3>24K Magic</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/SunflowerBean2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Sunflower Bean</h3>
-        <h3>Human Ceremony</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/MasayoshiFujita2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Masayoshi Fujita / Jan Jelinek</h3>
-        <h3>Schaum</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Surgeon2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Surgeon</h3>
-        <h3>From Farthest Known Objects</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/NineInchNails2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Nine Inch Nails</h3>
-        <h3>Not the Actual Events</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Perturbator2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Perturbator</h3>
-        <h3>The Uncanny Valley</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/TheRange2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Range</h3>
-        <h3>Potential</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/TheChainsmokers2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Chainsmokers</h3>
-        <h3>Collage</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/WallisBird2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Wallis Bird</h3>
-        <h3>Home</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Forteresse2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Fortresse</h3>
-        <h3>Thèmes pour la Rébellion</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/JuniorBoys2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Junior Boys</h3>
-        <h3>Big Black Coat</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/TheAnchoress2016.jpg" width="100" height="100" alt=""/>
-        <h3>The Anchoress</h3>
-        <h3>Confessions of a Romance Novelist</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/EsperanzaSpalding2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Esperanza Spalding</h3>
-        <h3>Emily's D+Evolution</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/KateNV2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kate NV</h3>
-        <h3>Binasu</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/DivoliSvere2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Divoli S'vere</h3>
-        <h3>NSTU | DLX</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/YorkstonThorneKhan2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Yorkston / Thorne / Khan</h3>
-        <h3>Everything Sacred</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/WhiteLung2016.jpeg" width="100" height="100" alt=""/>
-        <h3>White Lung</h3>
-        <h3>Paradise</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/2016/Jonghyun2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jonghyun</h3>
-        <h3>She Is</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Bladee2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Bladee / Thaiboy Digital</h3>
-        <h3>AvP</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/TheWeeknd2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Weeknd</h3>
-        <h3>Starboy</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/LetsEatGrandma2017.jpg" width="100" height="100" alt=""/>
-        <h3>Let's Eat Grandma</h3>
-        <h3>I, Gemini</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/ParquetCourts2017.jpeg" width="100" height="100" alt=""/>
-        <h3>Parquet Courts</h3>
-        <h3>Human Performance</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/TheRadioDept2016.jpeg" width="100" height="100" alt=""/>
-        <h3>The Radio Dept.</h3>
-        <h3>Running Out of Love</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/JamilaWoods2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jamila Woods</h3>
-        <h3>Heavn</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Jpegmafia2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Jpegmafia</h3>
-        <h3>Black Ben Carson</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/MassiveAttack2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Massive Attack</h3>
-        <h3>Ritual Spirit</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/UkendtKunstner2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ukendt Kunstner</h3>
-        <h3>Den Anden Side</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/KishiBashi2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kishi Bashi</h3>
-        <h3>Sonderlust</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/SchoolboyQ2016.jpeg" width="100" height="100" alt=""/>
-        <h3>ScHoolboy Q</h3>
-        <h3>Blank Face LP</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Kaytranada2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Kaytranada</h3>
-        <h3>99.9%</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/PetiteMeller2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Petite Meller</h3>
-        <h3>Lil Empire</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Messa2016.jpg" width="100" height="100" alt=""/>
-        <h3>Messa</h3>
-        <h3>Belfry</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Twice2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Twice</h3>
-        <h3>TWICEcoaster: Lane 1</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/ToucheAmore2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Touché Amoré</h3>
-        <h3>Stage Four</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/XiuXiu2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Xiu Xiu</h3>
-        <h3>Plays the Music of Twin Peaks</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/JanaWinderen2016.jpg" width="100" height="100" alt=""/>
-        <h3>Jana Winderen</h3>
-        <h3>The Wanderer</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/MilesDavis2016.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis / Robert Glasper</h3>
-        <h3>Everything's Beautiful</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/BigUps2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Big Ups</h3>
-        <h3>Before a Million Universes</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Tiga2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Tiga</h3>
-        <h3>No Fantasy Required</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/BK2016.jpeg" width="100" height="100" alt=""/>
-        <h3>BK</h3>
-        <h3>Castelos & Ruínas</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/DDDumbo2016.jpeg" width="100" height="100" alt=""/>
-        <h3>D.D Dumbo</h3>
-        <h3>Utopia Defeated</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Future2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Future</h3>
-        <h3>Evol</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Ihsahn2016.jpg" width="100" height="100" alt=""/>
-        <h3>Ihsahn</h3>
-        <h3>Arktis</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/EmmaRuthRundle2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Emma Ruth Rundle</h3>
-        <h3>Marked for Death</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/EsbenAndTheWitch2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Esben & The Witch</h3>
-        <h3>Older Terrors</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Machinedrum2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Machinedrum</h3>
-        <h3>Human Energy</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/AphexTwin2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Aphex Twin</h3>
-        <h3>Cheetah EP</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/CateLeBon2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Cate Le Bon</h3>
-        <h3>Crab Day</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/MarenMorris2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Maren Morris</h3>
-        <h3>Hero</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/MannequinPussy2016.jpg" width="100" height="100" alt=""/>
-        <h3>Mannequin Pussy</h3>
-        <h3>Romantic</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/CarSeatHeadrest2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Car Seat Headrest</h3>
-        <h3>Teens of Denial</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Villagers2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Villagers</h3>
-        <h3>Where Have You Been All My Life?</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/CraigDavid2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Craig David</h3>
-        <h3>Following My Intuition</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Lambchop2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Lambchop</h3>
-        <h3>FLOTUS</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/2016/Ulcerate2016.jpeg" width="100" height="100" alt=""/>
-        <h3>Ulcerate</h3>
-        <h3>Shrines of Paralysis</h3>
-	    <h3>2¾</h3>
+<main><ol>
+<h1>2016: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">9¼</div>
+  <div class="album-cover"><img src="images/2016/FrankOcean2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Frank Ocean</h3>
+    <h3>Blonde</h3>
+    <h3>9¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/2016/NickCave2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nick Cave & The Bad Seeds</h3>
+    <h3>Skeleton Tree</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/2016/DavidBowie2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>David Bowie</h3>
+    <h3>Blackstar</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/2016/Radiohead2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Radiohead</h3>
+    <h3>A Moon Shaped Pool</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/2016/KanyeWest2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kanye West</h3>
+    <h3>The Life of Pablo</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/2016/BonIver2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bon Iver</h3>
+    <h3>22, a Million</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/2016/The19752016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The 1975</h3>
+    <h3>I Like It When You Sleep for You Are So Beautiful...</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/2016/KendrickLamar2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kendrick Lamar</h3>
+    <h3>Untitled Unmastered</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/2016/DannyBrown2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Danny Brown</h3>
+    <h3>Atrocity Exhibition</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/2016/FrankOcean2016-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Frank Ocean</h3>
+    <h3>Endless</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/YoungThug2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Young Thug</h3>
+    <h3>No, My Name Is Jeffery</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/NicolasJaar2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nicolás Jaar</h3>
+    <h3>Sirens</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/JennyHval2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jenny Hval</h3>
+    <h3>Blood Bitch</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/TheAvalanches2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Avalanches</h3>
+    <h3>Wildflower</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/RunTheJewels2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Run the Jewels</h3>
+    <h3>Run the Jewels 3</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/DenzelCurry2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Denzel Curry</h3>
+    <h3>Imperial</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/2016/Alcest2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Alcest</h3>
+    <h3>Kodama</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2016/InjuryReserve2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Injury Reserve</h3>
+    <h3>Floss</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2016/JeffRosenstock2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jeff Rosenstock</h3>
+    <h3>Worry</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/2016/Ka2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ka</h3>
+    <h3>Honor Killed the Samurai</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2016/Beyonce2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Beyoncé</h3>
+    <h3>Lemonade</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2016/ATribeCalledQuest2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>A Tribe Called Quest</h3>
+    <h3>We Got It From Here… Thank You 4 Your Service</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2016/ParkJiha2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Park Jiha</h3>
+    <h3>Communion</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/2016/BTS2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>BTS</h3>
+    <h3>Young Forever</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2016/Solange2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Solange</h3>
+    <h3>A Seat at the Table</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2016/TimHecker2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tim Hecker</h3>
+    <h3>Love Streams</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/2016/LeonVynehall2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Leon Vynehall</h3>
+    <h3>Rojus (Designed to Dance)</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2016/LeonardCohen2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Leonard Cohen</h3>
+    <h3>You Want It Darker</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2016/MinhwiLee2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Minhwi Lee</h3>
+    <h3>Borrowed Tongue</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/2016/40WattSun2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>40 Watt Sun</h3>
+    <h3>Wider Than the Sky</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2016/BigBang2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>BigBang</h3>
+    <h3>Made</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/2016/KeroKeroBonito2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kero Kero Bonito</h3>
+    <h3>Bonito Generation</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2016/SturgillSimpson2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sturgill Simpson</h3>
+    <h3>A Sailor's Guide to Earth</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2016/Deakin2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Deakin</h3>
+    <h3>Sleep Cycle</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2016/Arca2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Arca</h3>
+    <h3>Entrañas</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2016/Matmos2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Matmos</h3>
+    <h3>Ultimate Care II</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/2016/MarieDavidson2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Marie Davidson</h3>
+    <h3>Adieux au Dancefloor</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/Skepta2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Skepta</h3>
+    <h3>Konnichiwa</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/AndersonPaak2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Anderson .Paak</h3>
+    <h3>Malibu</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/BatForLashes2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bat for Lashes</h3>
+    <h3>The Bride</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/Preoccupations2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Preoccupations</h3>
+    <h3>Preoccupations</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/AndyShauf2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Andy Shauf</h3>
+    <h3>The Party</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/Furia2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Furia</h3>
+    <h3>Księżyc Milczy Luty</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/Babymetal2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Babymetal</h3>
+    <h3>Metal Resistance</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/HikaruUtada2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Hikaru Utada</h3>
+    <h3>Fantôme</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/LilUziVert2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lil Uzi Vert</h3>
+    <h3>Lil Uzi Vert vs. the World</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/AmnesiaScanner2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Amnesia Scanner</h3>
+    <h3>AS</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/Tindersticks2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tindersticks</h3>
+    <h3>The Waiting Room</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/2016/BJTheChicagoKid2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>BJ the Chicago Kid</h3>
+    <h3>In My Mind</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/CharliXCX2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Charli XCX</h3>
+    <h3>Vroom Vroom</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Rihanna2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rihanna</h3>
+    <h3>Anti</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Syringe2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Syringe</h3>
+    <h3>Anti-World</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/ChanceTheRapper2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Chance the Rapper</h3>
+    <h3>Coloring Book</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/BloodOrange2017.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Blood Orange</h3>
+    <h3>Freetown Sound</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/JohannJohannson2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jóhann Jóhannsson</h3>
+    <h3>Orphée</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/PJHarvey2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>PJ Harvey</h3>
+    <h3>The Hope Six Demolition Project</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/MattElliott2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Matt Elliott</h3>
+    <h3>The Calm Before</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Tinashe2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tinashe</h3>
+    <h3>Nightride</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/DeathGrips2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Death Grips</h3>
+    <h3>Bottomless Pit</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Maxwell2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Maxwell</h3>
+    <h3>blackSUMMERS'night</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/WilliamTyler2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>William Tyler</h3>
+    <h3>Modern Country</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Swans2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Swans</h3>
+    <h3>The Glowing Man</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Suede2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Suede</h3>
+    <h3>Night Thoughts</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/ManicSheep2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Manic Sheep</h3>
+    <h3>Brooklyn</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/NxWorries2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>NxWorries</h3>
+    <h3>Yes Lawd!</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/DeathspellOmega2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Deathspell Omega</h3>
+    <h3>The Synarchy of Molten Bones</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/DIIV2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>DIIV</h3>
+    <h3>Is the Is Are</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Anohni2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Anohni</h3>
+    <h3>Hopelessness</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/Chairlift2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Chairlift</h3>
+    <h3>Moth</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/2016/IchikoAoba2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ichiko Aoba</h3>
+    <h3>Mahoroboshiya</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/HuercoS2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Huerco S.</h3>
+    <h3>For Those of You Who Have Never (And Also Those Who Have)</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Crush2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Crush</h3>
+    <h3>Interlude</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Abra2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Abra</h3>
+    <h3>Princess</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Pangaea2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pangaea</h3>
+    <h3>In Drum Play</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/JamesBlake2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>James Blake</h3>
+    <h3>The Colour in Anything</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Niechec2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Niechęć</h3>
+    <h3>Niechęć</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/AesopRock2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Aesop Rock</h3>
+    <h3>The Impossible Kid</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Vektor2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Vektor</h3>
+    <h3>Terminal Redux</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Autechre2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Autechre</h3>
+    <h3>Elseq 1–5</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Powell2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Powell</h3>
+    <h3>Sport</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/BrunoPernadas2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bruno Pernadas</h3>
+    <h3>Those Who Throw Objects at the Crocodiles...</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/Angel lsen2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Angel Olsen</h3>
+    <h3>My Woman</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/2016/StevenWilson2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Steven Wilson</h3>
+    <h3>4 ½</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/JessyLanza2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jessy Lanza</h3>
+    <h3>Oh No</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/UyamaHiroto2017.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Uyama Hiroto</h3>
+    <h3>Freeform Jazz</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/KevinAbstract2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kevin Abstract</h3>
+    <h3>American Boyfriend: A Suburban Love Story</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/BloodIncantation2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Blood Incantation</h3>
+    <h3>Starspawn</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Noisia2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Noisia</h3>
+    <h3>Outer Edges</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/ArianaGrande2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ariana Grande</h3>
+    <h3>Dangerous Woman</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/JustinHurwitz2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Justin Hurwitz</h3>
+    <h3>La La Land OST</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Noname2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Noname</h3>
+    <h3>Telephone</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Drake2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Drake</h3>
+    <h3>Views</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/SarathyKorwar2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sarathy Korwar</h3>
+    <h3>Day to Day</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/KikiHitomi2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kiki Hitomi</h3>
+    <h3>Karma no Kusari</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/JefreCantuLedesma2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jefre Cantu-Ledesma</h3>
+    <h3>In Summer</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/AestheticsPlease2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Aesthetics Please</h3>
+    <h3>Righteous Groove</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Auktyon2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Аукцыон</h3>
+    <h3>На Cолнце</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Lone2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lone</h3>
+    <h3>Levitate</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/DMAs2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>DMA's</h3>
+    <h3>Hills End</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Smerz2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Smerz</h3>
+    <h3>Okey</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/HeadWoundCity2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Head Wound City</h3>
+    <h3>A New Wave of Violence</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/BTS2016-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>BTS</h3>
+    <h3>Wings</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Kamaiyah2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kamaiyah</h3>
+    <h3>A Good Night in the Ghetto</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/TheField2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Field</h3>
+    <h3>The Follower</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/2016/Deftones2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Deftones</h3>
+    <h3>Gore</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Saba2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Saba</h3>
+    <h3>Bucket List Project</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/BrailleFace2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Braille Face</h3>
+    <h3>Kōya</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Kemba2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kemba</h3>
+    <h3>Negus</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/HorseLords2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Horse Lords</h3>
+    <h3>Interventions</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Shinee2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>SHINee</h3>
+    <h3>1 of 1</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/JBalvin2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>J Balvin</h3>
+    <h3>Energía</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/RavynLenae2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ravyn Lenae</h3>
+    <h3>Moon Shoes</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/RedHotChiliPeppers2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Red Hot Chili Peppers</h3>
+    <h3>The Getaway</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/AcidArab2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Acid Arab</h3>
+    <h3>Musique de France</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Luh2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Luh</h3>
+    <h3>Spiritual Songs for Lovers to Sing</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Digitalism2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Digitalism</h3>
+    <h3>Mirage</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/SwetShopBoys2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Swet Shop Boys</h3>
+    <h3>Cashmere</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/WildNothing2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Wild Nothing</h3>
+    <h3>Life of Pause</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/TheDrones2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Drones</h3>
+    <h3>Feelin Kinda Free</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/Clipping2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Clipping.</h3>
+    <h3>Wriggle</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/JuliannaBarwick2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Julianna Barwick</h3>
+    <h3>Will</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/OpenMikeEagle2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Open Mike Eagle / Paul White</h3>
+    <h3>Hella Personal Film Festival</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/2016/CarnivalYouth2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Carnival Youth</h3>
+    <h3>Propeller</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/WeyesBlood2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Weyes Blood</h3>
+    <h3>Front Row Seat to Earth</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Fennesz2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Fennesz / Jim O'Rourke</h3>
+    <h3>It's Hard for Me to Say I'm Sorry</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Wormrot2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Wormrot</h3>
+    <h3>Voices</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Tomppabeats2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tomppabeats</h3>
+    <h3>Harbor</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/IsaiahRashad2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Isaiah Rashad</h3>
+    <h3>The Sun's Tirade</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/AnimalCollective2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Animal Collective</h3>
+    <h3>Painting With</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/SkeeMask2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Skee Mask</h3>
+    <h3>Shred</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Sepalcure2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sepalcure</h3>
+    <h3>Folding Time</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Omni2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Omni</h3>
+    <h3>Deluxe</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/MIA2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>M.I.A.</h3>
+    <h3>AIM</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Trim2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Trim</h3>
+    <h3>1-800 Dinosaur Presents Trim</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Clipping2016-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Clipping.</h3>
+    <h3>Splendor & Misery</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Gojira2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Gojira</h3>
+    <h3>Magma</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/DamienJurado2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Damien Jurado</h3>
+    <h3>Visions of Us on the Land</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Djwwww2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Djwwww</h3>
+    <h3>Arigato</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/JuteGyte2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jute Gyte</h3>
+    <h3>Perdurance</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/Weezer2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Weezer</h3>
+    <h3>Weezer (White Album)</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/LaFemme2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>La Femme</h3>
+    <h3>Mystère</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/2016/FrightenedRabbit2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Frightened Rabbit</h3>
+    <h3>Painting of a Panic Attack</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Baauer2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Baauer</h3>
+    <h3>Aa</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/RaeSremmurd2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rae Sremmurd</h3>
+    <h3>SremmLife 2</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/YG2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>YG</h3>
+    <h3>Still Brazy</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/KnockedLoose2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Knocked Loose</h3>
+    <h3>Laugh Tracks</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/DRAM2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>D.R.A.M.</h3>
+    <h3>Big Baby D.R.A.M.</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/BigThief2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Big Thief</h3>
+    <h3>Masterpiece</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/KashiwaDaisuke2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kashiwa Daisuke</h3>
+    <h3>Program Music II</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/MachHommy2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mach-Hommy</h3>
+    <h3>HBO (Haitian Body Odor)</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Glintshake2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Glintshake</h3>
+    <h3>Оэщ Магзиу</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/MargoPrice2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Margo Price</h3>
+    <h3>Midwest Farmer's Daughter</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Goat2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Goat</h3>
+    <h3>Requiem</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Brockhampton2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Brockhampton</h3>
+    <h3>All-American Trash</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Neurosis2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Neurosis</h3>
+    <h3>Fires Within Fires</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/DaddyWasAMilkman2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Daddy Was a Milkman</h3>
+    <h3>Daydreaming</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/TheFallOfTroy2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Fall of Troy</h3>
+    <h3>OK</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Dvsn2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>dvsn</h3>
+    <h3>Sept. 5th</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/MoorMother2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Moor Mother</h3>
+    <h3>Fetish Bones</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/GFOTY2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>GFOTY</h3>
+    <h3>Call Him a Doctor</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/VinceStaples2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Vince Staples</h3>
+    <h3>Prima Donna</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/JesuSunKilMoon2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jesu / Sun Kil Moon</h3>
+    <h3>Jesu / Sun Kil Moon</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Sia2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sia</h3>
+    <h3>This Is Acting</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Shura2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Shura</h3>
+    <h3>Nothing's Real</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Tiffany2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tiffany</h3>
+    <h3>I Just Wanna Dance</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Mitski2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mitski</h3>
+    <h3>Puberty 2</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Serpentwithfeet2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Serpentwithfeet</h3>
+    <h3>Blisters</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/KloPelgag2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Klô Pelgag</h3>
+    <h3>L'étoile Thoracique</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Nails2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nails</h3>
+    <h3>You Will Never Be One of Us</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/TravisScott2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Travis Scott</h3>
+    <h3>Birds in the Trap Sing McKnight</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/BrunoMars2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bruno Mars</h3>
+    <h3>24K Magic</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/SunflowerBean2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sunflower Bean</h3>
+    <h3>Human Ceremony</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/MasayoshiFujita2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Masayoshi Fujita / Jan Jelinek</h3>
+    <h3>Schaum</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Surgeon2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Surgeon</h3>
+    <h3>From Farthest Known Objects</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/NineInchNails2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nine Inch Nails</h3>
+    <h3>Not the Actual Events</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Perturbator2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Perturbator</h3>
+    <h3>The Uncanny Valley</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/TheRange2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Range</h3>
+    <h3>Potential</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/TheChainsmokers2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Chainsmokers</h3>
+    <h3>Collage</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/WallisBird2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Wallis Bird</h3>
+    <h3>Home</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/Forteresse2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Forteresse</h3>
+    <h3>Thèmes pour la Rébellion</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/JuniorBoys2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Junior Boys</h3>
+    <h3>Big Black Coat</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/TheAnchoress2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Anchoress</h3>
+    <h3>Confessions of a Romance Novelist</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/EsperanzaSpalding2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Esperanza Spalding</h3>
+    <h3>Emily's D+Evolution</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/KateNV2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kate NV</h3>
+    <h3>Binasu</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/DivoliSvere2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Divoli S'vere</h3>
+    <h3>NSTU | DLX</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/YorkstonThorneKhan2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Yorkston / Thorne / Khan</h3>
+    <h3>Everything Sacred</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/2016/WhiteLung2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>White Lung</h3>
+    <h3>Paradise</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Jonghyun2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jonghyun</h3>
+    <h3>She Is</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Bladee2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bladee / Thaiboy Digital</h3>
+    <h3>AvP</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/TheWeeknd2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Weeknd</h3>
+    <h3>Starboy</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/LetsEatGrandma2017.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Let's Eat Grandma</h3>
+    <h3>I, Gemini</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/ParquetCourts2017.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Parquet Courts</h3>
+    <h3>Human Performance</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/TheRadioDept2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Radio Dept.</h3>
+    <h3>Running Out of Love</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/JamilaWoods2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jamila Woods</h3>
+    <h3>Heavn</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Jpegmafia2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jpegmafia</h3>
+    <h3>Black Ben Carson</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/MassiveAttack2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Massive Attack</h3>
+    <h3>Ritual Spirit</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/UkendtKunstner2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ukendt Kunstner</h3>
+    <h3>Den Anden Side</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/KishiBashi2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kishi Bashi</h3>
+    <h3>Sonderlust</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/SchoolboyQ2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>ScHoolboy Q</h3>
+    <h3>Blank Face LP</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Kaytranada2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kaytranada</h3>
+    <h3>99.9%</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/PetiteMeller2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Petite Meller</h3>
+    <h3>Lil Empire</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Messa2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Messa</h3>
+    <h3>Belfry</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Twice2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Twice</h3>
+    <h3>TWICEcoaster: Lane 1</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/ToucheAmore2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Touché Amoré</h3>
+    <h3>Stage Four</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/XiuXiu2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Xiu Xiu</h3>
+    <h3>Plays the Music of Twin Peaks</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/JanaWinderen2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jana Winderen</h3>
+    <h3>The Wanderer</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/MilesDavis2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Miles Davis / Robert Glasper</h3>
+    <h3>Everything's Beautiful</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/BigUps2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Big Ups</h3>
+    <h3>Before a Million Universes</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Tiga2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tiga</h3>
+    <h3>No Fantasy Required</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/BK2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>BK</h3>
+    <h3>Castelos & Ruínas</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/DDDumbo2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>D.D Dumbo</h3>
+    <h3>Utopia Defeated</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Future2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Future</h3>
+    <h3>Evol</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Ihsahn2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ihsahn</h3>
+    <h3>Arktis</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/EmmaRuthRundle2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Emma Ruth Rundle</h3>
+    <h3>Marked for Death</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/EsbenAndTheWitch2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Esben & The Witch</h3>
+    <h3>Older Terrors</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Machinedrum2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Machinedrum</h3>
+    <h3>Human Energy</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/AphexTwin2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Aphex Twin</h3>
+    <h3>Cheetah EP</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/CateLeBon2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Cate Le Bon</h3>
+    <h3>Crab Day</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/MarenMorris2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Maren Morris</h3>
+    <h3>Hero</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/MannequinPussy2016.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mannequin Pussy</h3>
+    <h3>Romantic</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/CarSeatHeadrest2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Car Seat Headrest</h3>
+    <h3>Teens of Denial</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Villagers2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Villagers</h3>
+    <h3>Where Have You Been All My Life?</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/CraigDavid2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Craig David</h3>
+    <h3>Following My Intuition</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Lambchop2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lambchop</h3>
+    <h3>FLOTUS</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/2016/Ulcerate2016.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ulcerate</h3>
+    <h3>Shrines of Paralysis</h3>
+    <h3>2¾</h3>
+      </div></div></li>
       <li> 
 		<img src="images/2016/GoldPanda2016.jpeg" width="100" height="100" alt=""/>
         <h3>Gold Panda</h3>
