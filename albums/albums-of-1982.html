@@ -1,730 +1,1113 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1982 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1981.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1983.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1981.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1983.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1982: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/1982/MichaelJackson1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Michael Jackson</h3>
-        <h3>Thriller</h3>
-	    <h3>9</h3>
-      <li> 
-		<img src="images/1982/BruceSpringsteen1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Bruce Springsteen</h3>
-        <h3>Nebraska</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1982/RoxyMusic1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Roxy Music</h3>
-        <h3>Avalon</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1982/Prince1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Prince</h3>
-        <h3>1999</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1982/PhilipGlass1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Philip Glass</h3>
-        <h3>Glassworks</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1982/IronMaiden1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Iron Maiden</h3>
-        <h3>The Number of the Beast</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/1982/MissionOfBurma1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Mission of Burma</h3>
-        <h3>Vs.</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/1982/LaurieAnderson1982.jpg" width="100" height="100" alt=""/>
-        <h3>Laurie Anderson</h3>
-        <h3>Big Science</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1982/TheAssociates1982.jpg" width="100" height="100" alt=""/>
-        <h3>The Associates</h3>
-        <h3>Sulk</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1982/ABC1982.jpeg" width="100" height="100" alt=""/>
-        <h3>ABC</h3>
-        <h3>The Lexicon of Love</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1982/DeadKennedys1982.jpg" width="100" height="100" alt=""/>
-        <h3>Dead Kennedys</h3>
-        <h3>Plastic Surgery Disasters</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1982/LouReed1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Lou Reed</h3>
-        <h3>The Blue Mask</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1982/AkikoYano1982.jpg" width="100" height="100" alt=""/>
-        <h3>Akiko Yano</h3>
-        <h3>Ai Ga Nakucha Ne</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1982/DexysMidnightRunners1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Dexys Midnight Runners</h3>
-        <h3>Too-Rye-Ay</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1982/TheFall1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Fall</h3>
-        <h3>Hex Enduction Hour</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1982/TatsuroYamashita1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Tatsuro Yamashita</h3>
-        <h3>For You</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1982/ChristianDeath1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Christian Death</h3>
-        <h3>Only Theatre of Pain</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1982/TheCure1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Cure</h3>
-        <h3>Pornography</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1982/LoredanaBerte1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Loredana Berte</h3>
-        <h3>Traslocando</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1982/BrianEno1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>Ambient 4: On Land</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1982/JudasPriest1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Judas Priest</h3>
-        <h3>Screaming for Vengeance</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1982/PeterGabriel1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Peter Gabriel</h3>
-        <h3>Peter Gabriel</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1982/DireStraits1982.jpg" width="100" height="100" alt=""/>
-        <h3>Dire Straits</h3>
-        <h3>Love Over Gold</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1982/KateBush1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Kate Bush</h3>
-        <h3>The Dreaming</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1982/SiouxsieAndTheBanshees1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Siouxsie & The Banshees</h3>
-        <h3>A Kiss in the Dreamhouse</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1982/Flipper1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Flipper</h3>
-        <h3>Album: Generic Flipper</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1982/PinoDaniele1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Pino Daniele</h3>
-        <h3>Bella 'mbriana</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1982/REM1982.jpeg" width="100" height="100" alt=""/>
-        <h3>R.E.M.</h3>
-        <h3>Chronic Town</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1982/DuranDuran1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Duran Duran</h3>
-        <h3>Rio</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1982/Ciani1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Suzanne Ciani</h3>
-        <h3>Seven Waves</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1982/TheClash1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Clash</h3>
-        <h3>Combat Rock</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1982/Testpattern1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Testpattern</h3>
-        <h3>Après-midi</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1982/OrangeJuice1982-2.jpg" width="100" height="100" alt=""/>
-        <h3>Orange Juice</h3>
-        <h3>Rip It Up</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1982/KimWilde1982.jpg" width="100" height="100" alt=""/>
-        <h3>Kim Wilde</h3>
-        <h3>Select</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1982/XTC1982.jpeg" width="100" height="100" alt=""/>
-        <h3>XTC</h3>
-        <h3>English Settlement</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/TheBeat1982.jpg" width="100" height="100" alt=""/>
-        <h3>The Beat</h3>
-        <h3>Special Beat Service</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/Rush1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Rush</h3>
-        <h3>Signals</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/SolidSpace1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Solid Space</h3>
-        <h3>Space Museum</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/Misfits1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Misfits</h3>
-        <h3>Walk Among Us</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/HiroshiYoshimura1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Hiroshi Yoshimura</h3>
-        <h3>Wave Notation 1: Music for Nine Post Cards</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1982/YasuakiShimizu1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Yasuaki Shimizu</h3>
-        <h3>Kakashi</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1982/FleetwoodMac1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Fleetwood Mac</h3>
-        <h3>Mirage</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1982/TomVerlaine1982.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Verlaine</h3>
-        <h3>Words From the Front</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1982/TalkTalk1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Talk Talk</h3>
-        <h3>The Party's Over</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1982/SonicYouth1982.jpg" width="100" height="100" alt=""/>
-        <h3>Sonic Youth</h3>
-        <h3>Sonic Youth</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/GrandmasterFlash1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Grandmaster Flash & The Furious Five</h3>
-        <h3>The Message</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/BrygadaKryzys1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Brygada Kryzys</h3>
-        <h3>Brygada Kryzys</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/BadReligion1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Bad Religion</h3>
-        <h3>How Could Hell Be Any Worse?</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/CabaretVoltaire1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Cabaret Voltaire</h3>
-        <h3>2x45</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/PatMetheny1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Pat Metheny Group</h3>
-        <h3>Offramp</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/AdamAnt1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Adam Ant</h3>
-        <h3>Friend or Foe</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/MercyfulFate1982.jpg" width="100" height="100" alt=""/>
-        <h3>Mercyful Fate</h3>
-        <h3>Mercyful Fate</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/RobertPlant1982.jpg" width="100" height="100" alt=""/>
-        <h3>Robert Plant</h3>
-        <h3>Pictures at Eleven</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/Fear1982.jpg" width="100" height="100" alt=""/>
-        <h3>Fear</h3>
-        <h3>The Record</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/CocteauTwins1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Cocteau Twins</h3>
-        <h3>Garlands</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/Scorpions1982.jpg" width="100" height="100" alt=""/>
-        <h3>Scorpions</h3>
-        <h3>Blackout</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/X1982.jpeg" width="100" height="100" alt=""/>
-        <h3>X</h3>
-        <h3>Under the Big Black Sun</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1982/TomokoAran1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Tomoko Aran</h3>
-        <h3>Shikisaikankaku</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/Venom1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Venom</h3>
-        <h3>Black Metal</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/Yazoo1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Yazoo</h3>
-        <h3>Upstairs at Eric's</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/ElvisCostello1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Elvis Costello & The Attractions</h3>
-        <h3>Imperial Bedroom</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/AFlockOfSeagulls1982.jpg" width="100" height="100" alt=""/>
-        <h3>A Flock of Seagulls</h3>
-        <h3>A Flock of Seagulls</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/DepecheMode1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Depeche Mode</h3>
-        <h3>A Broken Frame</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/GraceJones1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Grace Jones</h3>
-        <h3>Living My Life</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/SplitEnz1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Split Enz</h3>
-        <h3>Time and Tide</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/FunBoyThree1982.jpg" width="100" height="100" alt=""/>
-        <h3>The Fun Boy Three</h3>
-        <h3>FB3</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/ThedBs1982.jpg" width="100" height="100" alt=""/>
-        <h3>The dB's</h3>
-        <h3>Repercussion</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/BlackUhuru1982.jpg" width="100" height="100" alt=""/>
-        <h3>Black Uhuru</h3>
-        <h3>Chill Out</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/Motorhead1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Motörhead</h3>
-        <h3>Iron Fist</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/TeisutisMakacinas1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Teisutis Makačinas</h3>
-        <h3>Disko Muzika</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/TomWaits1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Waits / Crystal Gayle</h3>
-        <h3>One From the Heart</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/TraceyThorn1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Tracey Thorn</h3>
-        <h3>A Distant Shore</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/HueyLewis1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Huey Lewis & The News</h3>
-        <h3>Picture This</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1982/KillingJoke1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Killing Joke</h3>
-        <h3>Revelations</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/SatoshiAshikawa1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Satoshi Ashikawa</h3>
-        <h3>Wave Notation 2: Still Way</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/AkinaNakamori1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Akina Nakamori</h3>
-        <h3>Prologue</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/TheJam1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Jam</h3>
-        <h3>The Gift</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/TwistedSister1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Twisted Sister</h3>
-        <h3>Under the Blade</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/Asia1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Asia</h3>
-        <h3>Asia</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/GangOfFour1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Gang of Four</h3>
-        <h3>Songs of the Free</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1982/TomPetty1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Petty & The Heartbreakers</h3>
-        <h3>Long After Dark</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/TheReplacements1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Replacements</h3>
-        <h3>Stink</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/VanMorrison1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Beautiful Vision</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/TVPersonalities1982.jpeg" width="100" height="100" alt=""/>
-        <h3>TV Personalities</h3>
-        <h3>Mummy Your Not Watching Me</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/MickKarn1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Mick Karn</h3>
-        <h3>Titles</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/BadBrains1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Bad Brains</h3>
-        <h3>Bad Brains</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/Madness1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Madness</h3>
-        <h3>The Rise & Fall</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/TheBirthdayParty1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Birthday Party</h3>
-        <h3>Junkyard</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/AuPairs1982.jpg" width="100" height="100" alt=""/>
-        <h3>Au Pairs</h3>
-        <h3>Sense and Sensuality</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/Devo1982.jpg" width="100" height="100" alt=""/>
-        <h3>Devo</h3>
-        <h3>Oh, No! It's Devo</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/ThompsonTwins1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Thompson Twins</h3>
-        <h3>Set</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1982/GeinohYamashirogumi1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Geinoh Yamashirogumi</h3>
-        <h3>Africa Genjoh</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/Swans1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Swans</h3>
-        <h3>Swans</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/RichardHell1982.jpg" width="100" height="100" alt=""/>
-        <h3>Richard Hell & The Voidoids</h3>
-        <h3>Destiny Street</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/PaulMcCartney1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Paul McCartney</h3>
-        <h3>Tug of War</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/OrangeJuice1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Orange Juice</h3>
-        <h3>You Can't Hide Your Love Forever</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/SoftCell1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Soft Cell</h3>
-        <h3>Non-Stop Ecstatic Dancing</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/DustySpringfield1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Dusty Springfield</h3>
-        <h3>White Heat</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/INXS1982.jpeg" width="100" height="100" alt=""/>
-        <h3>INXS</h3>
-        <h3>Shabooh Shoobah</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/Sparks1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Sparks</h3>
-        <h3>Angst in My Pants</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/SisterSledge1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Sister Sledge</h3>
-        <h3>The Sisters</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1982/CraigLeon1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Craig Leon</h3>
-        <h3>Visiting</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/JudieTzuke1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Judie Tzuke</h3>
-        <h3>Shoot the Moon</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/LedZeppelin1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Led Zeppelin</h3>
-        <h3>Coda</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/Imagination1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Imagination</h3>
-        <h3>In the Heat of the Night</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/FadGadget1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Fad Gadget</h3>
-        <h3>Under the Flag</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/CultureClub1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Culture Club</h3>
-        <h3>Kissing to Be Clever</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/Squeeze1982.jpg" width="100" height="100" alt=""/>
-        <h3>Squeeze</h3>
-        <h3>Sweets From a Stranger</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/KurtisBlow1982.jpg" width="100" height="100" alt=""/>
-        <h3>Kurtis Blow</h3>
-        <h3>Tough</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/WangChung1982.jpg" width="100" height="100" alt=""/>
-        <h3>Wang Chung</h3>
-        <h3>Huang Chung</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1982/GilScottHeron1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Gil Scott-Heron</h3>
-        <h3>Moving Target</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/JohnCooperClarke1982.jpeg" width="100" height="100" alt=""/>
-        <h3>John Cooper Clarke</h3>
-        <h3>Zip Style Method</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/DonnaSummer1982.jpg" width="100" height="100" alt=""/>
-        <h3>Donna Summer</h3>
-        <h3>Donna Summer</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/ScrittiPolitti1982.jpg" width="100" height="100" alt=""/>
-        <h3>Scritti Politti</h3>
-        <h3>Songs to Remember</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/Toyah1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Toyah</h3>
-        <h3>The Changeling</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/KennyG1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Kenny G.</h3>
-        <h3>Kenny G.</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/MasamiTsuchiya1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Masami Tsuchiya</h3>
-        <h3>Rice Music</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/TheSound1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Sound</h3>
-        <h3>All Fall Down</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/TheSaints1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Saints</h3>
-        <h3>Casablanca</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/GaryMoore1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Gary Moore</h3>
-        <h3>Corridors of Power</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1982/Toto1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Toto</h3>
-        <h3>IV</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/CaetanoVeloso1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Caetano Veloso</h3>
-        <h3>Cores, Nomes</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/Queen1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Queen</h3>
-        <h3>Hot Space</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/ToshikiKadomatsu1982.jpg" width="100" height="100" alt=""/>
-        <h3>Toshiki Kadomatsu</h3>
-        <h3>Weekend Fly to the Sun</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/AkinaNakamori1982-2.jpg" width="100" height="100" alt=""/>
-        <h3>Akina Nakamori</h3>
-        <h3>Variation</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/EnnoVelthuys1982.jpg" width="100" height="100" alt=""/>
-        <h3>Enno Velthuys</h3>
-        <h3>Ontmoeting</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/Survivor1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Survivor</h3>
-        <h3>Eye of the Tiger</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/SpandauBallet1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Spandau Ballet</h3>
-        <h3>Diamond</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/RickJames1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Rick James</h3>
-        <h3>Throwin' Down</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1982/MissingPersons1982.jpg" width="100" height="100" alt=""/>
-        <h3>Missing Persons</h3>
-        <h3>Spring Session M</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1982/Blondie1982.jpeg" width="100" height="100" alt=""/>
-        <h3>Blondie</h3>
-        <h3>The Hunter</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1982/BigBlack1982.jpg" width="100" height="100" alt=""/>
-        <h3>Big Black</h3>
-        <h3>Lungs</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1982/TheDamned1982.jpeg" width="100" height="100" alt=""/>
-        <h3>The Damned</h3>
-        <h3>Strawberries</h3>
-	    <h3>1¾</h3>
+<main><ol>
+<h1>1982: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">9</div>
+  <div class="album-cover"><img src="images/1982/MichaelJackson1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Michael Jackson</h3>
+    <h3>Thriller</h3>
+    <h3>9</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1982/BruceSpringsteen1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bruce Springsteen</h3>
+    <h3>Nebraska</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1982/RoxyMusic1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Roxy Music</h3>
+    <h3>Avalon</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1982/Prince1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Prince</h3>
+    <h3>1999</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1982/PhilipGlass1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Philip Glass</h3>
+    <h3>Glassworks</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/1982/IronMaiden1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Iron Maiden</h3>
+    <h3>The Number of the Beast</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/1982/MissionOfBurma1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Mission of Burma</h3>
+    <h3>Vs.</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1982/LaurieAnderson1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Laurie Anderson</h3>
+    <h3>Big Science</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1982/TheAssociates1982.jpg" alt="" /></div><div class="album-text">
+    <h3>The Associates</h3>
+    <h3>Sulk</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1982/ABC1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>ABC</h3>
+    <h3>The Lexicon of Love</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1982/DeadKennedys1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Dead Kennedys</h3>
+    <h3>Plastic Surgery Disasters</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1982/LouReed1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Lou Reed</h3>
+    <h3>The Blue Mask</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1982/AkikoYano1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Akiko Yano</h3>
+    <h3>Ai Ga Nakucha Ne</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1982/DexysMidnightRunners1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dexys Midnight Runners</h3>
+    <h3>Too-Rye-Ay</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1982/TheFall1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Fall</h3>
+    <h3>Hex Enduction Hour</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1982/TatsuroYamashita1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tatsuro Yamashita</h3>
+    <h3>For You</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1982/ChristianDeath1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Christian Death</h3>
+    <h3>Only Theatre of Pain</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1982/TheCure1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Cure</h3>
+    <h3>Pornography</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1982/LoredanaBerte1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Loredana Berte</h3>
+    <h3>Traslocando</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1982/BrianEno1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>Ambient 4: On Land</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1982/JudasPriest1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Judas Priest</h3>
+    <h3>Screaming for Vengeance</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1982/PeterGabriel1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Peter Gabriel</h3>
+    <h3>Peter Gabriel</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1982/DireStraits1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Dire Straits</h3>
+    <h3>Love Over Gold</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1982/KateBush1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kate Bush</h3>
+    <h3>The Dreaming</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1982/SiouxsieAndTheBanshees1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Siouxsie & The Banshees</h3>
+    <h3>A Kiss in the Dreamhouse</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1982/Flipper1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Flipper</h3>
+    <h3>Album: Generic Flipper</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1982/PinoDaniele1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pino Daniele</h3>
+    <h3>Bella 'mbriana</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1982/REM1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>R.E.M.</h3>
+    <h3>Chronic Town</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1982/DuranDuran1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Duran Duran</h3>
+    <h3>Rio</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1982/Ciani1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Suzanne Ciani</h3>
+    <h3>Seven Waves</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1982/TheClash1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Clash</h3>
+    <h3>Combat Rock</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1982/Testpattern1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Testpattern</h3>
+    <h3>Après-midi</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1982/OrangeJuice1982-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Orange Juice</h3>
+    <h3>Rip It Up</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1982/KimWilde1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Kim Wilde</h3>
+    <h3>Select</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/XTC1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>XTC</h3>
+    <h3>English Settlement</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/TheBeat1982.jpg" alt="" /></div><div class="album-text">
+    <h3>The Beat</h3>
+    <h3>Special Beat Service</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/Rush1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Rush</h3>
+    <h3>Signals</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/SolidSpace1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Solid Space</h3>
+    <h3>Space Museum</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/Misfits1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Misfits</h3>
+    <h3>Walk Among Us</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1982/HiroshiYoshimura1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Hiroshi Yoshimura</h3>
+    <h3>Wave Notation 1: Music for Nine Post Cards</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1982/YasuakiShimizu1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Yasuaki Shimizu</h3>
+    <h3>Kakashi</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1982/FleetwoodMac1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fleetwood Mac</h3>
+    <h3>Mirage</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1982/TomVerlaine1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Verlaine</h3>
+    <h3>Words From the Front</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1982/TalkTalk1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Talk Talk</h3>
+    <h3>The Party's Over</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/SonicYouth1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Sonic Youth</h3>
+    <h3>Sonic Youth</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/GrandmasterFlash1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Grandmaster Flash & The Furious Five</h3>
+    <h3>The Message</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/BrygadaKryzys1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Brygada Kryzys</h3>
+    <h3>Brygada Kryzys</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/BadReligion1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bad Religion</h3>
+    <h3>How Could Hell Be Any Worse?</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/CabaretVoltaire1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cabaret Voltaire</h3>
+    <h3>2x45</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/PatMetheny1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pat Metheny Group</h3>
+    <h3>Offramp</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/AdamAnt1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Adam Ant</h3>
+    <h3>Friend or Foe</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/MercyfulFate1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Mercyful Fate</h3>
+    <h3>Mercyful Fate</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/RobertPlant1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Robert Plant</h3>
+    <h3>Pictures at Eleven</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/Fear1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Fear</h3>
+    <h3>The Record</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/CocteauTwins1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Cocteau Twins</h3>
+    <h3>Garlands</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/Scorpions1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Scorpions</h3>
+    <h3>Blackout</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1982/X1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>X</h3>
+    <h3>Under the Big Black Sun</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/TomokoAran1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tomoko Aran</h3>
+    <h3>Shikisaikankaku</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/Venom1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Venom</h3>
+    <h3>Black Metal</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/Yazoo1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Yazoo</h3>
+    <h3>Upstairs at Eric's</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/ElvisCostello1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Elvis Costello & The Attractions</h3>
+    <h3>Imperial Bedroom</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/AFlockOfSeagulls1982.jpg" alt="" /></div><div class="album-text">
+    <h3>A Flock of Seagulls</h3>
+    <h3>A Flock of Seagulls</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/DepecheMode1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Depeche Mode</h3>
+    <h3>A Broken Frame</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/GraceJones1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Grace Jones</h3>
+    <h3>Living My Life</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/SplitEnz1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Split Enz</h3>
+    <h3>Time and Tide</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/FunBoyThree1982.jpg" alt="" /></div><div class="album-text">
+    <h3>The Fun Boy Three</h3>
+    <h3>FB3</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/ThedBs1982.jpg" alt="" /></div><div class="album-text">
+    <h3>The dB's</h3>
+    <h3>Repercussion</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/BlackUhuru1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Black Uhuru</h3>
+    <h3>Chill Out</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/Motorhead1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Motörhead</h3>
+    <h3>Iron Fist</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/TeisutisMakacinas1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Teisutis Makačinas</h3>
+    <h3>Disko Muzika</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/TomWaits1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tom Waits / Crystal Gayle</h3>
+    <h3>One From the Heart</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/TraceyThorn1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tracey Thorn</h3>
+    <h3>A Distant Shore</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1982/HueyLewis1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Huey Lewis & The News</h3>
+    <h3>Picture This</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/KillingJoke1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Killing Joke</h3>
+    <h3>Revelations</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/SatoshiAshikawa1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Satoshi Ashikawa</h3>
+    <h3>Wave Notation 2: Still Way</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/AkinaNakamori1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Akina Nakamori</h3>
+    <h3>Prologue</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/TheJam1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Jam</h3>
+    <h3>The Gift</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/TwistedSister1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Twisted Sister</h3>
+    <h3>Under the Blade</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/Asia1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Asia</h3>
+    <h3>Asia</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1982/GangOfFour1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gang of Four</h3>
+    <h3>Songs of the Free</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/TomPetty1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tom Petty & The Heartbreakers</h3>
+    <h3>Long After Dark</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/TheReplacements1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Replacements</h3>
+    <h3>Stink</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/VanMorrison1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Beautiful Vision</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/TVPersonalities1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>TV Personalities</h3>
+    <h3>Mummy Your Not Watching Me</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/MickKarn1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Mick Karn</h3>
+    <h3>Titles</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/BadBrains1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bad Brains</h3>
+    <h3>Bad Brains</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/Madness1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Madness</h3>
+    <h3>The Rise & Fall</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/TheBirthdayParty1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Birthday Party</h3>
+    <h3>Junkyard</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/AuPairs1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Au Pairs</h3>
+    <h3>Sense and Sensuality</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/Devo1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Devo</h3>
+    <h3>Oh, No! It's Devo</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1982/ThompsonTwins1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Thompson Twins</h3>
+    <h3>Set</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/GeinohYamashirogumi1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Geinoh Yamashirogumi</h3>
+    <h3>Africa Genjoh</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/Swans1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Swans</h3>
+    <h3>Swans</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/RichardHell1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Richard Hell & The Voidoids</h3>
+    <h3>Destiny Street</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/PaulMcCartney1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Paul McCartney</h3>
+    <h3>Tug of War</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/OrangeJuice1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Orange Juice</h3>
+    <h3>You Can't Hide Your Love Forever</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/SoftCell1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Soft Cell</h3>
+    <h3>Non-Stop Ecstatic Dancing</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/DustySpringfield1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dusty Springfield</h3>
+    <h3>White Heat</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/INXS1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>INXS</h3>
+    <h3>Shabooh Shoobah</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/Sparks1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sparks</h3>
+    <h3>Angst in My Pants</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1982/SisterSledge1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sister Sledge</h3>
+    <h3>The Sisters</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/CraigLeon1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Craig Leon</h3>
+    <h3>Visiting</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/JudieTzuke1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Judie Tzuke</h3>
+    <h3>Shoot the Moon</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/LedZeppelin1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Led Zeppelin</h3>
+    <h3>Coda</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/Imagination1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Imagination</h3>
+    <h3>In the Heat of the Night</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/FadGadget1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fad Gadget</h3>
+    <h3>Under the Flag</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/CultureClub1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Culture Club</h3>
+    <h3>Kissing to Be Clever</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/Squeeze1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Squeeze</h3>
+    <h3>Sweets From a Stranger</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/KurtisBlow1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Kurtis Blow</h3>
+    <h3>Tough</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1982/WangChung1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Wang Chung</h3>
+    <h3>Huang Chung</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/GilScottHeron1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gil Scott-Heron</h3>
+    <h3>Moving Target</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/JohnCooperClarke1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>John Cooper Clarke</h3>
+    <h3>Zip Style Method</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/DonnaSummer1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Donna Summer</h3>
+    <h3>Donna Summer</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/ScrittiPolitti1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Scritti Politti</h3>
+    <h3>Songs to Remember</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/Toyah1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Toyah</h3>
+    <h3>The Changeling</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/KennyG1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kenny G.</h3>
+    <h3>Kenny G.</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/MasamiTsuchiya1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Masami Tsuchiya</h3>
+    <h3>Rice Music</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/TheSound1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Sound</h3>
+    <h3>All Fall Down</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/TheSaints1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Saints</h3>
+    <h3>Casablanca</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1982/GaryMoore1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gary Moore</h3>
+    <h3>Corridors of Power</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/Toto1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Toto</h3>
+    <h3>IV</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/CaetanoVeloso1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Caetano Veloso</h3>
+    <h3>Cores, Nomes</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/Queen1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Queen</h3>
+    <h3>Hot Space</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/ToshikiKadomatsu1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Toshiki Kadomatsu</h3>
+    <h3>Weekend Fly to the Sun</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/AkinaNakamori1982-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Akina Nakamori</h3>
+    <h3>Variation</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/EnnoVelthuys1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Enno Velthuys</h3>
+    <h3>Ontmoeting</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/Survivor1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Survivor</h3>
+    <h3>Eye of the Tiger</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/SpandauBallet1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Spandau Ballet</h3>
+    <h3>Diamond</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1982/RickJames1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Rick James</h3>
+    <h3>Throwin' Down</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1982/MissingPersons1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Missing Persons</h3>
+    <h3>Spring Session M</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1982/Blondie1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>Blondie</h3>
+    <h3>The Hunter</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1982/BigBlack1982.jpg" alt="" /></div><div class="album-text">
+    <h3>Big Black</h3>
+    <h3>Lungs</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1982/TheDamned1982.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Damned</h3>
+    <h3>Strawberries</h3>
+    <h3>1¾</h3>
+      </div></div></li>
       <li> 
 		<img src="images/1982/PhilCollins1982.jpeg" width="100" height="100" alt=""/>
         <h3>Phil Collins</h3>
