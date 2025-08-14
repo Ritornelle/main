@@ -1,1355 +1,1900 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1991 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1990.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1992.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1990.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1992.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1991: Albums of the Year</h1>
-    <ol>
-      <li class="Nevermind"> 
-		<img src="images/1991/Nirvana1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Nirvana</h3>
-        <h3>Nevermind</h3>
-	    <h3>10</h3>
-      <li class="Loveless"> 
-		<img src="images/1991/MyBloodyValentine1991.jpeg" width="100" height="100" alt=""/>
-        <h3>My Bloody Valentine</h3>
-        <h3>Loveless</h3>
-	    <h3>10</h3>
-      <li class="Laughing Stock"> 
-		<img src="images/1991/TalkTalk1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Talk Talk</h3>
-        <h3>Laughing Stock</h3>
-	    <h3>9</h3>
-      <li class="Spiderland"> 
-		<img src="images/1991/Slint1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Slint</h3>
-        <h3>Spiderland</h3>
-	    <h3>7¾</h3>
-      <li class="Bandwagonesque"> 
-		<img src="images/1991/TeenageFanclub1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Teenage Fanclub</h3>
-        <h3>Bandwagonesque</h3>
-	    <h3>7½</h3>
-      <li class="Blue Lines"> 
-		<img src="images/1991/MassiveAttack1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Massive Attack</h3>
-        <h3>Blue Lines</h3>
-	    <h3>7¼</h3>
-      <li class="The Low End Theory"> 
-		<img src="images/1991/ATribeCalledQuest1991.jpeg" width="100" height="100" alt=""/>
-        <h3>A Tribe Called Quest</h3>
-        <h3>The Low End Theory</h3>
-	    <h3>7</h3>
-      <li class="Drive Like Jehu"> 
-		<img src="images/1991/DriveLikeJehu1991.jpg" width="100" height="100" alt=""/>
-        <h3>Drive Like Jehu</h3>
-        <h3>Drive Like Jehu</h3>
-	    <h3>7</h3>
-      <li class="Step in the Arena"> 
-		<img src="images/1991/GangStarr1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Gang Starr</h3>
-        <h3>Step in the Arena</h3>
-	    <h3>6¾</h3>
-      <li class="Dondestan"> 
-		<img src="images/1991/RobertWyatt1991.jpg" width="100" height="100" alt=""/>
-        <h3>Robert Wyatt</h3>
-        <h3>Dondestan</h3>
-	    <h3>6¾</h3>
-      <li class="O G  Original Gangster"> 
-		<img src="images/1991/IceT1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ice-T</h3>
-        <h3>O.G. Original Gangster</h3>
-	    <h3>6½</h3>
-      <li class="Screamadelica"> 
-		<img src="images/1991/PrimalScream1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Primal Scream</h3>
-        <h3>Screamadelica</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1991/Coroner1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Coroner</h3>
-        <h3>Mental Vortex</h3>
-	    <h3>6½</h3>
-      <li class="Tremolo EP"> 
-		<img src="images/1991/MyBloodyValentine1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>My Bloody Valentine</h3>
-        <h3>Tremolo EP</h3>
-	    <h3>6¼</h3>
-      <li class="Goat"> 
-		<img src="images/1991/TheJesusLizard1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Jesus Lizard</h3>
-        <h3>Goat</h3>
-	    <h3>6¼</h3>
-      <li class="Temple of the Dog"> 
-		<img src="images/1991/TempleOfTheDog1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Temple of the Dog</h3>
-        <h3>Temple of the Dog</h3>
-	    <h3>6</h3>
-      <li class="Bullhead"> <img src="images/1991/Melvins1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Melvins</h3>
-        <h3>Bullhead</h3>
-        <h3>6</h3>
-      <li class="Blood Sugar Sex Magic"> 
-		<img src="images/1991/RedHotChiliPeppers1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Red Hot Chili Peppers</h3>
-        <h3>Blood Sugar Sex Magik</h3>
-	    <h3>5¾</h3>
-      <li class="Cypress Hill"> 
-		<img src="images/1991/CypressHill1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Cypress Hill</h3>
-        <h3>Cypress Hill</h3>
-	    <h3>5¾</h3>
-      <li class="Out of Time"> 
-		<img src="images/1991/REM1991.jpeg" width="100" height="100" alt=""/>
-        <h3>R.E.M.</h3>
-        <h3>Out of Time</h3>
-	    <h3>5¾</h3>
-      <li class="Human"> 
-		<img src="images/1991/Death1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Death</h3>
-        <h3>Human</h3>
-	    <h3>5¾</h3>
-      <li class="Foxbase Alpha"> 
-		<img src="images/1991/SaintEtienne1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Saint Etienne</h3>
-        <h3>Foxbase Alpha</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1991/U21991.jpeg" width="100" height="100" alt=""/>
-        <h3>U2</h3>
-        <h3>Achtung Baby</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1991/Immolation1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Immolation</h3>
-        <h3>Dawn of Possession</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1991/TheKLF1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The KLF</h3>
-        <h3>The White Room</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1991/DeLaSoul1991.jpeg" width="100" height="100" alt=""/>
-        <h3>De La Soul</h3>
-        <h3>De La Soul Is Dead</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1991/ThrowingMuses1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Throwing Muses</h3>
-        <h3>The Real Ramona</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1991/MichaelJackson1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Michael Jackson</h3>
-        <h3>Dangerous</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1991/Bathory1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Bathory</h3>
-        <h3>Twilight of the Gods</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1991/MyleneFarmer1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Mylène Farmer</h3>
-        <h3>L'autre</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1991/MercuryRev1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Mercury Rev</h3>
-        <h3>Yerself Is Steam</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/TheWeddingPresent1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Wedding Present</h3>
-        <h3>Seamonsters</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/Chapterhouse1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Chapterhouse</h3>
-        <h3>Whirlpool</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/EcstasyOfStTheresa1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ecstasy of St. Theresa</h3>
-        <h3>Pigment</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/Suffocation1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Suffocation</h3>
-        <h3>Effigy of the Forgotten</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/Dismember1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Dismember</h3>
-        <h3>Like an Ever Flowing Stream</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1991/Entombed1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Entombed</h3>
-        <h3>Clandestine</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1991/Sepultura1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sepultura</h3>
-        <h3>Arise</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1991/TheFeelies1991.jpg" width="100" height="100" alt=""/>
-        <h3>The Feelies</h3>
-        <h3>Time for a Witness</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1991/808State1991.jpeg" width="100" height="100" alt=""/>
-        <h3>808 State</h3>
-        <h3>ex:el</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1991/LFO1991.jpeg" width="100" height="100" alt=""/>
-        <h3>LFO</h3>
-        <h3>Frequencies</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1991/Atheist1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Atheist</h3>
-        <h3>Unquestionable Presence</h3>
-	    <h3>4</h3>
-      <li class="Mental Funeral"> 
-		<img src="images/1991/Autopsy1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Autopsy</h3>
-        <h3>Mental Funeral</h3>
-	    <h3>4</h3>
-      <li class="Heavenly vs  Satan"> 
-		<img src="images/1991/Heavenly1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Heavenly</h3>
-        <h3>Heavenly vs. Satan</h3>
-	    <h3>4</h3>
-      <li class="13-Point Program to Destroy America"> 
-		<img src="images/1991/NationOfUlysses1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Nation of Ulysses</h3>
-        <h3>13-Point Program to Destroy America</h3>
-	    <h3>4</h3>
-      <li class="Green Mind"> 
-		<img src="images/1991/DinosaurJr1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Dinosaur Jr</h3>
-        <h3>Green Mind</h3>
-	    <h3>4</h3>
-      <li class="Ten"> 
-		<img src="images/1991/PearlJam1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Pearl Jam</h3>
-        <h3>Ten</h3>
-	    <h3>4</h3>
-      <li class="Seal"> 
-		<img src="images/1991/Seal1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Seal</h3>
-        <h3>Seal</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1991/NWA1991.jpeg" width="100" height="100" alt=""/>
-        <h3>N.W.A</h3>
-        <h3>Efil4zaggin</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1991/TheWonderStuff1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Wonder Stuff</h3>
-        <h3>Never Loved Elvis</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1991/MorbidAngel1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Morbid Angel</h3>
-        <h3>Blessed Are the Sick</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/Hole1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Hole</h3>
-        <h3>Pretty on the Inside</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/RainTreeCrow1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Rain Tree Crow</h3>
-        <h3>Rain Tree Crow</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/DJQuik1991.jpeg" width="100" height="100" alt=""/>
-        <h3>DJ Quik</h3>
-        <h3>Quik Is the Name</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/2Pac1991.jpeg" width="100" height="100" alt=""/>
-        <h3>2Pac</h3>
-        <h3>2Pacalypse Now</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/Earth1991.jpg" width="100" height="100" alt=""/>
-        <h3>Earth</h3>
-        <h3>Extra-Capsular Extraction</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/Swans1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Swans</h3>
-        <h3>White Light From the Mouth of Infinity</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1991/Slowdive1991.jpg" width="100" height="100" alt=""/>
-        <h3>Slowdive</h3>
-        <h3>Morningrise</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Metallica1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Metallica</h3>
-        <h3>Metallica</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/LydiaLunch1991.jpg" width="100" height="100" alt=""/>
-        <h3>Lydia Lunch / Rowland S. Howard</h3>
-        <h3>Shotgun Wedding</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Kyuss1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Kyuss</h3>
-        <h3>Wretch</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Electronic1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Electronic</h3>
-        <h3>Electronic</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Slowdive1991-2.jpg" width="100" height="100" alt=""/>
-        <h3>Slowdive</h3>
-        <h3>Just for a Day</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/DelTheFunkyHomosapien1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Del the Funky Homosapien</h3>
-        <h3>I Wish My Brother George Was Here</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/GWMcLennan1991.jpeg" width="100" height="100" alt=""/>
-        <h3>G.W. McLennan</h3>
-        <h3>Watershed</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Morrissey1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Morrissey</h3>
-        <h3>Kill Uncle</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/ScreamingTrees1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Screaming Trees</h3>
-        <h3>Uncle Anesthesia</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Carcass1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Carcass</h3>
-        <h3>Necroticism: Descanting the Insalubrious</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Biosphere1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Biosphere</h3>
-        <h3>Microgravity</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/DinosaurJr1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Dinosaur Jr</h3>
-        <h3>Whatever's Cool With Me</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/TheSmashingPumpkins1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Smashing Pumpkins</h3>
-        <h3>Gish</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/PublicEnemy1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Public Enemy</h3>
-        <h3>Apocalypse 91...The Enemy Strikes Black</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Heroin1991.jpg" width="100" height="100" alt=""/>
-        <h3>Heroin</h3>
-        <h3>All About Heroin</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Darkthrone1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Darkthrone</h3>
-        <h3>Soulside Journey</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/ViolentFemmes1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Violent Femmes</h3>
-        <h3>Why Do Birds Sing?</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/SlickRick1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Slick Rick</h3>
-        <h3>The Ruler's Back</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1991/Pixies1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Pixies</h3>
-        <h3>Trompe le Monde</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/Slowdive1991-3.jpeg" width="100" height="100" alt=""/>
-        <h3>Slowdive</h3>
-        <h3>Holding Our Breath</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/Bix1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Bix</h3>
-        <h3>Akli Kariai</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/Queen1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Queen</h3>
-        <h3>Innuendo</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/GetoBoys1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Geto Boys</h3>
-        <h3>We Can't Be Stopped</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/IceCube1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ice Cube</h3>
-        <h3>Death Certificate</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1991/Lio1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Lio</h3>
-        <h3>Des Fleurs Pour un Caméléon</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/Blur1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Blur</h3>
-        <h3>Leisure</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/TheOrb1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Orb</h3>
-        <h3>The Orb's Adventures Beyond the Ultraworld</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/VoiceOfTheBeehive1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Voice of the Beehive</h3>
-        <h3>Honey Lingers</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/ComptonsMostWanted1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Compton's Most Wanted</h3>
-        <h3>Straight Check N'Em</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/Tad1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Tad</h3>
-        <h3>8-Way Santa</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/VelvetCrush1991.jpg" width="100" height="100" alt=""/>
-        <h3>Velvet Crush</h3>
-        <h3>In the Presence of Greatness</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/DireStraits1991.jpg" width="100" height="100" alt=""/>
-        <h3>Dire Straits</h3>
-        <h3>On Every Street</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/Mudhoney1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Mudhoney</h3>
-        <h3>Every Good Boy Deserves Fudge</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/NedsAtomicDustbin1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ned's Atomic Dustbin</h3>
-        <h3>God Fodder</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/KitchensOfDistinction1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Kitchens of Distinction</h3>
-        <h3>Strange Free World</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/InspiralCarpets1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Inspiral Carpets</h3>
-        <h3>The Beast Inside</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/OMD1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Orchestral Manoeuvres in the Dark</h3>
-        <h3>Sugar Tax</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1991/SupremeNTM1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Suprême NTM</h3>
-        <h3>Authentik</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/LesRallizesDenudes1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Les Rallizes Dénudés</h3>
-        <h3>'77 Live</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/Roxette1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Roxette</h3>
-        <h3>Joyride</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/OzzyOsbourne1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ozzy Osbourne</h3>
-        <h3>No More Tears</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/Galliano1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Galliano</h3>
-        <h3>In Pursuit of the 13th Note</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/DreamWarriors1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Dream Warriors</h3>
-        <h3>And Now the Legacy Begins</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/CrowdedHouse1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Crowded House</h3>
-        <h3>Woodface</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/TomPetty1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Petty & The Heartbreakers</h3>
-        <h3>Into the Great Wide Open</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/MilltownBrothers1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Milltown Brothers</h3>
-        <h3>Slinky</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/BookOfLove1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Book of Love</h3>
-        <h3>Candy Carol</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/BabesInToyland1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Babes in Toyland</h3>
-        <h3>To Mother</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/RatAtRatR1991.jpg" width="100" height="100" alt=""/>
-        <h3>Rat at Rat R</h3>
-        <h3>Rat at Rat R</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/DefinitionOfSound1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Definition of Sound</h3>
-        <h3>Love and Life: A Journey With the Chameleons</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1991/DiscoInferno1991.jpg" width="100" height="100" alt=""/>
-        <h3>Disco Inferno</h3>
-        <h3>Open Doors, Closed Windows</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/Fugazi1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Fugazi</h3>
-        <h3>Steady Diet of Nothing</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/UrgeOverkill1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Urge Overkill</h3>
-        <h3>Supersonic Storybook</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/KMD1991.jpeg" width="100" height="100" alt=""/>
-        <h3>KMD</h3>
-        <h3>Mr. Hood</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/AtTheGates1991.jpeg" width="100" height="100" alt=""/>
-        <h3>At the Gates</h3>
-        <h3>Gardens of Grief</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/MorbidAngel1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Morbid Angel</h3>
-        <h3>Abominations of Desolation</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/MeatPuppets1991.jpg" width="100" height="100" alt=""/>
-        <h3>Meat Puppets</h3>
-        <h3>Forbidden Places</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/Genesis1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Genesis</h3>
-        <h3>We Can't Dance</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/KylieMinogue1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Kylie Minogue</h3>
-        <h3>Let's Get to It</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1991/BeatHappening1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Beat Happening</h3>
-        <h3>Dreamy</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/PMDawn1991.jpeg" width="100" height="100" alt=""/>
-        <h3>P.M. Dawn</h3>
-        <h3>Of the Heart, of the Soul and of the Cross</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/TheCramps1991.jpg" width="100" height="100" alt=""/>
-        <h3>The Cramps</h3>
-        <h3>Look Mom No Head!</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/NightmaresOnWax1991.jpg" width="100" height="100" alt=""/>
-        <h3>Nightmares on Wax</h3>
-        <h3>A Word of Science (The 1st & Final Chapter)</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/BillyBragg1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Billy Bragg</h3>
-        <h3>Don't Try This at Home</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/Gorguts1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Gorguts</h3>
-        <h3>Considered Dead</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1991/LloydCole1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Lloyd Cole</h3>
-        <h3>Don't Get Weird on Me Babe</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/LisaGermano1991.jpg" width="100" height="100" alt=""/>
-        <h3>Lisa Germano</h3>
-        <h3>On the Way Down From the Moon Palace</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/3rdBass1991.jpeg" width="100" height="100" alt=""/>
-        <h3>3rd Bass</h3>
-        <h3>Derelicts of Dialect</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/DonnaSummer1991.jpg" width="100" height="100" alt=""/>
-        <h3>Donna Summer</h3>
-        <h3>Mistaken Identity</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Leatherface1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Leatherface</h3>
-        <h3>Mush</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/CannibalCorpse1991.jpg" width="100" height="100" alt=""/>
-        <h3>Cannibal Corpse</h3>
-        <h3>Butchered at Birth</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/ButtholeSurfers1991.jpg" width="100" height="100" alt=""/>
-        <h3>Butthole Surfers</h3>
-        <h3>Piouhgd</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Meshuggah1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Meshuggah</h3>
-        <h3>Contradictions Collapse</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Foje1991.jpg" width="100" height="100" alt=""/>
-        <h3>Foje</h3>
-        <h3>Gali Skambėti Keistai</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/SarahMcLachlan1991.jpg" width="100" height="100" alt=""/>
-        <h3>Sarah McLachlan</h3>
-        <h3>Solace</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/LAGuns1991.jpg" width="100" height="100" alt=""/>
-        <h3>L.A. Guns</h3>
-        <h3>Hollywood Vampires</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/DeaconBlue1991.jpg" width="100" height="100" alt=""/>
-        <h3>Deacon Blue</h3>
-        <h3>Fellow Hoodlums</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Erasure1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Erasure</h3>
-        <h3>Chorus</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Coil1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Coil</h3>
-        <h3>Love's Secret Domain</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1991/Auktyon1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Аукцыон</h3>
-        <h3>Бодун</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Soundgarden1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Soundgarden</h3>
-        <h3>Badmotorfinger</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/TypeONegative1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Type O Negative</h3>
-        <h3>Slow, Deep and Hard</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/AmericanMusicClub1991.jpeg" width="100" height="100" alt=""/>
-        <h3>American Music Club</h3>
-        <h3>Everclear</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/SpinDoctors1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Spin Doctors</h3>
-        <h3>Pocket Full of Kryptonite</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/SiouxsieAndTheBanshees1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Siouxsie & the Banshees</h3>
-        <h3>Superstition</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/TatsuroYamashita1991.jpg" width="100" height="100" alt=""/>
-        <h3>Tatsuro Yamashita</h3>
-        <h3>Artisan</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/TheBlueAeroplanes1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Blue Aeroplanes</h3>
-        <h3>Beatsongs</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Toyah1991.jpg" width="100" height="100" alt=""/>
-        <h3>Toyah</h3>
-        <h3>Ophelia's Shadow</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Sleep1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sleep</h3>
-        <h3>Volume One</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/MilesDavis1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Miles Davis / Michel Legrand</h3>
-        <h3>Dingo</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/TheCult1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Cult</h3>
-        <h3>Ceremony</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Primus1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Primus</h3>
-        <h3>Sailing the Seas of Cheese</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/MrBungle1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Mr. Bungle</h3>
-        <h3>Mr. Bungle</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/EMF1991.jpeg" width="100" height="100" alt=""/>
-        <h3>EMF</h3>
-        <h3>Schubert Dip</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Squeeze1991.jpg" width="100" height="100" alt=""/>
-        <h3>Squeeze</h3>
-        <h3>Play</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/ThePoohSticks1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Pooh Sticks</h3>
-        <h3>The Great White Wonder</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Saxon1991.jpg" width="100" height="100" alt=""/>
-        <h3>Saxon</h3>
-        <h3>Solid Ball of Rock</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/HueyLewis1991.jpg" width="100" height="100" alt=""/>
-        <h3>Huey Lewis & The News</h3>
-        <h3>Hard at Play</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/Ultramarine1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ultramarine</h3>
-        <h3>Every Man and Woman Is a Star</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/BigDaddyKane1991.jpg" width="100" height="100" alt=""/>
-        <h3>Big Daddy Kane</h3>
-        <h3>Prince of Darkness</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1991/SimplyRed1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Simply Red</h3>
-        <h3>Stars</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/TheFarm1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Farm</h3>
-        <h3>Spartacus</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/TomWaits1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Waits</h3>
-        <h3>Night on Earth</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/Bz1991.jpeg" width="100" height="100" alt=""/>
-        <h3>B'z</h3>
-        <h3>In the Life</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/KazmaKazma1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Казма-Казма</h3>
-        <h3>Пляски Tрубадуров</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/Sting1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sting</h3>
-        <h3>The Soul Cages</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/CrystalWaters1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Crystal Waters</h3>
-        <h3>Surprise</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/ColorMeBadd1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Color Me Badd</h3>
-        <h3>C.M.B.</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/PharoahSanders1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Pharoah Sanders</h3>
-        <h3>Welcome to Love</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/Prince1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Prince & The New Power Generation</h3>
-        <h3>Diamonds and Pearls</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/ElvisCostello1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Elvis Costello</h3>
-        <h3>Mighty Like a Rose</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/TheSmashingPumpkins1991-2.jpg" width="100" height="100" alt=""/>
-        <h3>The Smashing Pumpkins</h3>
-        <h3>Lull</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/CaetanoVeloso1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Caetano Veloso</h3>
-        <h3>Circuladô</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/TheFall1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Fall</h3>
-        <h3>Shift-Work</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/HerbertGronemeyer1991.jpg" width="100" height="100" alt=""/>
-        <h3>Herbert Grönemeyer</h3>
-        <h3>Luxus</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/BizMarkie1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Biz Markie</h3>
-        <h3>I Need a Haircut</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/X1991.jpeg" width="100" height="100" alt=""/>
-        <h3>X</h3>
-        <h3>Jealousy</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/PinoDaniele1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Pino Daniele</h3>
-        <h3>Sotto 'o Sole</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/PinoDaniele1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Pino Daniele</h3>
-        <h3>Un Uomo in Blues</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/SenselessThings1991.jpg" width="100" height="100" alt=""/>
-        <h3>Senseless Things</h3>
-        <h3>The First of Too Many</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/ABC1991.jpeg" width="100" height="100" alt=""/>
-        <h3>ABC</h3>
-        <h3>Abracadabra</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1991/SunCityGirls1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sun City Girls</h3>
-        <h3>Dawn of the Devi</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/Fishmans1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Fishmans</h3>
-        <h3>Chappie, Don't Cry</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/LennyKravitz1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Lenny Kravitz</h3>
-        <h3>Mama Said</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/JulianCope1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Julian Cope</h3>
-        <h3>Peggy Suicide</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/BrianEno1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>My Squelchy Life</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/Sebadoh1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sebadoh</h3>
-        <h3>III</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/BlackUhuru1991.jpg" width="100" height="100" alt=""/>
-        <h3>Black Uhuru</h3>
-        <h3>Iron Storm</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/CarterUSM1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Carter the Unstoppable Sex Machine</h3>
-        <h3>30 Something</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/Kingmaker1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Kingmaker</h3>
-        <h3>Eat Yourself Whole</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/JimORourke1991.jpg" width="100" height="100" alt=""/>
-        <h3>Jim O'Rourke</h3>
-        <h3>Tamper</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/MPeople1991.jpeg" width="100" height="100" alt=""/>
-        <h3>M People</h3>
-        <h3>Northern Soul</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/Spacemen31991.jpeg" width="100" height="100" alt=""/>
-        <h3>Spacemen 3</h3>
-        <h3>Recurring</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/ESG1991.jpg" width="100" height="100" alt=""/>
-        <h3>ESG</h3>
-        <h3>ESG</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1991/Motorhead1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Motörhead</h3>
-        <h3>1916</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Hiperbole1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Hiperbolė</h3>
-        <h3>Hiperbolė '82</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Texas1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Texas</h3>
-        <h3>Mothers Heaven</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/JangPilSoon1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Jang Pil-Soon</h3>
-        <h3>Lonely Love</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/James1991.jpeg" width="100" height="100" alt=""/>
-        <h3>James</h3>
-        <h3>Gold Mother</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/VanHalen1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Van Halen</h3>
-        <h3>For Unlawful Carnal Knowledge</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/ThompsonTwins1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Thompson Twins</h3>
-        <h3>Queer</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/JudieTzuke1991.jpg" width="100" height="100" alt=""/>
-        <h3>Judie Tzuke</h3>
-        <h3>Left Hand Talking</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TheDuruttiColumn1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Durutti Column</h3>
-        <h3>Dry</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/EverythingButTheGirl1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Everything but the Girl</h3>
-        <h3>Worldwide</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TeenageFanclub1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Teenage Fanclub</h3>
-        <h3>The King</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Rush1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Rush</h3>
-        <h3>Roll the Bones</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Foreigner1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Foreigner</h3>
-        <h3>Unusual Heat</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/DJJazzyJeff1991.jpeg" width="100" height="100" alt=""/>
-        <h3>DJ Jazzy Jeff & The Fresh Prince</h3>
-        <h3>Homebase</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/AliceCooper1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Alice Cooper</h3>
-        <h3>Hey Stoopid</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TransvisionVamp1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Transvision Vamp</h3>
-        <h3>Little Magnets Vs. The Bubble of Babble</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/RocketFromTheCrypt1991.jpg" width="100" height="100" alt=""/>
-        <h3>Rocket From the Crypt</h3>
-        <h3>Paint as a Fragrance</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/CultureBeat1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Culture Beat</h3>
-        <h3>Horizon</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/GaryNuman1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Gary Numan</h3>
-        <h3>Outland</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Sham691991.jpeg" width="100" height="100" alt=""/>
-        <h3>Sham 69</h3>
-        <h3>Information Libre</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/BryanAdams1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Bryan Adams</h3>
-        <h3>Waking Up the Neighbours</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/JohnnyHatesJazz1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Johnny Hates Jazz</h3>
-        <h3>Tall Stories</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/AlisonMoyet1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Alison Moyet</h3>
-        <h3>Hoodoo</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TheFatimaMansions1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The Fatima Mansions</h3>
-        <h3>Berties Brochures</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Venom1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Venom</h3>
-        <h3>Temples of Ice</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/L71991.jpeg" width="100" height="100" alt=""/>
-        <h3>L7</h3>
-        <h3>Smell the Magic</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Current931991.jpg" width="100" height="100" alt=""/>
-        <h3>HÖH / Current 93</h3>
-        <h3>Island</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/PatBenatar1991.jpg" width="100" height="100" alt=""/>
-        <h3>Pat Benatar</h3>
-        <h3>True Love</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/GangOfFour1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Gang of Four</h3>
-        <h3>Mall</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/SamanthaFox1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Samantha Fox</h3>
-        <h3>Just One Night</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TPau1991.jpeg" width="100" height="100" alt=""/>
-        <h3>T'Pau</h3>
-        <h3>The Promise</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Masterboy1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Masterboy</h3>
-        <h3>The Masterboy Family</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TheMountainGoats1991.jpg" width="100" height="100" alt=""/>
-        <h3>The Mountain Goats</h3>
-        <h3>Taboo VI: The Homecoming</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/ToshikiKadomatsu1991.jpg" width="100" height="100" alt=""/>
-        <h3>Toshiki Kadomatsu</h3>
-        <h3>All Is Vanity</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/Bananarama1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Bananarama</h3>
-        <h3>Pop Life</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/CliffRichard1991.jpg" width="100" height="100" alt=""/>
-        <h3>Cliff Richard</h3>
-        <h3>Together</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/TinMachine1991.jpg" width="100" height="100" alt=""/>
-        <h3>Tin Machine</h3>
-        <h3>Tin Machine II</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/SuziQuatro1991.jpg" width="100" height="100" alt=""/>
-        <h3>Suzi Quatro</h3>
-        <h3>Oh, Suzi Q.</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1991/GunsNRoses1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Guns n' Roses</h3>
-        <h3>Use Your Illusion I</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/CabaretVoltaire1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Cabaret Voltaire</h3>
-        <h3>Body and Soul</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/RickAstley1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Rick Astley</h3>
-        <h3>Free</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/MariahCarey1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Mariah Carey</h3>
-        <h3>Emotions</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/StevieWonder1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Stevie Wonder</h3>
-        <h3>Music From the Movie "Jungle Fever"</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/KimHyunSik1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Kim Hyun Sik</h3>
-        <h3>Kim Hyun Sik Vol. 6</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/JethroTull1991.jpg" width="100" height="100" alt=""/>
-        <h3>Jethro Tull</h3>
-        <h3>Catfish Rising</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/TheOJays1991.jpeg" width="100" height="100" alt=""/>
-        <h3>The O'Jays</h3>
-        <h3>Emotionally Yours</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/TomJones1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>Carrying a Torch</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/Consolidated1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Consolidated</h3>
-        <h3>Friendly Fascism</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/DieTotenHosen1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Die Toten Hosen</h3>
-        <h3>Learning English, Lesson 1</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/AlanisMorissette1991.jpg" width="100" height="100" alt=""/>
-        <h3>Alanis Morissette</h3>
-        <h3>Alanis</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1991/Shakira1991.jpg" width="100" height="100" alt=""/>
-        <h3>Shakira</h3>
-        <h3>Magia</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/VanMorrison1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Hymns to the Silence</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/TheOJays1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>The O'Jays</h3>
-        <h3>Home for Christmas</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/Wir1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Wir</h3>
-        <h3>The First Letter</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/SeikoMatsuda1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Seiko Matsuda</h3>
-        <h3>Eternal</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/RickyMartin1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ricky Martin</h3>
-        <h3>Ricky Martin</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/Yes1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Yes</h3>
-        <h3>Union</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/Showaddywaddy1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Showaddywaddy</h3>
-        <h3>Jump Boogie & Jive</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/Turboreanimacija1991.jpg" width="100" height="100" alt=""/>
-        <h3>Turboreanimacija</h3>
-        <h3>Sik Sip</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/PereUbu1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Pere Ubu</h3>
-        <h3>Worlds in Collision</h3>
-	    <h3>0½</h3>
-      <li> 
-		<img src="images/1991/GunsNRoses1991-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Guns n' Roses</h3>
-        <h3>Use Your Illusion II</h3>
-	    <h3>0¼</h3>
-      <li> 
-		<img src="images/1991/Wire1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Wire</h3>
-        <h3>The Drill</h3>
-	    <h3>0¼</h3>
-      <li> 
-		<img src="images/1991/SimpleMinds1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Simple Minds</h3>
-        <h3>Real Life</h3>
-	    <h3>0¼</h3>
-      <li> 
-		<img src="images/1991/MCHammer1991.jpeg" width="100" height="100" alt=""/>
-        <h3>MC Hammer</h3>
-        <h3>Too Legit to Quit</h3>
-	    <h3>0¼</h3>
-      <li> 
-		<img src="images/1991/Ween1991.jpeg" width="100" height="100" alt=""/>
-        <h3>Ween</h3>
-        <h3>The Pod</h3>
-	    <h3>0</h3>
-      </li><!-- Repeat for the rest of the albums -->
-    </ol>
-  </main>
-    
+<main><ol>
+<h1>1991: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li class="Nevermind"><div class="album"><div class="album-rating">10</div>
+  <div class="album-cover"><img src="images/1991/Nirvana1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nirvana</h3>
+    <h3>Nevermind</h3>
+    <h3>10</h3>
+      </div></div></li>
+<li class="Loveless"><div class="album"><div class="album-rating">10</div>
+  <div class="album-cover"><img src="images/1991/MyBloodyValentine1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>My Bloody Valentine</h3>
+    <h3>Loveless</h3>
+    <h3>10</h3>
+      </div></div></li>
+<li class="Laughing Stock"><div class="album"><div class="album-rating">9</div>
+  <div class="album-cover"><img src="images/1991/TalkTalk1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Talk Talk</h3>
+    <h3>Laughing Stock</h3>
+    <h3>9</h3>
+      </div></div></li>
+<li class="Spiderland"><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1991/Slint1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Slint</h3>
+    <h3>Spiderland</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li class="Bandwagonesque"><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/1991/TeenageFanclub1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Teenage Fanclub</h3>
+    <h3>Bandwagonesque</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li class="Blue Lines"><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/1991/MassiveAttack1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Massive Attack</h3>
+    <h3>Blue Lines</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li class="The Low End Theory"><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1991/ATribeCalledQuest1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>A Tribe Called Quest</h3>
+    <h3>The Low End Theory</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li class="Drive Like Jehu"><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1991/DriveLikeJehu1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Drive Like Jehu</h3>
+    <h3>Drive Like Jehu</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li class="Step in the Arena"><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1991/GangStarr1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Gang Starr</h3>
+    <h3>Step in the Arena</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li class="Dondestan"><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1991/RobertWyatt1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Robert Wyatt</h3>
+    <h3>Dondestan</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li class="O G  Original Gangster"><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1991/IceT1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ice-T</h3>
+    <h3>O.G. Original Gangster</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li class="Screamadelica"><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1991/PrimalScream1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Primal Scream</h3>
+    <h3>Screamadelica</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1991/Coroner1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Coroner</h3>
+    <h3>Mental Vortex</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li class="Tremolo EP"><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1991/MyBloodyValentine1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>My Bloody Valentine</h3>
+    <h3>Tremolo EP</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li class="Goat"><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1991/TheJesusLizard1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Jesus Lizard</h3>
+    <h3>Goat</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li class="Temple of the Dog"><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1991/TempleOfTheDog1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Temple of the Dog</h3>
+    <h3>Temple of the Dog</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li class="Bullhead"><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1991/Melvins1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Melvins</h3>
+    <h3>Bullhead</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li class="Blood Sugar Sex Magic"><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1991/RedHotChiliPeppers1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Red Hot Chili Peppers</h3>
+    <h3>Blood Sugar Sex Magik</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li class="Cypress Hill"><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1991/CypressHill1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Cypress Hill</h3>
+    <h3>Cypress Hill</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li class="Out of Time"><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1991/REM1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>R.E.M.</h3>
+    <h3>Out of Time</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li class="Human"><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1991/Death1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Death</h3>
+    <h3>Human</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li class="Foxbase Alpha"><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1991/SaintEtienne1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Saint Etienne</h3>
+    <h3>Foxbase Alpha</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1991/U21991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>U2</h3>
+    <h3>Achtung Baby</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1991/Immolation1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Immolation</h3>
+    <h3>Dawn of Possession</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1991/TheKLF1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The KLF</h3>
+    <h3>The White Room</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1991/DeLaSoul1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>De La Soul</h3>
+    <h3>De La Soul Is Dead</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1991/ThrowingMuses1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Throwing Muses</h3>
+    <h3>The Real Ramona</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1991/MichaelJackson1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Michael Jackson</h3>
+    <h3>Dangerous</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1991/Bathory1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bathory</h3>
+    <h3>Twilight of the Gods</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1991/MyleneFarmer1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mylène Farmer</h3>
+    <h3>L'autre</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/MercuryRev1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mercury Rev</h3>
+    <h3>Yerself Is Steam</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/TheWeddingPresent1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Wedding Present</h3>
+    <h3>Seamonsters</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/Chapterhouse1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Chapterhouse</h3>
+    <h3>Whirlpool</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/EcstasyOfStTheresa1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ecstasy of St. Theresa</h3>
+    <h3>Pigment</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/Suffocation1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Suffocation</h3>
+    <h3>Effigy of the Forgotten</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1991/Dismember1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Dismember</h3>
+    <h3>Like an Ever Flowing Stream</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1991/Entombed1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Entombed</h3>
+    <h3>Clandestine</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1991/Sepultura1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sepultura</h3>
+    <h3>Arise</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1991/TheFeelies1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Feelies</h3>
+    <h3>Time for a Witness</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/808State1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>808 State</h3>
+    <h3>ex:el</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/LFO1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>LFO</h3>
+    <h3>Frequencies</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/Atheist1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Atheist</h3>
+    <h3>Unquestionable Presence</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="Mental Funeral"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/Autopsy1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Autopsy</h3>
+    <h3>Mental Funeral</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="Heavenly vs  Satan"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/Heavenly1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Heavenly</h3>
+    <h3>Heavenly vs. Satan</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="13-Point Program to Destroy America"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/NationOfUlysses1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nation of Ulysses</h3>
+    <h3>13-Point Program to Destroy America</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="Green Mind"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/DinosaurJr1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Dinosaur Jr</h3>
+    <h3>Green Mind</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="Ten"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/PearlJam1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pearl Jam</h3>
+    <h3>Ten</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li class="Seal"><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/Seal1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Seal</h3>
+    <h3>Seal</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/NWA1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>N.W.A</h3>
+    <h3>Efil4zaggin</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1991/TheWonderStuff1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Wonder Stuff</h3>
+    <h3>Never Loved Elvis</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/MorbidAngel1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Morbid Angel</h3>
+    <h3>Blessed Are the Sick</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/Hole1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Hole</h3>
+    <h3>Pretty on the Inside</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/RainTreeCrow1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rain Tree Crow</h3>
+    <h3>Rain Tree Crow</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/DJQuik1991.jpeg" width=" Старший пользователь
+100" height="100" alt="" /></div><div class="album-text">
+    <h3>DJ Quik</h3>
+    <h3>Quik Is the Name</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/2Pac1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>2Pac</h3>
+    <h3>2Pacalypse Now</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/Earth1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Earth</h3>
+    <h3>Extra-Capsular Extraction</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1991/Swans1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Swans</h3>
+    <h3>White Light From the Mouth of Infinity</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Slowdive1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Slowdive</h3>
+    <h3>Morningrise</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Metallica1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Metallica</h3>
+    <h3>Metallica</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/LydiaLunch1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lydia Lunch / Rowland S. Howard</h3>
+    <h3>Shotgun Wedding</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Kyuss1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kyuss</h3>
+    <h3>Wretch</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Electronic1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Electronic</h3>
+    <h3>Electronic</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Slowdive1991-2.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Slowdive</h3>
+    <h3>Just for a Day</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/DelTheFunkyHomosapien1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Del the Funky Homosapien</h3>
+    <h3>I Wish My Brother George Was Here</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/GWMcLennan1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>G.W. McLennan</h3>
+    <h3>Watershed</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Morrissey1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Morrissey</h3>
+    <h3>Kill Uncle</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/ScreamingTrees1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Screaming Trees</h3>
+    <h3>Uncle Anesthesia</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Carcass1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Carcass</h3>
+    <h3>Necroticism: Descanting the Insalubrious</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Biosphere1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Biosphere</h3>
+    <h3>Microgravity</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/DinosaurJr1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Dinosaur Jr</h3>
+    <h3>Whatever's Cool With Me</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/TheSmashingPumpkins1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Smashing Pumpkins</h3>
+    <h3>Gish</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/PublicEnemy1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Public Enemy</h3>
+    <h3>Apocalypse 91...The Enemy Strikes Black</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Heroin1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Heroin</h3>
+    <h3>All About Heroin</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/Darkthrone1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Darkthrone</h3>
+    <h3>Soulside Journey</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/ViolentFemmes1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Violent Femmes</h3>
+    <h3>Why Do Birds Sing?</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1991/SlickRick1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Slick Rick</h3>
+    <h3>The Ruler's Back</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/Pixies1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pixies</h3>
+    <h3>Trompe le Monde</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/Slowdive1991-3.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Slowdive</h3>
+    <h3>Holding Our Breath</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/Bix1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bix</h3>
+    <h3>Akli Kariai</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/Queen1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Queen</h3>
+    <h3>Innuendo</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/GetoBoys1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Geto Boys</h3>
+    <h3>We Can't Be Stopped</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1991/IceCube1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ice Cube</h3>
+    <h3>Death Certificate</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/Lio1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lio</h3>
+    <h3>Des Fleurs Pour un Caméléon</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/Blur1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Blur</h3>
+    <h3>Leisure</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/TheOrb1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Orb</h3>
+    <h3>The Orb's Adventures Beyond the Ultraworld</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/VoiceOfTheBeehive1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Voice of the Beehive</h3>
+    <h3>Honey Lingers</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/ComptonsMostWanted1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Compton's Most Wanted</h3>
+    <h3>Straight Check N'Em</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/Tad1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tad</h3>
+    <h3>8-Way Santa</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/VelvetCrush1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Velvet Crush</h3>
+    <h3>In the Presence of Greatness</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/DireStraits1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Dire Straits</h3>
+    <h3>On Every Street</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/Mudhoney1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mudhoney</h3>
+    <h3>Every Good Boy Deserves Fudge</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/NedsAtomicDustbin1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ned's Atomic Dustbin</h3>
+    <h3>God Fodder</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/KitchensOfDistinction1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kitchens of Distinction</h3>
+    <h3>Strange Free World</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/InspiralCarpets1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Inspiral Carpets</h3>
+    <h3>The Beast Inside</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1991/OMD1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Orchestral Manoeuvres in the Dark</h3>
+    <h3>Sugar Tax</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/SupremeNTM1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Suprême NTM</h3>
+    <h3>Authentik</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/LesRallizesDenudes1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Les Rallizes Dénudés</h3>
+    <h3>'77 Live</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/Roxette1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Roxette</h3>
+    <h3>Joyride</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/OzzyOsbourne1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ozzy Osbourne</h3>
+    <h3>No More Tears</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/Galliano1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Galliano</h3>
+    <h3>In Pursuit of the 13th Note</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/DreamWarriors1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Dream Warriors</h3>
+    <h3>And Now the Legacy Begins</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/CrowdedHouse1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Crowded House</h3>
+    <h3>Woodface</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/TomPetty1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tom Petty & The Heartbreakers</h3>
+    <h3>Into the Great Wide Open</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/MilltownBrothers1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Milltown Brothers</h3>
+    <h3>Slinky</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/BookOfLove1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Book of Love</h3>
+    <h3>Candy Carol</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/BabesInToyland1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Babes in Toyland</h3>
+    <h3>To Mother</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/RatAtRatR1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rat at Rat R</h3>
+    <h3>Rat at Rat R</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1991/DefinitionOfSound1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Definition of Sound</h3>
+    <h3>Love and Life: A Journey With the Chameleons</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/DiscoInferno1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Disco Inferno</h3>
+    <h3>Open Doors, Closed Windows</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/Fugazi1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Fugazi</h3>
+    <h3>Steady Diet of Nothing</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/UrgeOverkill1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Urge Overkill</h3>
+    <h3>Supersonic Storybook</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/KMD1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>KMD</h3>
+    <h3>Mr. Hood</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/AtTheGates1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>At the Gates</h3>
+    <h3>Gardens of Grief</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/MorbidAngel1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Morbid Angel</h3>
+    <h3>Abominations of Desolation</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/MeatPuppets1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Meat Puppets</h3>
+    <h3>Forbidden Places</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/Genesis1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Genesis</h3>
+    <h3>We Can't Dance</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1991/KylieMinogue1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kylie Minogue</h3>
+    <h3>Let's Get to It</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/BeatHappening1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Beat Happening</h3>
+    <h3>Dreamy</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/PMDawn1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>P.M. Dawn</h3>
+    <h3>Of the Heart, of the Soul and of the Cross</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/TheCramps1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Cramps</h3>
+    <h3>Look Mom No Head!</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/NightmaresOnWax1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Nightmares on Wax</h3>
+    <h3>A Word of Science (The 1st & Final Chapter)</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/BillyBragg1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Billy Bragg</h3>
+    <h3>Don't Try This at Home</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1991/Gorguts1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Gorguts</h3>
+    <h3>Considered Dead</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/LloydCole1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lloyd Cole</h3>
+    <h3>Don't Get Weird on Me Babe</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/LisaGermano1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lisa Germano</h3>
+    <h3>On the Way Down From the Moon Palace</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/3rdBass1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>3rd Bass</h3>
+    <h3>Derelicts of Dialect</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/DonnaSummer1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Donna Summer</h3>
+    <h3>Mistaken Identity</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/Leatherface1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Leatherface</h3>
+    <h3>Mush</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/CannibalCorpse1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Cannibal Corpse</h3>
+    <h3>Butchered at Birth</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/ButtholeSurfers1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Butthole Surfers</h3>
+    <h3>Piouhgd</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/Meshuggah1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Meshuggah</h3>
+    <h3>Contradictions Collapse</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/Foje1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Foje</h3>
+    <h3>Gali Skambėti Keistai</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/SarahMcLachlan1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sarah McLachlan</h3>
+    <h3>Solace</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/LAGuns1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>L.A. Guns</h3>
+    <h3>Hollywood Vampires</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/DeaconBlue1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Deacon Blue</h3>
+    <h3>Fellow Hoodlums</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/Erasure1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Erasure</h3>
+    <h3>Chorus</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1991/Coil1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Coil</h3>
+    <h3>Love's Secret Domain</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Auktyon1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Аукцыон</h3>
+    <h3>Бодун</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Soundgarden1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Soundgarden</h3>
+    <h3>Badmotorfinger</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/TypeONegative1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Type O Negative</h3>
+    <h3>Slow, Deep and Hard</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/AmericanMusicClub1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>American Music Club</h3>
+    <h3>Everclear</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/SpinDoctors1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Spin Doctors</h3>
+    <h3>Pocket Full of Kryptonite</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/SiouxsieAndTheBanshees1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Siouxsie & the Banshees</h3>
+    <h3>Superstition</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/TatsuroYamashita1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tatsuro Yamashita</h3>
+    <h3>Artisan</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/TheBlueAeroplanes1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Blue Aeroplanes</h3>
+    <h3>Beatsongs</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Toyah1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Toyah</h3>
+    <h3>Ophelia's Shadow</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Sleep1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sleep</h3>
+    <h3>Volume One</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/MilesDavis1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Miles Davis / Michel Legrand</h3>
+    <h3>Dingo</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/TheCult1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Cult</h3>
+    <h3>Ceremony</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Primus1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Primus</h3>
+    <h3>Sailing the Seas of Cheese</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/MrBungle1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mr. Bungle</h3>
+    <h3>Mr. Bungle</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/EMF1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>EMF</h3>
+    <h3>Schubert Dip</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Squeeze1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Squeeze</h3>
+    <h3>Play</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/ThePoohSticks1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Pooh Sticks</h3>
+    <h3>The Great White Wonder</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Saxon1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Saxon</h3>
+    <h3>Solid Ball of Rock</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/HueyLewis1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Huey Lewis & The News</h3>
+    <h3>Hard at Play</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/Ultramarine1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ultramarine</h3>
+    <h3>Every Man and Woman Is a Star</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li class="Prince of Darkness"><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1991/BigDaddyKane1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Big Daddy Kane</h3>
+    <h3>Prince of Darkness</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li class="Stars"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/SimplyRed1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Simply Red</h3>
+    <h3>Stars</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Spartacus"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/TheFarm1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Farm</h3>
+    <h3>Spartacus</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Night on Earth"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/TomWaits1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tom Waits</h3>
+    <h3>Night on Earth</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="In the Life"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/Bz1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>B'z</h3>
+    <h3>In the Life</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Пляски Tрубадуров"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/KazmaKazma1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Казма-Казма</h3>
+    <h3>Пляски Tрубадуров</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="The Soul Cages"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/Sting1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sting</h3>
+    <h3>The Soul Cages</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Surprise"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/CrystalWaters1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Crystal Waters</h3>
+    <h3>Surprise</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="C.M.B."><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/ColorMeBadd1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Color Me Badd</h3>
+    <h3>C.M.B.</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Welcome to Love"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/PharoahSanders1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pharoah Sanders</h3>
+    <h3>Welcome to Love</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Diamonds and Pearls"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/Prince1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Prince & The New Power Generation</h3>
+    <h3>Diamonds and Pearls</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Mighty Like a Rose"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/ElvisCostello1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Elvis Costello</h3>
+    <h3>Mighty Like a Rose</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Lull"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/TheSmashingPumpkins1991-2.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Smashing Pumpkins</h3>
+    <h3>Lull</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Circuladô"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/CaetanoVeloso1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Caetano Veloso</h3>
+    <h3>Circuladô</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Shift-Work"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/TheFall1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Fall</h3>
+    <h3>Shift-Work</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Luxus"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/HerbertGronemeyer1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Herbert Grönemeyer</h3>
+    <h3>Luxus</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="I Need a Haircut"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/BizMarkie1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Biz Markie</h3>
+    <h3>I Need a Haircut</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Jealousy"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/X1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>X</h3>
+    <h3>Jealousy</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Sotto 'o Sole"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/PinoDaniele1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pino Daniele</h3>
+    <h3>Sotto 'o Sole</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Un Uomo in Blues"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/PinoDaniele1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pino Daniele</h3>
+    <h3>Un Uomo in Blues</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="The First of Too Many"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/SenselessThings1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Senseless Things</h3>
+    <h3>The First of Too Many</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Abracadabra"><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1991/ABC1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>ABC</h3>
+    <h3>Abracadabra</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li class="Dawn of the Devi"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/SunCityGirls1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sun City Girls</h3>
+    <h3>Dawn of the Devi</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Chappie, Don't Cry"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/Fishmans1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Fishmans</h3>
+    <h3>Chappie, Don't Cry</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Mama Said"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/LennyKravitz1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Lenny Kravitz</h3>
+    <h3>Mama Said</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Peggy Suicide"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/JulianCope1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Julian Cope</h3>
+    <h3>Peggy Suicide</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="My Squelchy Life"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/BrianEno1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>My Squelchy Life</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="III"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/Sebadoh1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sebadoh</h3>
+    <h3>III</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Iron Storm"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/BlackUhuru1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Black Uhuru</h3>
+    <h3>Iron Storm</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="30 Something"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/CarterUSM1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Carter the Unstoppable Sex Machine</h3>
+    <h3>30 Something</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Eat Yourself Whole"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/Kingmaker1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kingmaker</h3>
+    <h3>Eat Yourself Whole</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Tamper"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/JimORourke1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jim O'Rourke</h3>
+    <h3>Tamper</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Northern Soul"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/MPeople1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>M People</h3>
+    <h3>Northern Soul</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="Recurring"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/Spacemen31991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Spacemen 3</h3>
+    <h3>Recurring</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="ESG"><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1991/ESG1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>ESG</h3>
+    <h3>ESG</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li class="1916"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Motorhead1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Motörhead</h3>
+    <h3>1916</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Hiperbolė '82"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Hiperbole1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Hiperbolė</h3>
+    <h3>Hiperbolė '82</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Mothers Heaven"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Texas1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Texas</h3>
+    <h3>Mothers Heaven</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Lonely Love"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/JangPilSoon1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jang Pil-Soon</h3>
+    <h3>Lonely Love</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Gold Mother"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/James1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>James</h3>
+    <h3>Gold Mother</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="For Unlawful Carnal Knowledge"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/VanHalen1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Van Halen</h3>
+    <h3>For Unlawful Carnal Knowledge</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Queer"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/ThompsonTwins1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Thompson Twins</h3>
+    <h3>Queer</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Left Hand Talking"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/JudieTzuke1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Judie Tzuke</h3>
+    <h3>Left Hand Talking</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Dry"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TheDuruttiColumn1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Durutti Column</h3>
+    <h3>Dry</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Worldwide"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/EverythingButTheGirl1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Everything but the Girl</h3>
+    <h3>Worldwide</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="The King"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TeenageFanclub1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Teenage Fanclub</h3>
+    <h3>The King</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Roll the Bones"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Rush1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rush</h3>
+    <h3>Roll the Bones</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Unusual Heat"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Foreigner1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Foreigner</h3>
+    <h3>Unusual Heat</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Homebase"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/DJJazzyJeff1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>DJ Jazzy Jeff & The Fresh Prince</h3>
+    <h3>Homebase</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Hey Stoopid"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/AliceCooper1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Alice Cooper</h3>
+    <h3>Hey Stoopid</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Little Magnets Vs. The Bubble of Babble"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TransvisionVamp1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Transvision Vamp</h3>
+    <h3>Little Magnets Vs. The Bubble of Babble</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Paint as a Fragrance"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/RocketFromTheCrypt1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rocket From the Crypt</h3>
+    <h3>Paint as a Fragrance</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Horizon"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/CultureBeat1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Culture Beat</h3>
+    <h3>Horizon</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Outland"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/GaryNuman1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Gary Numan</h3>
+    <h3>Outland</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Information Libre"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Sham691991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Sham 69</h3>
+    <h3>Information Libre</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Waking Up the Neighbours"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/BryanAdams1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bryan Adams</h3>
+    <h3>Waking Up the Neighbours</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Tall Stories"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/JohnnyHatesJazz1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Johnny Hates Jazz</h3>
+    <h3>Tall Stories</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Hoodoo"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/AlisonMoyet1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Alison Moyet</h3>
+    <h3>Hoodoo</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Berties Brochures"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TheFatimaMansions1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Fatima Mansions</h3>
+    <h3>Berties Brochures</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Temples of Ice"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Venom1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Venom</h3>
+    <h3>Temples of Ice</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Smell the Magic"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/L71991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>L7</h3>
+    <h3>Smell the Magic</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Island"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Current931991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>HÖH / Current 93</h3>
+    <h3>Island</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="True Love"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/PatBenatar1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pat Benatar</h3>
+    <h3>True Love</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Mall"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/GangOfFour1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Gang of Four</h3>
+    <h3>Mall</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Just One Night"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/SamanthaFox1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Samantha Fox</h3>
+    <h3>Just One Night</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="The Promise"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TPau1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>T'Pau</h3>
+    <h3>The Promise</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="The Masterboy Family"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Masterboy1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Masterboy</h3>
+    <h3>The Masterboy Family</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Taboo VI: The Homecoming"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TheMountainGoats1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The Mountain Goats</h3>
+    <h3>Taboo VI: The Homecoming</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="All Is Vanity"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/ToshikiKadomatsu1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Toshiki Kadomatsu</h3>
+    <h3>All Is Vanity</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Pop Life"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/Bananarama1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Bananarama</h3>
+    <h3>Pop Life</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Together"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/CliffRichard1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Cliff Richard</h3>
+    <h3>Together</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Tin Machine II"><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/TinMachine1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tin Machine</h3>
+    <h3>Tin Machine II</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Oh, Suzi Q."><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1991/SuziQuatro1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Suzi Quatro</h3>
+    <h3>Oh, Suzi Q.</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li class="Use Your Illusion I"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/GunsNRoses1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Guns n' Roses</h3>
+    <h3>Use Your Illusion I</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Body and Soul"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/CabaretVoltaire1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Cabaret Voltaire</h3>
+    <h3>Body and Soul</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Free"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/RickAstley1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Rick Astley</h3>
+    <h3>Free</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Emotions"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/MariahCarey1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Mariah Carey</h3>
+    <h3>Emotions</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Music From the Movie Jungle Fever"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/StevieWonder1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Stevie Wonder</h3>
+    <h3>Music From the Movie "Jungle Fever"</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Kim Hyun Sik Vol. 6"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/KimHyunSik1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Kim Hyun Sik</h3>
+    <h3>Kim Hyun Sik Vol. 6</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Catfish Rising"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/JethroTull1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Jethro Tull</h3>
+    <h3>Catfish Rising</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Emotionally Yours"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/TheOJays1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The O'Jays</h3>
+    <h3>Emotionally Yours</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Carrying a Torch"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/TomJones1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>Carrying a Torch</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Friendly Fascism"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/Consolidated1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Consolidated</h3>
+    <h3>Friendly Fascism</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Learning English, Lesson 1"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/DieTotenHosen1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Die Toten Hosen</h3>
+    <h3>Learning English, Lesson 1</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Alanis"><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1991/AlanisMorissette1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Alanis Morissette</h3>
+    <h3>Alanis</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li class="Magia"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/Shakira1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Shakira</h3>
+    <h3>Magia</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Hymns to the Silence"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/VanMorrison1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Hymns to the Silence</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Home for Christmas"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/TheOJays1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>The O'Jays</h3>
+    <h3>Home for Christmas</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="The First Letter"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/Wir1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Wir</h3>
+    <h3>The First Letter</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Eternal"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/SeikoMatsuda1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Seiko Matsuda</h3>
+    <h3>Eternal</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Ricky Martin"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/RickyMartin1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ricky Martin</h3>
+    <h3>Ricky Martin</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Union"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/Yes1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Yes</h3>
+    <h3>Union</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Jump Boogie & Jive"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/Showaddywaddy1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Showaddywaddy</h3>
+    <h3>Jump Boogie & Jive</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Sik Sip"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/Turboreanimacija1991.jpg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Turboreanimacija</h3>
+    <h3>Sik Sip</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Worlds in Collision"><div class="album"><div class="album-rating">0½</div>
+  <div class="album-cover"><img src="images/1991/PereUbu1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Pere Ubu</h3>
+    <h3>Worlds in Collision</h3>
+    <h3>0½</h3>
+      </div></div></li>
+<li class="Use Your Illusion II"><div class="album"><div class="album-rating">0¼</div>
+  <div class="album-cover"><img src="images/1991/GunsNRoses1991-2.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Guns n' Roses</h3>
+    <h3>Use Your Illusion II</h3>
+    <h3>0¼</h3>
+      </div></div></li>
+<li class="The Drill"><div class="album"><div class="album-rating">0¼</div>
+  <div class="album-cover"><img src="images/1991/Wire1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Wire</h3>
+    <h3>The Drill</h3>
+    <h3>0¼</h3>
+      </div></div></li>
+<li class="Real Life"><div class="album"><div class="album-rating">0¼</div>
+  <div class="album-cover"><img src="images/1991/SimpleMinds1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Simple Minds</h3>
+    <h3>Real Life</h3>
+    <h3>0¼</h3>
+      </div></div></li>
+<li class="Too Legit to Quit"><div class="album"><div class="album-rating">0¼</div>
+  <div class="album-cover"><img src="images/1991/MCHammer1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>MC Hammer</h3>
+    <h3>Too Legit to Quit</h3>
+    <h3>0¼</h3>
+      </div></div></li>
+<li class="The Pod"><div class="album"><div class="album-rating">0</div>
+  <div class="album-cover"><img src="images/1991/Ween1991.jpeg" width="100" height="100" alt="" /></div><div class="album-text">
+    <h3>Ween</h3>
+    <h3>The Pod</h3>
+    <h3>0</h3>
+      </div></div></li>
+
+</ol></main>
+
+
+<!-- Modal -->
+
+<!--<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div></div> */-->
+
+
   <footer>
-    <p>&copy; 1991 Albums of the Year</p>
-</footer>
+    <p>© 1991 The Key of Life. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    // Show modal with review & rating on album click
+    document.querySelectorAll('.album').forEach(album => {
+      album.addEventListener('click', () => {
+        const review = album.getAttribute('data-review');
+        const rating = album.getAttribute('data-rating');
+        modalText.innerHTML = `<p>${review}</p><p><strong>Rating:</strong> ${rating}</p>`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on clicking close button or outside modal-content
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
