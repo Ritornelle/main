@@ -1,381 +1,729 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1968 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1967.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1969.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1967.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1969.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1968: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/1968/TheVelvetUnderground1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Velvet Underground</h3>
-        <h3>White Light / White Heat</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1968/SilverApples1968.jpg" width="100" height="100" alt=""/>
-        <h3>Silver Apples</h3>
-        <h3>Silver Apples</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1968/JimiHendrix1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Jimi Hendrix Experience</h3>
-        <h3>Electric Ladyland</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1968/VanMorrison1968.jpg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Astral Weeks</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/1968/PinkFloyd1968.jpg" width="100" height="100" alt=""/>
-        <h3>Pink Floyd</h3>
-        <h3>A Saucerful of Secrets</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1968/SilverApples1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Silver Apples</h3>
-        <h3>Contact</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1968/TheRollingStones1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Rolling Stones</h3>
-        <h3>Beggars Banquet</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1968/TheZombies1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Zombies</h3>
-        <h3>Odessey and Oracle</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1968/OsMutantes1968.jpg" width="100" height="100" alt=""/>
-        <h3>Os Mutantes</h3>
-        <h3>Os Mutantes</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1968/SergeGainsbourg1968.jpg" width="100" height="100" alt=""/>
-        <h3>Serge Gainsbourg</h3>
-        <h3>Initials B.B.</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1968/TheMothersOfInvention1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Mothers of Invention</h3>
-        <h3>We're Only in It for the Money</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1968/SimonAndGarfunkel1968.jpg" width="100" height="100" alt=""/>
-        <h3>Simon & Garfunkel</h3>
-        <h3>Bookends</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1968/FrankZappa1968.jpg" width="100" height="100" alt=""/>
-        <h3>Frank Zappa</h3>
-        <h3>Lumpy Gravy</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1968/CreedenceClearwaterRevival1968.jpg" width="100" height="100" alt=""/>
-        <h3>Creedence Clearwater Revival</h3>
-        <h3>Creedence Clearwater Revival</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1968/FrancoiseHardy1968.jpg" width="100" height="100" alt=""/>
-        <h3>Françoise Hardy</h3>
-        <h3>Françoise Hardy (Comment te Dire Adieu)</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1968/Nico1968.jpg" width="100" height="100" alt=""/>
-        <h3>Nico</h3>
-        <h3>The Marble Index</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1968/JoniMitchell1968.jpg" width="100" height="100" alt=""/>
-        <h3>Joni Mitchell</h3>
-        <h3>Joni Mitchell (Song to a Seagull)</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1968/Cream1968.jpg" width="100" height="100" alt=""/>
-        <h3>Cream</h3>
-        <h3>Wheels of Fire</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1968/MilesDavis1968.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis</h3>
-        <h3>Nefertiti</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1968/CaetanoVeloso1968.jpg" width="100" height="100" alt=""/>
-        <h3>Caetano Veloso</h3>
-        <h3>Caetano Veloso</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1968/NancySinatra1968.jpg" width="100" height="100" alt=""/>
-        <h3>Nancy Sinatra / Lee Hazlewood</h3>
-        <h3>Nancy & Lee</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1968/UnitedStatesOfAmerica1968.jpg" width="100" height="100" alt=""/>
-        <h3>The United States of America</h3>
-        <h3>The United States of America</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1968/HerbieHancock1968.jpg" width="100" height="100" alt=""/>
-        <h3>Herbie Hancock</h3>
-        <h3>Speak Like a Child</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1968/ScottWalker1968.jpg" width="100" height="100" alt=""/>
-        <h3>Scott Walker</h3>
-        <h3>Scott 2</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1968/TheBeatles1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Beatles</h3>
-        <h3>The Beatles (White Album)</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1968/CaptainBeefheart1968.jpg" width="100" height="100" alt=""/>
-        <h3>Captain Beefheart & His Magic Band</h3>
-        <h3>Strictly Personal</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1968/DeepPurple1968.jpg" width="100" height="100" alt=""/>
-        <h3>Deep Purple</h3>
-        <h3>Shades of Deep Purple</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1968/TheDoors1968.jpg" width="100" height="100" alt=""/>
-        <h3>The Doors</h3>
-        <h3>Waiting for the Sun</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1968/DustySpringfield1968.jpg" width="100" height="100" alt=""/>
-        <h3>Dusty Springfield</h3>
-        <h3>Dusty... Definitely</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1968/JohnColtrane1968.jpg" width="100" height="100" alt=""/>
-        <h3>John Coltrane / Alice Coltrane</h3>
-        <h3>Cosmic Music</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1968/TownesVanZandt1968.jpg" width="100" height="100" alt=""/>
-        <h3>Townes Van Zandt</h3>
-        <h3>For the Sake of the Song</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1968/FairportConvention1968.jpeg" width="100" height="100" alt=""/>
-        <h3>Fairport Convention</h3>
-        <h3>Fairport Convention</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1968/JacquesDutronc1968.jpg" width="100" height="100" alt=""/>
-        <h3>Jacques Dutronc</h3>
-        <h3>Jacques Dutronc</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1968/MilesDavis1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis</h3>
-        <h3>Miles in the Sky</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1968/WesMontgomery1968.jpg" width="100" height="100" alt=""/>
-        <h3>Wes Montgomery</h3>
-        <h3>Down Here on the Ground</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1968/ChicoBuarque1968.jpg" width="100" height="100" alt=""/>
-        <h3>Chico Buarque</h3>
-        <h3>Volume 3</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1968/JohnColtrane1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>John Coltrane</h3>
-        <h3>Om</h3>
-	    <h3>3¼</h3>
-      <li> 
-		    <img src="images/1968/FranceGall1968.jpg" width="100" height="100" alt=""/>
-        <h3>France Gall</h3>
-        <h3>1968</h3>
-	      <h3>3</h3>
-      <li> 
-		    <img src="images/1968/JeffBeck1968.jpeg" width="100" height="100" alt=""/>
-        <h3>Jeff Beck</h3>
-        <h3>Truth</h3>
-	      <h3>3</h3>
-      <li> 
-		    <img src="images/1968/MargoGuryan1968.jpg" width="100" height="100" alt=""/>
-        <h3>Margo Guryan</h3>
-        <h3>Take a Picture</h3>
-	      <h3>3</h3>
-      <li> 
-		    <img src="images/1968/TyrannosaurusRex1968.jpg" width="100" height="100" alt=""/>
-        <h3>Tyrannosaurus Rex</h3>
-        <h3>Prophets, Seers & Sages: The Angels of the Ages</h3>
-	      <h3>2¾</h3>
-      <li> 
-		    <img src="images/1968/WesMontgomery1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Wes Montgomery</h3>
-        <h3>Road Song</h3>
-	      <h3>2½</h3>
-      <li> 
-		    <img src="images/1968/WesMontgomery1968-3.jpg" width="100" height="100" alt=""/>
-        <h3>Wes Montgomery</h3>
-        <h3>Willow Weep for Me</h3>
-	      <h3>2¼</h3>
-      <li> 
-		    <img src="images/1968/JethroTull1968.jpg" width="100" height="100" alt=""/>
-        <h3>Jethro Tull</h3>
-        <h3>This Was</h3>
-	      <h3>2¼</h3>
-      <li> 
-		    <img src="images/1968/TyrannosaurusRex1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Tyrannosaurus Rex</h3>
-        <h3>My People Were Fair and Had Sky in Their Hair</h3>
-	      <h3>2¼</h3>
-      <li> 
-		    <img src="images/1968/DionneWarwick1968.jpg" width="100" height="100" alt=""/>
-        <h3>Dionne Warwick</h3>
-        <h3>Dionne Warwick in Valley of the Dolls</h3>
-	      <h3>2</h3>
-      <li> 
-		    <img src="images/1968/DionneWarwick1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Dionne Warwick</h3>
-        <h3>Promises, Promises</h3>
-	      <h3>2</h3>
-      <li> 
-		    <img src="images/1968/FleetwoodMac1968.jpg" width="100" height="100" alt=""/>
-        <h3>Fleetwood Mac</h3>
-        <h3>Peter Green's Fleetwood Mac</h3>
-	      <h3>2</h3>
-      <li> 
-		    <img src="images/1968/DollyParton1968.jpeg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Just Because I'm a Woman</h3>
-	      <h3>2</h3>
-      <li> 
-		    <img src="images/1968/GeorgeHarrison1968.jpg" width="100" height="100" alt=""/>
-        <h3>George Harrison</h3>
-        <h3>Wonderwall Music</h3>
-	      <h3>2</h3>
-      <li> 
-		    <img src="images/1968/BuffaloSpringfield1968.jpg" width="100" height="100" alt=""/>
-        <h3>Buffalo Springfield</h3>
-        <h3>Last Time Around</h3>
-	      <h3>1¾</h3>
-      <li> 
-		<img src="images/1968/VinceGuaraldi1968.jpg" width="100" height="100" alt=""/>
-        <h3>Vince Guaraldi</h3>
-        <h3>Oh, Good Grief!</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1968/Cher1968.jpg" width="100" height="100" alt=""/>
-        <h3>Cher</h3>
-        <h3>Backstage</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1968/TomJones1968.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>Delilah</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1968/FleetwoodMac1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Fleetwood Mac</h3>
-        <h3>Mr. Wonderful</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1968/StevieWonder1968.jpg" width="100" height="100" alt=""/>
-        <h3>Stevie Wonder</h3>
-        <h3>For Once in My Life</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1968/AdrianoCelentano1968.jpg" width="100" height="100" alt=""/>
-        <h3>Adriano Celentano</h3>
-        <h3>Azzurro</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1968/TomJones1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>Help Yourself</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1968/TonyBennett1968.jpg" width="100" height="100" alt=""/>
-        <h3>Tony Bennett</h3>
-        <h3>Snowfall: The Tony Bennett Christmas Album</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1968/StevieWonder1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>Stevie Wonder</h3>
-        <h3>Eivets Rednow</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1968/TheMothersOfInvention1968-2.jpg" width="100" height="100" alt=""/>
-        <h3>The Mothers of Invention</h3>
-        <h3>Cruising With Ruben & The Jets</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1968/YokoOno1968.jpeg" width="100" height="100" alt=""/>
-        <h3>Yoko Ono / John Lennon</h3>
-        <h3>Unfinished Music No. 1: Two Virgins</h3>
-	    <h3>0</h3>
-      </li><!-- Repeat for the rest of the albums -->
-    </ol>
-  </main>
-    
+<main><ol>
+<h1>1968: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1968/TheVelvetUnderground1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Velvet Underground</h3>
+    <h3>White Light / White Heat</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1968/SilverApples1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Silver Apples</h3>
+    <h3>Silver Apples</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1968/JimiHendrix1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Jimi Hendrix Experience</h3>
+    <h3>Electric Ladyland</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/1968/VanMorrison1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Astral Weeks</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1968/PinkFloyd1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Pink Floyd</h3>
+    <h3>A Saucerful of Secrets</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1968/SilverApples1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Silver Apples</h3>
+    <h3>Contact</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1968/TheRollingStones1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Rolling Stones</h3>
+    <h3>Beggars Banquet</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1968/TheZombies1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Zombies</h3>
+    <h3>Odessey and Oracle</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1968/OsMutantes1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Os Mutantes</h3>
+    <h3>Os Mutantes</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1968/SergeGainsbourg1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Serge Gainsbourg</h3>
+    <h3>Initials B.B.</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1968/TheMothersOfInvention1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Mothers of Invention</h3>
+    <h3>We're Only in It for the Money</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1968/SimonAndGarfunkel1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Simon & Garfunkel</h3>
+    <h3>Bookends</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1968/FrankZappa1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Frank Zappa</h3>
+    <h3>Lumpy Gravy</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1968/CreedenceClearwaterRevival1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Creedence Clearwater Revival</h3>
+    <h3>Creedence Clearwater Revival</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1968/FrancoiseHardy1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Françoise Hardy</h3>
+    <h3>Françoise Hardy (Comment te Dire Adieu)</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1968/Nico1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Nico</h3>
+    <h3>The Marble Index</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1968/JoniMitchell1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Joni Mitchell</h3>
+    <h3>Joni Mitchell (Song to a Seagull)</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1968/Cream1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Cream</h3>
+    <h3>Wheels of Fire</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1968/MilesDavis1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Miles Davis</h3>
+    <h3>Nefertiti</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1968/CaetanoVeloso1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Caetano Veloso</h3>
+    <h3>Caetano Veloso</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1968/NancySinatra1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Nancy Sinatra / Lee Hazlewood</h3>
+    <h3>Nancy & Lee</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1968/UnitedStatesOfAmerica1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The United States of America</h3>
+    <h3>The United States of America</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1968/HerbieHancock1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Herbie Hancock</h3>
+    <h3>Speak Like a Child</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1968/ScottWalker1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Scott Walker</h3>
+    <h3>Scott 2</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1968/TheBeatles1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Beatles</h3>
+    <h3>The Beatles (White Album)</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1968/CaptainBeefheart1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Captain Beefheart & His Magic Band</h3>
+    <h3>Strictly Personal</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1968/DeepPurple1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Deep Purple</h3>
+    <h3>Shades of Deep Purple</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1968/TheDoors1968.jpg" alt="" /></div><div class="album-text">
+    <h3>The Doors</h3>
+    <h3>Waiting for the Sun</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1968/DustySpringfield1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Dusty Springfield</h3>
+    <h3>Dusty... Definitely</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1968/JohnColtrane1968.jpg" alt="" /></div><div class="album-text">
+    <h3>John Coltrane / Alice Coltrane</h3>
+    <h3>Cosmic Music</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1968/TownesVanZandt1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Townes Van Zandt</h3>
+    <h3>For the Sake of the Song</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1968/FairportConvention1968.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fairport Convention</h3>
+    <h3>Fairport Convention</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1968/JacquesDutronc1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Jacques Dutronc</h3>
+    <h3>Jacques Dutronc</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1968/MilesDavis1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Miles Davis</h3>
+    <h3>Miles in the Sky</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1968/WesMontgomery1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Wes Montgomery</h3>
+    <h3>Down Here on the Ground</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1968/ChicoBuarque1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Chico Buarque</h3>
+    <h3>Volume 3</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1968/JohnColtrane1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>John Coltrane</h3>
+    <h3>Om</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1968/FranceGall1968.jpg" alt="" /></div><div class="album-text">
+    <h3>France Gall</h3>
+    <h3>1968</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1968/JeffBeck1968.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jeff Beck</h3>
+    <h3>Truth</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1968/MargoGuryan1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Margo Guryan</h3>
+    <h3>Take a Picture</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1968/TyrannosaurusRex1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Tyrannosaurus Rex</h3>
+    <h3>Prophets, Seers & Sages: The Angels of the Ages</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1968/WesMontgomery1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Wes Montgomery</h3>
+    <h3>Road Song</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1968/WesMontgomery1968-3.jpg" alt="" /></div><div class="album-text">
+    <h3>Wes Montgomery</h3>
+    <h3>Willow Weep for Me</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1968/JethroTull1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Jethro Tull</h3>
+    <h3>This Was</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1968/TyrannosaurusRex1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Tyrannosaurus Rex</h3>
+    <h3>My People Were Fair and Had Sky in Their Hair</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1968/DionneWarwick1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Dionne Warwick</h3>
+    <h3>Dionne Warwick in Valley of the Dolls</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1968/DionneWarwick1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Dionne Warwick</h3>
+    <h3>Promises, Promises</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1968/FleetwoodMac1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Fleetwood Mac</h3>
+    <h3>Peter Green's Fleetwood Mac</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1968/DollyParton1968.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Just Because I'm a Woman</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1968/GeorgeHarrison1968.jpg" alt="" /></div><div class="album-text">
+    <h3>George Harrison</h3>
+    <h3>Wonderwall Music</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1968/BuffaloSpringfield1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Buffalo Springfield</h3>
+    <h3>Last Time Around</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1968/VinceGuaraldi1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Vince Guaraldi</h3>
+    <h3>Oh, Good Grief!</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1968/Cher1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Cher</h3>
+    <h3>Backstage</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1968/TomJones1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>Delilah</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1968/FleetwoodMac1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Fleetwood Mac</h3>
+    <h3>Mr. Wonderful</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1968/StevieWonder1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Stevie Wonder</h3>
+    <h3>For Once in My Life</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1968/AdrianoCelentano1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Adriano Celentano</h3>
+    <h3>Azzurro</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1968/TomJones1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>Help Yourself</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1968/TonyBennett1968.jpg" alt="" /></div><div class="album-text">
+    <h3>Tony Bennett</h3>
+    <h3>Snowfall: The Tony Bennett Christmas Album</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1968/StevieWonder1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Stevie Wonder</h3>
+    <h3>Eivets Rednow</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1968/TheMothersOfInvention1968-2.jpg" alt="" /></div><div class="album-text">
+    <h3>The Mothers of Invention</h3>
+    <h3>Cruising With Ruben & The Jets</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0</div>
+  <div class="album-cover"><img src="images/1968/YokoOno1968.jpeg" alt="" /></div><div class="album-text">
+    <h3>Yoko Ono / John Lennon</h3>
+    <h3>Unfinished Music No. 1: Two Virgins</h3>
+    <h3>0</h3>
+      </div></div></li>
+
+</ol></main>
+
+
+<!-- Modal -->
+
+<!--<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div></div> */-->
+
+
   <footer>
-    <p>&copy; 1968 Albums of the Year</p>
-</footer>
+    <p>© 1968 The Key of Life. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    // Show modal with review & rating on album click
+    document.querySelectorAll('.album').forEach(album => {
+      album.addEventListener('click', () => {
+        const review = album.getAttribute('data-review');
+        const rating = album.getAttribute('data-rating');
+        modalText.innerHTML = `<p>${review}</p><p><strong>Rating:</strong> ${rating}</p>`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on clicking close button or outside modal-content
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
