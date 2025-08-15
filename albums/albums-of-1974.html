@@ -1,571 +1,958 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1974 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1973.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1975.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1973.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1975.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1974: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/1974/RobertWyatt1974.jpg" width="100" height="100" alt=""/>
-        <h3>Robert Wyatt</h3>
-        <h3>Rock Bottom</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1974/BrianEno1974.jpg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>Here Come the Warm Jets</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1974/BrianEno1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>Taking Tiger Mountain (By Strategy)</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1974/KingCrimson1974.jpg" width="100" height="100" alt=""/>
-        <h3>King Crimson</h3>
-        <h3>Red</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/1974/Kraftwerk1974.jpg" width="100" height="100" alt=""/>
-        <h3>Kraftwerk</h3>
-        <h3>Autobahn</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/1974/Queen1974.jpg" width="100" height="100" alt=""/>
-        <h3>Queen</h3>
-        <h3>Sheer Heart Attack</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1974/RoxyMusic1974.jpg" width="100" height="100" alt=""/>
-        <h3>Roxy Music</h3>
-        <h3>Country Life</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1974/DavidBowie1974.jpg" width="100" height="100" alt=""/>
-        <h3>David Bowie</h3>
-        <h3>Diamond Dogs</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1974/Can1974.jpg" width="100" height="100" alt=""/>
-        <h3>Can</h3>
-        <h3>Soon Over Babaluma</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1974/Sparks1974.jpg" width="100" height="100" alt=""/>
-        <h3>Sparks</h3>
-        <h3>Kimono My House</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1974/Queen1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Queen</h3>
-        <h3>Queen II</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1974/PopolVuh1974.jpg" width="100" height="100" alt=""/>
-        <h3>Popol Vuh</h3>
-        <h3>Einsjäger & Siebenjäger</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1974/10cc1974.jpg" width="100" height="100" alt=""/>
-        <h3>10cc</h3>
-        <h3>Sheet Music</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1974/TomWaits1974.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Waits</h3>
-        <h3>The Heart of Saturday Night</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1974/StevieWonder1974.jpg" width="100" height="100" alt=""/>
-        <h3>Stevie Wonder</h3>
-        <h3>Fulfillingness' First Finale</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1974/Kiss1974.jpg" width="100" height="100" alt=""/>
-        <h3>Kiss</h3>
-        <h3>Kiss</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1974/SteelyDan1974.jpg" width="100" height="100" alt=""/>
-        <h3>Steely Dan</h3>
-        <h3>Pretzel Logic</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1974/NeilYoung1974.jpg" width="100" height="100" alt=""/>
-        <h3>Neil Young</h3>
-        <h3>On the Beach</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/BigStar1974.jpg" width="100" height="100" alt=""/>
-        <h3>Big Star</h3>
-        <h3>Radio City</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/JohnColtrane1974.jpg" width="100" height="100" alt=""/>
-        <h3>John Coltrane</h3>
-        <h3>Interstellar Space</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/GilScottHeron1974.jpg" width="100" height="100" alt=""/>
-        <h3>Gil Scott-Heron / Brian Jackson</h3>
-        <h3>Winter in America</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/BobbyHumphrey1974.jpg" width="100" height="100" alt=""/>
-        <h3>Bobbi Humphrey</h3>
-        <h3>Blacks and Blues</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/Sweet1974.jpg" width="100" height="100" alt=""/>
-        <h3>Sweet</h3>
-        <h3>Sweet Fanny Adams</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/Abba1974.jpg" width="100" height="100" alt=""/>
-        <h3>ABBA</h3>
-        <h3>Waterloo</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/Funkadelic1974.jpg" width="100" height="100" alt=""/>
-        <h3>Funkadelic</h3>
-        <h3>Standing on the Verge of Getting It On</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1974/Sparks1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Sparks</h3>
-        <h3>Propaganda</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1974/DeepPurple1974.jpg" width="100" height="100" alt=""/>
-        <h3>Deep Purple</h3>
-        <h3>Burn</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1974/Sweet1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Sweet</h3>
-        <h3>Desolation Boulevard</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1974/RobbieBasho1974.jpg" width="100" height="100" alt=""/>
-        <h3>Robbie Basho</h3>
-        <h3>Zarthus</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1974/LeonardCohen1974.jpg" width="100" height="100" alt=""/>
-        <h3>Leonard Cohen</h3>
-        <h3>New Skin for the Old Ceremony</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1974/TangerineDream1974.jpg" width="100" height="100" alt=""/>
-        <h3>Tangerine Dream</h3>
-        <h3>Phaedra</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1974/DollyParton1974.jpg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Jolene</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1974/PharoahSanders1974.jpg" width="100" height="100" alt=""/>
-        <h3>Pharoah Sanders</h3>
-        <h3>Love in Us All</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1974/BobDylan1974.jpg" width="100" height="100" alt=""/>
-        <h3>Bob Dylan</h3>
-        <h3>Planet Waves</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1974/Comus1974.jpg" width="100" height="100" alt=""/>
-        <h3>Comus</h3>
-        <h3>To Keep From Crying</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1974/Slade1974.jpeg" width="100" height="100" alt=""/>
-        <h3>Slade</h3>
-        <h3>Old New Borrowed and Blue</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1974/BukkaWhite1974.jpeg" width="100" height="100" alt=""/>
-        <h3>Bukka White</h3>
-        <h3>Big Daddy</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1974/FelaKuti1974.jpg" width="100" height="100" alt=""/>
-        <h3>Fela Kuti & The Africa 70</h3>
-        <h3>Alagbon Close</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1974/Genesis1974.jpg" width="100" height="100" alt=""/>
-        <h3>Genesis</h3>
-        <h3>The Lamb Lies Down on Broadway</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/JudasPriest1974.jpg" width="100" height="100" alt=""/>
-        <h3>Judas Priest</h3>
-        <h3>Rocka Rolla</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/Scorpions1974.jpg" width="100" height="100" alt=""/>
-        <h3>Scorpions</h3>
-        <h3>Fly to the Rainbow</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1974/SuziQuatro1974.jpeg" width="100" height="100" alt=""/>
-        <h3>Suzi Quatro</h3>
-        <h3>Suzi Quatro</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/Commodores1974.jpg" width="100" height="100" alt=""/>
-        <h3>Commodores</h3>
-        <h3>Machine Gun</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/TheRollingStones1974.jpg" width="100" height="100" alt=""/>
-        <h3>The Rolling Stones</h3>
-        <h3>It's Only Rock 'n' Roll</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/KingCrimson1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>King Crimson</h3>
-        <h3>Starless and Bible Black</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1974/MinnieRipperton1974.jpg" width="100" height="100" alt=""/>
-        <h3>Minnie Riperton</h3>
-        <h3>Perfect Angel</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/Magma1974.jpg" width="100" height="100" alt=""/>
-        <h3>Magma</h3>
-        <h3>Köhntarkösz</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/ChetBaker1974.jpg" width="100" height="100" alt=""/>
-        <h3>Chet Baker</h3>
-        <h3>She Was Too Good to Me</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/MIlesDavis1974.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis</h3>
-        <h3>Big Fun</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/FaniaAllStars1974.jpg" width="100" height="100" alt=""/>
-        <h3>Fania All Stars</h3>
-        <h3>Latin - Soul - Rock</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/Nico1974.jpg" width="100" height="100" alt=""/>
-        <h3>Nico</h3>
-        <h3>The End</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/VanMorrison1974.jpg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Veedon Fleece/h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1974/Yes1974.jpg" width="100" height="100" alt=""/>
-        <h3>Yes</h3>
-        <h3>Relayer</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/EarthWindAndFire1974.jpg" width="100" height="100" alt=""/>
-        <h3>Earth, Wind & Fire</h3>
-        <h3>Open Our Eyes</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/JohnLennon1974.jpg" width="100" height="100" alt=""/>
-        <h3>John Lennon</h3>
-        <h3>Walls and Bridges</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/BryanFerry1974.jpg" width="100" height="100" alt=""/>
-        <h3>Bryan Ferry</h3>
-        <h3>Another Time, Another Place</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/ChicoBuarque1974.jpg" width="100" height="100" alt=""/>
-        <h3>Chico Buarque</h3>
-        <h3>Sinal Fechado</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/Rush1974.jpg" width="100" height="100" alt=""/>
-        <h3>Rush</h3>
-        <h3>Rush</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/LouReed1974.jpg" width="100" height="100" alt=""/>
-        <h3>Lou Reed</h3>
-        <h3>Sally Can't Dance</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1974/Kiss1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Kiss</h3>
-        <h3>Hotter Than Hell</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/DonnaSummer1974.jpg" width="100" height="100" alt=""/>
-        <h3>Donna Summer</h3>
-        <h3>Lady of the Night</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/Aerosmith1974.jpg" width="100" height="100" alt=""/>
-        <h3>Aerosmith</h3>
-        <h3>Get Your Wings</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/CaptainBeefheart1974.jpg" width="100" height="100" alt=""/>
-        <h3>Captain Beefheart & The Magic Band</h3>
-        <h3>Bluejeans & Moonbeams</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/AugustusPablo1974.jpg" width="100" height="100" alt=""/>
-        <h3>Augustus Pablo</h3>
-        <h3>Ital Dub</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/TRex1974.jpg" width="100" height="100" alt=""/>
-        <h3>T. Rex</h3>
-        <h3>Zinc Alloy and the Hidden Riders of Tomorrow</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/Eagles1974.jpg" width="100" height="100" alt=""/>
-        <h3>Eagles</h3>
-        <h3>On the Border</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1974/DeepPurple1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Deep Purple</h3>
-        <h3>Stormbringer</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/DollyParton1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Love Is Like a Butterfly</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/Slade1974-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Slade</h3>
-        <h3>Slade in Flame</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/BillEvans1974.jpg" width="100" height="100" alt=""/>
-        <h3>Bill Evans</h3>
-        <h3>Symbiosis</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/Witch1974.jpg" width="100" height="100" alt=""/>
-        <h3>Witch</h3>
-        <h3>In the Past</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/CliffRichard1974.jpg" width="100" height="100" alt=""/>
-        <h3>Cliff Richard</h3>
-        <h3>The 31st of February Street</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1974/MilesDavis1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis</h3>
-        <h3>Get Up With It</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1974/ThinLizzy1974.jpg" width="100" height="100" alt=""/>
-        <h3>Thin Lizzy</h3>
-        <h3>Night Life</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1974/JethroTull1974.jpg" width="100" height="100" alt=""/>
-        <h3>Jethro Tull</h3>
-        <h3>War Child</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1974/VariousCRC1974.jpeg" width="100" height="100" alt=""/>
-        <h3>Various (CRC)</h3>
-        <h3>The Red Flower of Tachai Blossoms Everywhere</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1974/SuziQuatro1974.jpg" width="100" height="100" alt=""/>
-        <h3>Suzi Quatro</h3>
-        <h3>Quatro</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1974/SoulMedia1974.jpg" width="100" height="100" alt=""/>
-        <h3>Soul Media</h3>
-        <h3>Funky Stuff</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1974/TinaTurner1974.jpg" width="100" height="100" alt=""/>
-        <h3>Tina Turner</h3>
-        <h3>Tina Turns the Country On!</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1974/RingoStarr1974.jpg" width="100" height="100" alt=""/>
-        <h3>Ringo Starr</h3>
-        <h3>Goodnight Vienna</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1974/HallAndOates1974.jpg" width="100" height="100" alt=""/>
-        <h3>Hall & Oates</h3>
-        <h3>War Babies</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1974/MeikoKaji1974.jpg" width="100" height="100" alt=""/>
-        <h3>Meiko Kaji</h3>
-        <h3>Sareyo, Sareyo, Kanashimi no Shirabe</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1974/GeorgeHarrison1974.jpg" width="100" height="100" alt=""/>
-        <h3>George Harrison</h3>
-        <h3>Dark Horse</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1974/RickSpringfield1974.jpg" width="100" height="100" alt=""/>
-        <h3>Rick Springfield</h3>
-        <h3>Mission Magic!</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1974/StasysPovilaitis1974.jpg" width="100" height="100" alt=""/>
-        <h3>Stasys Povilaitis</h3>
-        <h3>Dainuoja Stasys Povilaitis</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1974/FleetwoodMac1974.jpg" width="100" height="100" alt=""/>
-        <h3>Fleetwood Mac</h3>
-        <h3>Heroes Are Hard to Find</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1974/TimBuckley1974.jpg" width="100" height="100" alt=""/>
-        <h3>Tim Buckley</h3>
-        <h3>Look at the Fool</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1974/KCAndTheSunshineBand1974.jpg" width="100" height="100" alt=""/>
-        <h3>KC & The Sunshine Band</h3>
-        <h3>Do It Good</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/EltonJohn1974.jpg" width="100" height="100" alt=""/>
-        <h3>Elton John</h3>
-        <h3>Caribou</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/MomoeYamaguchi1974.jpg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>15 Sai no Theme: Hito Natsu no Keiken</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/MomoeYamaguchi1974-2.jpg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>15 Sai</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/Showaddywaddy1974.jpg" width="100" height="100" alt=""/>
-        <h3>Showaddywaddy</h3>
-        <h3>Showaddywaddy</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/Love1974.jpg" width="100" height="100" alt=""/>
-        <h3>Love</h3>
-        <h3>Reel to Real</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/FrancoiseHardy1974.jpg" width="100" height="100" alt=""/>
-        <h3>Françoise Hardy</h3>
-        <h3>Entr'acte</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/TheOJays1974.jpg" width="100" height="100" alt=""/>
-        <h3>The O'Jays / The Moments</h3>
-        <h3>The O'Jays Meet The Moments</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/MomoeYamaguchi1974-3.jpg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>15 Sai no Theme: Momoe no Kisetsu</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/TomJones1974.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>Somethin' 'Bout You Baby I Like</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/BayCityRollers1974.jpg" width="100" height="100" alt=""/>
-        <h3>Bay City Rollers</h3>
-        <h3>Rollin'</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1974/ScottWalker1974.jpg" width="100" height="100" alt=""/>
-        <h3>Scott Walker</h3>
-        <h3>We Had It All</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1974/REOSpeedwagon1974.jpg" width="100" height="100" alt=""/>
-        <h3>REO Speedwagon</h3>
-        <h3>Lost in a Dream</h3>
-	    <h3>0¾</h3>
-      </li><!-- Repeat for the rest of the albums -->
-    </ol>
-  </main>
-    
+<main><ol>
+<h1>1974: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1974/RobertWyatt1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Robert Wyatt</h3>
+    <h3>Rock Bottom</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1974/BrianEno1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>Here Come the Warm Jets</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1974/BrianEno1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>Taking Tiger Mountain (By Strategy)</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/1974/KingCrimson1974.jpg" alt="" /></div><div class="album-text">
+    <h3>King Crimson</h3>
+    <h3>Red</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/1974/Kraftwerk1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Kraftwerk</h3>
+    <h3>Autobahn</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1974/Queen1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Queen</h3>
+    <h3>Sheer Heart Attack</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1974/RoxyMusic1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Roxy Music</h3>
+    <h3>Country Life</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1974/DavidBowie1974.jpg" alt="" /></div><div class="album-text">
+    <h3>David Bowie</h3>
+    <h3>Diamond Dogs</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1974/Can1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Can</h3>
+    <h3>Soon Over Babaluma</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1974/Sparks1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Sparks</h3>
+    <h3>Kimono My House</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1974/Queen1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Queen</h3>
+    <h3>Queen II</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1974/PopolVuh1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Popol Vuh</h3>
+    <h3>Einsjäger & Siebenjäger</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1974/10cc1974.jpg" alt="" /></div><div class="album-text">
+    <h3>10cc</h3>
+    <h3>Sheet Music</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1974/TomWaits1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Waits</h3>
+    <h3>The Heart of Saturday Night</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1974/StevieWonder1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Stevie Wonder</h3>
+    <h3>Fulfillingness' First Finale</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1974/Kiss1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Kiss</h3>
+    <h3>Kiss</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1974/SteelyDan1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Steely Dan</h3>
+    <h3>Pretzel Logic</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/NeilYoung1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Neil Young</h3>
+    <h3>On the Beach</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/BigStar1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Big Star</h3>
+    <h3>Radio City</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/JohnColtrane1974.jpg" alt="" /></div><div class="album-text">
+    <h3>John Coltrane</h3>
+    <h3>Interstellar Space</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/GilScottHeron1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Gil Scott-Heron / Brian Jackson</h3>
+    <h3>Winter in America</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/BobbyHumphrey1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Bobbi Humphrey</h3>
+    <h3>Blacks and Blues</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/Sweet1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Sweet</h3>
+    <h3>Sweet Fanny Adams</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/Abba1974.jpg" alt="" /></div><div class="album-text">
+    <h3>ABBA</h3>
+    <h3>Waterloo</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1974/Funkadelic1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Funkadelic</h3>
+    <h3>Standing on the Verge of Getting It On</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1974/Sparks1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Sparks</h3>
+    <h3>Propaganda</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1974/DeepPurple1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Deep Purple</h3>
+    <h3>Burn</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1974/Sweet1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Sweet</h3>
+    <h3>Desolation Boulevard</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1974/RobbieBasho1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Robbie Basho</h3>
+    <h3>Zarthus</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1974/LeonardCohen1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Leonard Cohen</h3>
+    <h3>New Skin for the Old Ceremony</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1974/TangerineDream1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Tangerine Dream</h3>
+    <h3>Phaedra</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1974/DollyParton1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Jolene</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1974/PharoahSanders1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Pharoah Sanders</h3>
+    <h3>Love in Us All</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1974/BobDylan1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Bob Dylan</h3>
+    <h3>Planet Waves</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1974/Comus1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Comus</h3>
+    <h3>To Keep From Crying</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1974/Slade1974.jpeg" alt="" /></div><div class="album-text">
+    <h3>Slade</h3>
+    <h3>Old New Borrowed and Blue</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1974/BukkaWhite1974.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bukka White</h3>
+    <h3>Big Daddy</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1974/FelaKuti1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Fela Kuti & The Africa 70</h3>
+    <h3>Alagbon Close</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/Genesis1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Genesis</h3>
+    <h3>The Lamb Lies Down on Broadway</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/JudasPriest1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Judas Priest</h3>
+    <h3>Rocka Rolla</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1974/Scorpions1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Scorpions</h3>
+    <h3>Fly to the Rainbow</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/SuziQuatro1974.jpeg" alt="" /></div><div class="album-text">
+    <h3>Suzi Quatro</h3>
+    <h3>Suzi Quatro</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/Commodores1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Commodores</h3>
+    <h3>Machine Gun</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/TheRollingStones1974.jpg" alt="" /></div><div class="album-text">
+    <h3>The Rolling Stones</h3>
+    <h3>It's Only Rock 'n' Roll</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1974/KingCrimson1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>King Crimson</h3>
+    <h3>Starless and Bible Black</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/MinnieRipperton1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Minnie Riperton</h3>
+    <h3>Perfect Angel</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/Magma1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Magma</h3>
+    <h3>Köhntarkösz</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/ChetBaker1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Chet Baker</h3>
+    <h3>She Was Too Good to Me</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/MIlesDavis1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Miles Davis</h3>
+    <h3>Big Fun</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/FaniaAllStars1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Fania All Stars</h3>
+    <h3>Latin - Soul - Rock</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/Nico1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Nico</h3>
+    <h3>The End</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1974/VanMorrison1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Veedon Fleece</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/Yes1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Yes</h3>
+    <h3>Relayer</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/EarthWindAndFire1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Earth, Wind & Fire</h3>
+    <h3>Open Our Eyes</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/JohnLennon1974.jpg" alt="" /></div><div class="album-text">
+    <h3>John Lennon</h3>
+    <h3>Walls and Bridges</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/BryanFerry1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Bryan Ferry</h3>
+    <h3>Another Time, Another Place</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/ChicoBuarque1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Chico Buarque</h3>
+    <h3>Sinal Fechado</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/ probability: 0.99
+1974/Rush1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Rush</h3>
+    <h3>Rush</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1974/LouReed1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Lou Reed</h3>
+    <h3>Sally Can't Dance</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/Kiss1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Kiss</h3>
+    <h3>Hotter Than Hell</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/DonnaSummer1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Donna Summer</h3>
+    <h3>Lady of the Night</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/Aerosmith1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Aerosmith</h3>
+    <h3>Get Your Wings</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/CaptainBeefheart1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Captain Beefheart & The Magic Band</h3>
+    <h3>Bluejeans & Moonbeams</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/AugustusPablo1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Augustus Pablo</h3>
+    <h3>Ital Dub</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/TRex1974.jpg" alt="" /></div><div class="album-text">
+    <h3>T. Rex</h3>
+    <h3>Zinc Alloy and the Hidden Riders of Tomorrow</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1974/Eagles1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Eagles</h3>
+    <h3>On the Border</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/DeepPurple1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Deep Purple</h3>
+    <h3>Stormbringer</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/DollyParton1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Love Is Like a Butterfly</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/Slade1974-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Slade</h3>
+    <h3>Slade in Flame</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/BillEvans1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans</h3>
+    <h3>Symbiosis</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/Witch1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Witch</h3>
+    <h3>In the Past</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1974/CliffRichard1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Cliff Richard</h3>
+    <h3>The 31st of February Street</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1974/MilesDavis1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Miles Davis</h3>
+    <h3>Get Up With It</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1974/ThinLizzy1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Thin Lizzy</h3>
+    <h3>Night Life</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1974/JethroTull1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Jethro Tull</h3>
+    <h3>War Child</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1974/VariousCRC1974.jpeg" alt="" /></div><div class="album-text">
+    <h3>Various (CRC)</h3>
+    <h3>The Red Flower of Tachai Blossoms Everywhere</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1974/SuziQuatro1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Suzi Quatro</h3>
+    <h3>Quatro</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1974/SoulMedia1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Soul Media</h3>
+    <h3>Funky Stuff</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1974/TinaTurner1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Tina Turner</h3>
+    <h3>Tina Turns the Country On!</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1974/RingoStarr1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Ringo Starr</h3>
+    <h3>Goodnight Vienna</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1974/HallAndOates1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Hall & Oates</h3>
+    <h3>War Babies</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1974/MeikoKaji1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Meiko Kaji</h3>
+    <h3>Sareyo, Sareyo, Kanashimi no Shirabe</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1974/GeorgeHarrison1974.jpg" alt="" /></div><div class="album-text">
+    <h3>George Harrison</h3>
+    <h3>Dark Horse</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1974/RickSpringfield1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Rick Springfield</h3>
+    <h3>Mission Magic!</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1974/StasysPovilaitis1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Stasys Povilaitis</h3>
+    <h3>Dainuoja Stasys Povilaitis</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1974/FleetwoodMac1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Fleetwood Mac</h3>
+    <h3>Heroes Are Hard to Find</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1974/TimBuckley1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Tim Buckley</h3>
+    <h3>Look at the Fool</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/KCAndTheSunshineBand1974.jpg" alt="" /></div><div class="album-text">
+    <h3>KC & The Sunshine Band</h3>
+    <h3>Do It Good</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/EltonJohn1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Elton John</h3>
+    <h3>Caribou</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/MomoeYamaguchi1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>15 Sai no Theme: Hito Natsu no Keiken</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/MomoeYamaguchi1974-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>15 Sai</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/Showaddywaddy1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Showaddywaddy</h3>
+    <h3>Showaddywaddy</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/Love1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Love</h3>
+    <h3>Reel to Real</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/FrancoiseHardy1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Françoise Hardy</h3>
+    <h3>Entr'acte</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/TheOJays1974.jpg" alt="" /></div><div class="album-text">
+    <h3>The O'Jays / The Moments</h3>
+    <h3>The O'Jays Meet The Moments</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/MomoeYamaguchi1974-3.jpg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>15 Sai no Theme: Momoe no Kisetsu</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/TomJones1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>Somethin' 'Bout You Baby I Like</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1974/BayCityRollers1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Bay City Rollers</h3>
+    <h3>Rollin'</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1974/ScottWalker1974.jpg" alt="" /></div><div class="album-text">
+    <h3>Scott Walker</h3>
+    <h3>We Had It All</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1974/REOSpeedwagon1974.jpg" alt="" /></div><div class="album-text">
+    <h3>REO Speedwagon</h3>
+    <h3>Lost in a Dream</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+
+</ol></main>
+
+
+<!-- Modal -->
+
+<!--<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div></div> */-->
+
+
   <footer>
-    <p>&copy; 1974 Albums of the Year</p>
-</footer>
+    <p>© 1974 The Key of Life. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    // Show modal with review & rating on album click
+    document.querySelectorAll('.album').forEach(album => {
+      album.addEventListener('click', () => {
+        const review = album.getAttribute('data-review');
+        const rating = album.getAttribute('data-rating');
+        modalText.innerHTML = `<p>${review}</p><p><strong>Rating:</strong> ${rating}</p>`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on clicking close button or outside modal-content
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
