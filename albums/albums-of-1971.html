@@ -1,471 +1,837 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1971 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1970.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1972.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1970.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1972.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1971: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/1971/Can1971.jpg" width="100" height="100" alt=""/>
-        <h3>Can</h3>
-        <h3>Tago Mago</h3>
-	    <h3>9</h3>
-      <li> 
-		<img src="images/1971/SergeGainsbourg1971.jpg" width="100" height="100" alt=""/>
-        <h3>Serge Gainsbourg</h3>
-        <h3>Histoire de Melody Nelson</h3>
-	    <h3>8½</h3>
-      <li> 
-		<img src="images/1971/DavidBowie1971.jpg" width="100" height="100" alt=""/>
-        <h3>David Bowie</h3>
-        <h3>Hunky Dory</h3>
-	    <h3>8½</h3>
-      <li> 
-		<img src="images/1971/LedZeppelin1971.jpg" width="100" height="100" alt=""/>
-        <h3>Led Zeppelin</h3>
-        <h3>Led Zeppelin IV</h3>
-	    <h3>8½</h3>
-      <li> 
-		<img src="images/1971/JoniMitchell1971.jpg" width="100" height="100" alt=""/>
-        <h3>Joni Mitchell</h3>
-        <h3>Blue</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1971/TRex1971.jpg" width="100" height="100" alt=""/>
-        <h3>T. Rex</h3>
-        <h3>Electric Warrior</h3>
-	    <h3>8¼</h3>
-      <li> 
-		<img src="images/1971/Comus1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Comus</h3>
-        <h3>First Utterance</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1971/Faust1971.jpg" width="100" height="100" alt=""/>
-        <h3>Faust</h3>
-        <h3>Faust</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1971/PinkFloyd1971.jpg" width="100" height="100" alt=""/>
-        <h3>Pink Floyd</h3>
-        <h3>Meddle</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1971/PopolVuh1971.jpg" width="100" height="100" alt=""/>
-        <h3>Popol Vuh</h3>
-        <h3>In den Gärten Pharaos</h3>
-	    <h3>8</h3>
-      <li> 
-		<img src="images/1971/FrancoiseHardy1971.jpg" width="100" height="100" alt=""/>
-        <h3>Françoise Hardy</h3>
-        <h3>Françoise Hardy (La Question)</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1971/Funkadelic1971.jpg" width="100" height="100" alt=""/>
-        <h3>Funkadelic</h3>
-        <h3>Maggot Brain</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1971/SlyAndTheFamilyStone1971.jpg" width="100" height="100" alt=""/>
-        <h3>Sly & The Family Stone</h3>
-        <h3>There's a Riot Goin' On</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/1971/BlackSabbath1971.jpg" width="100" height="100" alt=""/>
-        <h3>Black Sabbath</h3>
-        <h3>Master of Reality</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1971/MarvinGaye1971.jpg" width="100" height="100" alt=""/>
-        <h3>Marvin Gaye</h3>
-        <h3>What's Going On</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1971/CaetanoVeloso1971.jpg" width="100" height="100" alt=""/>
-        <h3>Caetano Veloso</h3>
-        <h3>Caetano Veloso</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1971/Yes1971.jpg" width="100" height="100" alt=""/>
-        <h3>Yes</h3>
-        <h3>Fragile</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1971/Genesis1971.jpg" width="100" height="100" alt=""/>
-        <h3>Genesis</h3>
-        <h3>Nursery Cryme</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1971/KingCrimson1971.jpg" width="100" height="100" alt=""/>
-        <h3>King Crimson</h3>
-        <h3>Islands</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1971/ChicoBuarque1971.jpg" width="100" height="100" alt=""/>
-        <h3>Chico Buarque</h3>
-        <h3>Construção</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1971/CaptainBeefheart1971.jpg" width="100" height="100" alt=""/>
-        <h3>Captain Beefheart & His Magic Band</h3>
-        <h3>Mirror Man</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1971/AliceColtrane1971.jpg" width="100" height="100" alt=""/>
-        <h3>Alice Coltrane / Pharoah Sanders</h3>
-        <h3>Journey in Satchidananda</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1971/GilScottHeron1971.jpg" width="100" height="100" alt=""/>
-        <h3>Gil Scott-Heron</h3>
-        <h3>Pieces of a Man</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1971/DavidBowie1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>David Bowie</h3>
-        <h3>The Man Who Sold the World</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1971/JohnColtrane1971.jpg" width="100" height="100" alt=""/>
-        <h3>John Coltrane</h3>
-        <h3>Sun Ship</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1971/EltonJohn1971.jpg" width="100" height="100" alt=""/>
-        <h3>Elton John</h3>
-        <h3>Madman Across the Water</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1971/TheRollingStones1971.jpg" width="100" height="100" alt=""/>
-        <h3>The Rolling Stones</h3>
-        <h3>Sticky Fingers</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1971/LeonardCohen1971.jpg" width="100" height="100" alt=""/>
-        <h3>Leonard Cohen</h3>
-        <h3>Songs of Love and Hate</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1971/JethroTull1971.jpg" width="100" height="100" alt=""/>
-        <h3>Jethro Tull</h3>
-        <h3>Aqualung</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1971/TheDoors1971.jpg" width="100" height="100" alt=""/>
-        <h3>The Doors</h3>
-        <h3>L.A. Woman</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1971/CaroleKing1971.jpg" width="100" height="100" alt=""/>
-        <h3>Carole King</h3>
-        <h3>Tapestry</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1971/JohnLennon1971.jpg" width="100" height="100" alt=""/>
-        <h3>John Lennon</h3>
-        <h3>Imagine</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1971/PharoahSanders1971.jpg" width="100" height="100" alt=""/>
-        <h3>Pharoah Sanders</h3>
-        <h3>Thembi</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1971/TheWho1971.jpg" width="100" height="100" alt=""/>
-        <h3>The Who</h3>
-        <h3>Who's Next</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1971/Yes1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>Yes</h3>
-        <h3>The Yes Album</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1971/PaulMcCartney1971.jpg" width="100" height="100" alt=""/>
-        <h3>Paul McCartney / Linda McCartney</h3>
-        <h3>Ram</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1971/EarthWindAndFire1971.jpg" width="100" height="100" alt=""/>
-        <h3>Earth, Wind & Fire</h3>
-        <h3>Earth, Wind & Fire</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1971/VanMorrison1971.jpg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Tupelo Honey</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1971/MilesDavis1971.jpg" width="100" height="100" alt=""/>
-        <h3>Miles Davis</h3>
-        <h3>A Tribute to Jack Johnson</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1971/Magma1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Magma</h3>
-        <h3>1001° Centigrades</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1971/HerbieHancock1971.jpg" width="100" height="100" alt=""/>
-        <h3>Herbie Hancock</h3>
-        <h3>Mwandishi</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1971/EnnioMorricone1971.jpg" width="100" height="100" alt=""/>
-        <h3>Ennio Morricone</h3>
-        <h3>Giù la Testa</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1971/AliceCooper1971.jpg" width="100" height="100" alt=""/>
-        <h3>Alice Cooper</h3>
-        <h3>Love It to Death</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1971/DollyParton1971.jpg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Coat of Many Colors</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/JeffBeck1971.jpg" width="100" height="100" alt=""/>
-        <h3>Jeff Beck Group</h3>
-        <h3>Rough and Ready</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/TangerineDream1971.jpg" width="100" height="100" alt=""/>
-        <h3>Tangerine Dream</h3>
-        <h3>Alpha Centauri</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/Wings1971.jpg" width="100" height="100" alt=""/>
-        <h3>Wings</h3>
-        <h3>Wild Life</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/AliceCooper1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>Alice Cooper</h3>
-        <h3>Killer</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/FairportConvention1971-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Fairport Convention</h3>
-        <h3>"Babbacombe" Lee</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/RobbieBasho1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Robbie Băsho</h3>
-        <h3>Song of the Stallion</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/FairportConvention1971.jpg" width="100" height="100" alt=""/>
-        <h3>Fairport Convention</h3>
-        <h3>Angel Delight</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1971/Halfnelson1971.jpg" width="100" height="100" alt=""/>
-        <h3>Halfnelson</h3>
-        <h3>Halfnelson</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1971/DeepPurple1971.jpg" width="100" height="100" alt=""/>
-        <h3>Deep Purple</h3>
-        <h3>Fireball</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1971/FleetwoodMac1971.jpg" width="100" height="100" alt=""/>
-        <h3>Fleetwood Mac</h3>
-        <h3>Future Games</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1971/TheDoors1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>The Doors</h3>
-        <h3>Other Voices</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1971/MC51971.jpg" width="100" height="100" alt=""/>
-        <h3>MC5</h3>
-        <h3>High Time</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1971/TheLastPoets1971.jpg" width="100" height="100" alt=""/>
-        <h3>The Last Poets</h3>
-        <h3>This Is Madness</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1971/PieroUmiliani1971.jpg" width="100" height="100" alt=""/>
-        <h3>Piero Umiliani</h3>
-        <h3>La Ragazza dalla Pelle di Luna</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1971/Sweet1971.jpg" width="100" height="100" alt=""/>
-        <h3>Sweet</h3>
-        <h3>Funny How Sweet Co-Co Can Be</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1971/BillEvans1971.jpg" width="100" height="100" alt=""/>
-        <h3>Bill Evans</h3>
-        <h3>The Bill Evans Album</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1971/Niagara1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Niagara</h3>
-        <h3>Niagara</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1971/EarthWindAndFire1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>Earth, Wind & Fire</h3>
-        <h3>The Need of Love</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1971/ThinLizzy1971.jpg" width="100" height="100" alt=""/>
-        <h3>Thin Lizzy</h3>
-        <h3>Thin Lizzy</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1971/BillEvans1971-2.jpg" width="100" height="100" alt=""/>
-        <h3>Bill Evans</h3>
-        <h3>From Left to Right</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1971/KimMinGi1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Kim Min-Gi</h3>
-        <h3>Kim Min-Gi</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/DaevidAllen1971.jpg" width="100" height="100" alt=""/>
-        <h3>Daevid Allen</h3>
-        <h3>Banana Moon</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/StevieWonder1971.jpg" width="100" height="100" alt=""/>
-        <h3>Stevie Wonder</h3>
-        <h3>Where I'm Coming From</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/Rodriguez1971.jpg" width="100" height="100" alt=""/>
-        <h3>Rodriguez</h3>
-        <h3>Coming From Reality</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/GilbertOSullivan1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Gilbert O'Sullivan</h3>
-        <h3>Himself</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/Cher1971.jpg" width="100" height="100" alt=""/>
-        <h3>Cher</h3>
-        <h3>Gypsys, Tramps & Thieves</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/DollyParton1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Joshua</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1971/CarlosParedes1971.jpg" width="100" height="100" alt=""/>
-        <h3>Carlos Paredes</h3>
-        <h3>Movimento Perpétuo</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1971/TuckerZimmerman1971.jpg" width="100" height="100" alt=""/>
-        <h3>Tucker Zimmerman</h3>
-        <h3>Tucker Zimmerman</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1971/JohnnyCash1971.jpg" width="100" height="100" alt=""/>
-        <h3>Johnny Cash</h3>
-        <h3>Man in Black</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1971/TomJones1971.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>She's a Lady</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1971/FrankZappa1971.jpg" width="100" height="100" alt=""/>
-        <h3>Frank Zappa</h3>
-        <h3>200 Motels</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1971/REOSpeedwagon1971.jpg" width="100" height="100" alt=""/>
-        <h3>REO Speedwagon</h3>
-        <h3>REO Speedwagon</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1971/MeatLoaf1971.jpg" width="100" height="100" alt=""/>
-        <h3>Stoney & Meatloaf</h3>
-        <h3>Stoney and Meatloaf</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1971/ReikoIke1971.jpeg" width="100" height="100" alt=""/>
-        <h3>Reiko Ike</h3>
-        <h3>Koukotsu no Sekai</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1971/TheOJays1971.jpg" width="100" height="100" alt=""/>
-        <h3>The O'Jays</h3>
-        <h3>Super Bad</h3>
-	    <h3>0¾</h3>
-      </li><!-- Repeat for the rest of the albums -->
-    </ol>
-  </main>
-    
+<main><ol>
+<h1>1971: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">9</div>
+  <div class="album-cover"><img src="images/1971/Can1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Can</h3>
+    <h3>Tago Mago</h3>
+    <h3>9</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8½</div>
+  <div class="album-cover"><img src="images/1971/SergeGainsbourg1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Serge Gainsbourg</h3>
+    <h3>Histoire de Melody Nelson</h3>
+    <h3>8½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8½</div>
+  <div class="album-cover"><img src="images/1971/DavidBowie1971.jpg" alt="" /></div><div class="album-text">
+    <h3>David Bowie</h3>
+    <h3>Hunky Dory</h3>
+    <h3>8½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8½</div>
+  <div class="album-cover"><img src="images/1971/LedZeppelin1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Led Zeppelin</h3>
+    <h3>Led Zeppelin IV</h3>
+    <h3>8½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1971/JoniMitchell1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Joni Mitchell</h3>
+    <h3>Blue</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8¼</div>
+  <div class="album-cover"><img src="images/1971/TRex1971.jpg" alt="" /></div><div class="album-text">
+    <h3>T. Rex</h3>
+    <h3>Electric Warrior</h3>
+    <h3>8¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1971/Comus1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Comus</h3>
+    <h3>First Utterance</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1971/Faust1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Faust</h3>
+    <h3>Faust</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1971/PinkFloyd1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Pink Floyd</h3>
+    <h3>Meddle</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">8</div>
+  <div class="album-cover"><img src="images/1971/PopolVuh1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Popol Vuh</h3>
+    <h3>In den Gärten Pharaos</h3>
+    <h3>8</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1971/FrancoiseHardy1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Françoise Hardy</h3>
+    <h3>Françoise Hardy (La Question)</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1971/Funkadelic1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Funkadelic</h3>
+    <h3>Maggot Brain</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/1971/SlyAndTheFamilyStone1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Sly & The Family Stone</h3>
+    <h3>There's a Riot Goin' On</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1971/BlackSabbath1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Black Sabbath</h3>
+    <h3>Master of Reality</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1971/MarvinGaye1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Marvin Gaye</h3>
+    <h3>What's Going On</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1971/CaetanoVeloso1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Caetano Veloso</h3>
+    <h3>Caetano Veloso</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1971/Yes1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Yes</h3>
+    <h3>Fragile</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1971/Genesis1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Genesis</h3>
+    <h3>Nursery Cryme</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1971/KingCrimson1971.jpg" alt="" /></div><div class="album-text">
+    <h3>King Crimson</h3>
+    <h3>Islands</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1971/ChicoBuarque1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Chico Buarque</h3>
+    <h3>Construção</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1971/CaptainBeefheart1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Captain Beefheart & His Magic Band</h3>
+    <h3>Mirror Man</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1971/AliceColtrane1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Alice Coltrane / Pharoah Sanders</h3>
+    <h3>Journey in Satchidananda</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1971/GilScottHeron1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Gil Scott-Heron</h3>
+    <h3>Pieces of a Man</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1971/DavidBowie1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>David Bowie</h3>
+    <h3>The Man Who Sold the World</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1971/JohnColtrane1971.jpg" alt="" /></div><div class="album-text">
+    <h3>John Coltrane</h3>
+    <h3>Sun Ship</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1971/EltonJohn1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Elton John</h3>
+    <h3>Madman Across the Water</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1971/TheRollingStones1971.jpg" alt="" /></div><div class="album-text">
+    <h3>The Rolling Stones</h3>
+    <h3>Sticky Fingers</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1971/LeonardCohen1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Leonard Cohen</h3>
+    <h3>Songs of Love and Hate</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1971/JethroTull1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Jethro Tull</h3>
+    <h3>Aqualung</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1971/TheDoors1971.jpg" alt="" /></div><div class="album-text">
+    <h3>The Doors</h3>
+    <h3>L.A. Woman</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1971/CaroleKing1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Carole King</h3>
+    <h3>Tapestry</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1971/JohnLennon1971.jpg" alt="" /></div><div class="album-text">
+    <h3>John Lennon</h3>
+    <h3>Imagine</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1971/PharoahSanders1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Pharoah Sanders</h3>
+    <h3>Thembi</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1971/TheWho1971.jpg" alt="" /></div><div class="album-text">
+    <h3>The Who</h3>
+    <h3>Who's Next</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1971/Yes1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Yes</h3>
+    <h3>The Yes Album</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1971/PaulMcCartney1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Paul McCartney / Linda McCartney</h3>
+    <h3>Ram</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1971/EarthWindAndFire1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Earth, Wind & Fire</h3>
+    <h3>Earth, Wind & Fire</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1971/VanMorrison1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Tupelo Honey</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1971/MilesDavis1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Miles Davis</h3>
+    <h3>A Tribute to Jack Johnson</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1971/Magma1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Magma</h3>
+    <h3>1001° Centigrades</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1971/HerbieHancock1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Herbie Hancock</h3>
+    <h3>Mwandishi</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1971/EnnioMorricone1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Ennio Morricone</h3>
+    <h3>Giù la Testa</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1971/AliceCooper1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Alice Cooper</h3>
+    <h3>Love It to Death</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/DollyParton1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Coat of Many Colors</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/JeffBeck1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Jeff Beck Group</h3>
+    <h3>Rough and Ready</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/TangerineDream1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Tangerine Dream</h3>
+    <h3>Alpha Centauri</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/Wings1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Wings</h3>
+    <h3>Wild Life</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/AliceCooper1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Alice Cooper</h3>
+    <h3>Killer</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/FairportConvention1971-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fairport Convention</h3>
+    <h3>"Babbacombe" Lee</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/RobbieBasho1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Robbie Băsho</h3>
+    <h3>Song of the Stallion</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1971/FairportConvention1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Fairport Convention</h3>
+    <h3>Angel Delight</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1971/Halfnelson1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Halfnelson</h3>
+    <h3>Halfnelson</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1971/DeepPurple1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Deep Purple</h3>
+    <h3>Fireball</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1971/FleetwoodMac1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Fleetwood Mac</h3>
+    <h3>Future Games</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1971/TheDoors1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>The Doors</h3>
+    <h3>Other Voices</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1971/MC51971.jpg" alt="" /></div><div class="album-text">
+    <h3>MC5</h3>
+    <h3>High Time</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1971/TheLastPoets1971.jpg" alt="" /></div><div class="album-text">
+    <h3>The Last Poets</h3>
+    <h3>This Is Madness</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1971/PieroUmiliani1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Piero Umiliani</h3>
+    <h3>La Ragazza dalla Pelle di Luna</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1971/Sweet1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Sweet</h3>
+    <h3>Funny How Sweet Co-Co Can Be</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1971/BillEvans1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans</h3>
+    <h3>The Bill Evans Album</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1971/Niagara1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Niagara</h3>
+    <h3>Niagara</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1971/EarthWindAndFire1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Earth, Wind & Fire</h3>
+    <h3>The Need of Love</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1971/ThinLizzy1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Thin Lizzy</h3>
+    <h3>Thin Lizzy</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1971/BillEvans1971-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans</h3>
+    <h3>From Left to Right</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/KimMinGi1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kim Min-Gi</h3>
+    <h3>Kim Min-Gi</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/DaevidAllen1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Daevid Allen</h3>
+    <h3>Banana Moon</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/StevieWonder1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Stevie Wonder</h3>
+    <h3>Where I'm Coming From</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/Rodriguez1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Rodriguez</h3>
+    <h3>Coming From Reality</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/GilbertOSullivan1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gilbert O'Sullivan</h3>
+    <h3>Himself</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/Cher1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Cher</h3>
+    <h3>Gypsys, Tramps & Thieves</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1971/DollyParton1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Joshua</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1971/CarlosParedes1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Carlos Paredes</h3>
+    <h3>Movimento Perpétuo</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1971/TuckerZimmerman1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Tucker Zimmerman</h3>
+    <h3>Tucker Zimmerman</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1971/JohnnyCash1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Johnny Cash</h3>
+    <h3>Man in Black</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1971/TomJones1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>She's a Lady</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1971/FrankZappa1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Frank Zappa</h3>
+    <h3>200 Motels</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1971/REOSpeedwagon1971.jpg" alt="" /></div><div class="album-text">
+    <h3>REO Speedwagon</h3>
+    <h3>REO Speedwagon</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1971/MeatLoaf1971.jpg" alt="" /></div><div class="album-text">
+    <h3>Stoney & Meatloaf</h3>
+    <h3>Stoney and Meatloaf</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1971/ReikoIke1971.jpeg" alt="" /></div><div class="album-text">
+    <h3>Reiko Ike</h3>
+    <h3>Koukotsu no Sekai</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1971/TheOJays1971.jpg" alt="" /></div><div class="album-text">
+    <h3>The O'Jays</h3>
+    <h3>Super Bad</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+
+</ol></main>
+
+
+<!-- Modal -->
+
+<!--<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div></div> */-->
+
+
   <footer>
-    <p>&copy; 1971 Albums of the Year</p>
-</footer>
+    <p>© 1971 The Key of Life. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    // Show modal with review & rating on album click
+    document.querySelectorAll('.album').forEach(album => {
+      album.addEventListener('click', () => {
+        const review = album.getAttribute('data-review');
+        const rating = album.getAttribute('data-rating');
+        modalText.innerHTML = `<p>${review}</p><p><strong>Rating:</strong> ${rating}</p>`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on clicking close button or outside modal-content
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
