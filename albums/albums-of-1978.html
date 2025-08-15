@@ -1,826 +1,1263 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Albums of the Year</title>
-    <title>Image to the Left of Text</title>
-      <style>
-        img {
-          float: left;
-          margin-right: 20px;
-        }
-		  
-	  </style>
-	<title>Font Size</title>
-      <style>
-        body {
-          font-size: 16px;
-        }
-      
-        h3 {
-          font-size: 20px;
-        }
-      
-        h2 {
-          font-size: 16px;
-        }
-		  
-        h1 {
-		  font-size: 30px; 
-	    }
-		  
-      </style>
-    <title>Reducing Line Spacing</title>
-      <style>
- 	    h3 {
-          line-height: 0.8;
-        }
-      </style>
-	<title>Changing Typeface</title>
-      <style>
-        h1, h2, h3 {
-          font-family: Avenir Next Cyr, sans-serif;
-        }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>1978 Albums of the Year</title>
+  <style>
 
-      </style>
-  </head>
-<body>
-<header>
-      <h1>Albums of the Year</h1>
-      <nav>
-        <ul>
-          <li><a href="#"><a href="../index.html">Home</a></a></li>
-          <li><a href="#"><a href="albums-of-1977.html">Previous Year</a></a></li>
-          <li><a href="#"><a href="albums-of-1979.html">Next Year</a></a></li>
-        </ul>
-      </nav>
-  </header>
+@keyframes backgroundColorShift {
+  0%, 100% {
+    background-color: #06402B; /* dark green */
+  }
+  50% {
+    background-color: #650303; /* dark red */
+  }
+}
+body {
+  font-size: 16px;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+  font-weight: 300;
+  margin: 0;
+  padding: 0 20px;
+  background-color: #255;
+  animation: backgroundColorShift 10s ease-in-out infinite alternate;
+  color: #eee;
+}
+
+.site-title {
+  text-align: center;
+  font-size: 40px;
+  margin: 0 0 20px 0;
+  font-weight: bold;
+  font-style: normal;
+}
+
+main ol {
+  list-style-type: none;
+  list-style-position: outside;
+  counter-reset: album-counter;
+  padding-left: 0;
+  margin: auto;
+  max-width: 1000px;
+}
+
+main ol > li {
+  counter-increment: album-counter;
+  position: relative;
+  padding-left: 40px; 
+}
+
+main ol > li::before {
+  content: counter(album-counter) ".";
+  position: absolute;
+  left: 10px;
+  top: -0px; /* adjust vertical positioning here */
+  font-size: 14px;
+  color: #ccc;
+  font-weight: initial;
+}
+
+ol > li:last-child .album {
+  height: 146px;
+}
+
+header h1:not(.site-title) {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 5px;
+  font-style: normal;
+  font-weight: 300;
+}
+
+footer {
+  text-align: center;
+  margin: 60px 0 40px;
+  font-style: italic;
+  font-weight: 300;
+  color: #ccc;
+}
+
+nav {
+  text-align: center;
+  margin-top: 30px;
+  margin-bottom: 80px;
+}
+
+nav a {
+  display: block;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 5px 0;
+  color: #ccc;
+  font-style: italic;
+  font-weight: 300;
+}
+
+main h1 {
+  text-align: center;
+  margin-top: -60px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-style: oblique;
+  font-weight: 300;
+}
+
+main ol {
+  padding-left: 0;
+  max-width: 900px; /* make the boxes wider without messing up the 'ol' auto-numbering */
+  margin: auto;
+  position: relative;
+}
+
+.album { /* ALBUM BOX SETTINGS */
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: -55px;
+  padding: 12px 20px;
+  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
+  gap: 24px;                       /* gap between the album cover and the text to the right of it */
+  height: 100px;                   /* the height of the unhovered box */
+  overflow: hidden;                /* hides the text that overflows the box */
+  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  position: relative;
+  background-color: #111;          /* changes the colour of the unhovered box */
+  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  z-index: 1;
+  width: 100%;                     /* the width of the album container box */
+  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  box-sizing: border-box;
+  transition: 
+    height 1s ease, /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+}
+
+.album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
+  height: 146px;                                        /* the height of the hovered box */
+  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  z-index: 10;
+  box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
+  background-color: #333;                               /* changes the colour of the hovered box */
+}
+
+.album-cover { /* ALBUM IMAGE POSITIONING IN THE BOX */
+  position: relative;
+}
+.album img { /* ALBUM IMAGE SETTINGS */
+  width: 120px; /* sets the image's horizontal size */
+  height: 120px; /* sets the image's vertical size */
+  border-radius: 12px; /* rounds the corners for a soft vignette effect */
+  transition: /* smoothly animates size/transform changes */
+    width 0.4s ease,
+    height 0.4s ease,
+    transform 0.4s ease;
+  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+}
+.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+}
+
+.album-rating {
+  position: absolute;
+  top: 12px;
+  left: 20px;
+  background: rgba(0, 0, 0, 0.7);
+  padding: 4px 10px;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 6px;
+  font-weight: bold;
+  z-index: 5;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+}
+
+.album-text {
+  flex-grow: 1;
+  font-style: italic;
+  font-weight: 300;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 16px;                          /* change the size of unhovered text in the album box */
+  user-select: none;
+  line-height: 1;
+  transition: all 0.4s ease;
+}
+
+.album:hover .album-text {
+  white-space: normal;
+  font-size: 18px;                          /* change the size of hovered text in the album box*/
+  line-height: 1;
+  transform: translateX(10px);
+  text-overflow: unset;
+}
+
+.album-text h3 {
+  margin: 0 0 14px 0;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.site-banner {
+  background-color: rgba(0, 0, 0, 0.1);  /* background colour & transparency */
+  color: #fff;                           /* white text */
+  padding: 0px 0;                          /* top/bottom spacing */
+  text-align: center;                      /* center the title */
+  border-bottom: 1px solid #242424;      /* subtle line under banner */
+  position: sticky;
+  top: 10;
+  z-index: 100;
+  width: 100%;                             /* ensures background spans full page */
+}
+
+.site-title {
+  margin: 0;
+  font-size: 36px;
+  font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
+  font-style: normal;
+}
+
+.nav-links { /* LINK TO OTHER YEARS SETTINGS */
+  list-style-type: none;     /* remove bullet points */
+  padding-left: 0;           /* remove left padding */
+  margin-left: 0;            /* remove left margin if any */
+  display: flex;             /* makes children line up horizontally */
+  justify-content: center;   /* centers the links */
+  gap: 120px;                /* space between links */
+  margin-top: -20px;         /* remove any top margin */
+}
+.nav-links a { /* LINK TO OTHER YEARS SETTINGS */
+  display: inline-block;                   /* make the link behave like a box */
+  padding: 4px 8px;                        /* space inside the box */
+  border: 1px solid #242424;             /* border color */
+  border-radius: 1px;                      /* rounded corners */
+  background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
+  color: #ccc;                             /* text color */
+  border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+  text-decoration: none;                   /* remove underline */
+  transition: background-color 2s, border-color 1s, color 0.3s;
+}
+.nav-links a:hover {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
+  background-color: #444;                            /* highlight on hover */
+  border-color: #ccc;
+  color: #fff;
+}
+
+<!-- TOOLS FOR THE CLICKABLE COMMENT BOX -->
+/*.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.75);
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+}
+.modal-overlay.active {
+  display: flex;
+}
+.modal-content {
+  background: #111;
+  padding: 20px;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 10px;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+  user-select: none;
+}
+.modal-close:hover {
+  color: #fff;
+} */
+
+</style></head><body>
+
+<header><div class="site-banner"><h1 class="site-title">The Key of Life</h1></div>
+<nav><ul class="nav-links">
+  <li><a href="../index.html">Home</a></a></li>
+  <li><a href="albums-of-1977.html">Previous Year</a></a></li>
+  <li><a href="albums-of-1979.html">Next Year</a></a></li>
+</ul></nav></header>
     
-  <main>
-    <h1>1978: Albums of the Year</h1>
-    <ol>
-      <li> 
-		<img src="images/1978/KateBush1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Kate Bush</h3>
-        <h3>The Kick Inside</h3>
-	    <h3>9</h3>
-      <li> 
-		<img src="images/1978/Wire1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Wire</h3>
-        <h3>Chairs Missing</h3>
-	    <h3>7¾</h3>
-      <li> 
-		<img src="images/1978/Rush1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Rush</h3>
-        <h3>Hemispheres</h3>
-	    <h3>7½</h3>
-      <li> 
-		<img src="images/1978/ElvisCostello1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Elvis Costello</h3>
-        <h3>This Year's Model</h3>
-	    <h3>7¼</h3>
-      <li> 
-		<img src="images/1978/Blondie1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Blondie</h3>
-        <h3>Parallel Lines</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1978/BruceSpringsteen1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Bruce Springsteen</h3>
-        <h3>Darkness on the Edge of Town</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1978/BrianEno1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>Ambient 1: Music for Airports</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1978/TalkingHeads1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Talking Heads</h3>
-        <h3>More Songs About Buildings and Food</h3>
-	    <h3>7</h3>
-      <li> 
-		<img src="images/1978/Chic1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Chic</h3>
-        <h3>C'est Chic</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1978/Kraftwerk1978.jpg" width="100" height="100" alt=""/>
-        <h3>Kraftwerk</h3>
-        <h3>The Man-Machine</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1978/ThePolice1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Police</h3>
-        <h3>Outlandos d'Amour</h3>
-	    <h3>6¾</h3>
-      <li> 
-		<img src="images/1978/TheCars1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Cars</h3>
-        <h3>The Cars</h3>
-	    <h3>6½</h3>
-      <li> 
-		<img src="images/1978/PublicImageLtd1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Public Image Ltd</h3>
-        <h3>Public Image</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1978/YellowMagicOrchestra1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Yellow Magic Orchestra</h3>
-        <h3>Yellow Magic Orchestra</h3>
-	    <h3>6¼</h3>
-      <li> 
-		<img src="images/1978/TomWaits1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Waits</h3>
-        <h3>Blue Valentine</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1978/DireStraits1978.jpg" width="100" height="100" alt=""/>
-        <h3>Dire Straits</h3>
-        <h3>Dire Straits</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1978/Blondie1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Blondie</h3>
-        <h3>Plastic Letters</h3>
-	    <h3>6</h3>
-      <li> 
-		<img src="images/1978/RobbieBasho1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Robbie Basho</h3>
-        <h3>Visions of the Country</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1978/KateBush1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Kate Bush</h3>
-        <h3>Lionheart</h3>
-	    <h3>5¾</h3>
-      <li> 
-		<img src="images/1978/PereUbu1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Pere Ubu</h3>
-        <h3>The Modern Dance</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1978/PattiSmith1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Patti Smith Group</h3>
-        <h3>Easter</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1978/Ramones1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Ramones</h3>
-        <h3>Road to Ruin</h3>
-	    <h3>5½</h3>
-      <li> 
-		<img src="images/1978/RyuichiSakamoto1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Ryuichi Sakamoto</h3>
-        <h3>Thousand Knives of Ryuichi Sakamoto</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/TheJam1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Jam</h3>
-        <h3>All Mod Cons</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/Buzzcocks1978-2.jpg" width="100" height="100" alt=""/>
-        <h3>Buzzcocks</h3>
-        <h3>Another Music in a Different Kitchen</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/JeanMichelJarre1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Jean Michel Jarre</h3>
-        <h3>Equinoxe</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/Funkadelic1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Funkadelic</h3>
-        <h3>One Nation Under a Groove</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/XRaySpex1978.jpeg" width="100" height="100" alt=""/>
-        <h3>X-Ray Spex</h3>
-        <h3>Germfree Adolescents</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/ThrobbingGristle1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Throbbing Gristle</h3>
-        <h3>D.o.A: The Third and Final Report of Throbbing Gristle</h3>
-	    <h3>5¼</h3>
-      <li> 
-		<img src="images/1978/Magazine1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Magazine</h3>
-        <h3>Real Life</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1978/Buzzcocks1978.jpg" width="100" height="100" alt=""/>
-        <h3>Buzzcocks</h3>
-        <h3>Love Bites</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1978/JoyDivision1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Joy Division</h3>
-        <h3>An Ideal for Living</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1978/Devo1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Devo</h3>
-        <h3>Q: Are We Not Men? A: We Are Devo!</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1978/TheRollingStones1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Rolling Stones</h3>
-        <h3>Some Girls</h3>
-	    <h3>5</h3>
-      <li> 
-		<img src="images/1978/SteveReich1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Steve Reich</h3>
-        <h3>Music for 18 Musicians</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1978/BrianEno1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Brian Eno</h3>
-        <h3>Music for Films</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1978/Japan1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Japan</h3>
-        <h3>Obscure Alternatives</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1978/Moondog1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Moondog</h3>
-        <h3>H'art Songs</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1978/PereUbu1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Pere Ubu</h3>
-        <h3>Dub Housing</h3>
-	    <h3>4¾</h3>
-      <li> 
-		<img src="images/1978/VanHalen1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Van Halen</h3>
-        <h3>Van Halen</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1978/PeterGabriel1978.jpeg" width="100" height="100" alt=""/>
-        <h3>David Gilmour</h3>
-        <h3>David Gilmour</h3>
-	    <h3>4½</h3>
-      <li> 
-		<img src="images/1978/PeterGabriel1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Peter Gabriel</h3>
-        <h3>Peter Gabriel</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1978/Queen1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Queen</h3>
-        <h3>Jazz</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1978/Television1978.jpg" width="100" height="100" alt=""/>
-        <h3>Television</h3>
-        <h3>Adventure</h3>
-	    <h3>4¼</h3>
-      <li> 
-		<img src="images/1978/PinkLady1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Pink Lady</h3>
-        <h3>Hoshi Kara Kita Futari</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/BigStar1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Big Star</h3>
-        <h3>3rd</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/VariousNoNewYork1978.jpg" width="100" height="100" alt=""/>
-        <h3>Contortions / Teenage Jesus & The Jerks / Mars / D.N.A.</h3>
-        <h3>No New York</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/ACDC1978.jpeg" width="100" height="100" alt=""/>
-        <h3>AC/DC</h3>
-        <h3>Powerage</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/TomRobinsonBand1978.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Robinson Band</h3>
-        <h3>Power in the Darkness</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/TheClash1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Clash</h3>
-        <h3>Give 'Em Enough Rope</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/SteveHackett1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Steve Hackett</h3>
-        <h3>Please Don't Touch</h3>
-	    <h3>4</h3>
-      <li> 
-		<img src="images/1978/TangerineDream1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Tangerine Dream</h3>
-        <h3>Cyclone</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1978/LouReed1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Lou Reed</h3>
-        <h3>Street Hassle</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1978/DeadBoys1978.jpg" width="100" height="100" alt=""/>
-        <h3>Dead Boys</h3>
-        <h3>We Have Come for Your Children</h3>
-	    <h3>3¾</h3>
-      <li> 
-		<img src="images/1978/TaekoOhnuki1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Taeko Ohnuki</h3>
-        <h3>Mignonne</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/Ultravox1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Ultravox</h3>
-        <h3>Systems of Romance</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/PatMethenyGroup1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Pat Metheny Group</h3>
-        <h3>Pat Metheny Group</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/Vangelis1978.jpg" width="100" height="100" alt=""/>
-        <h3>Vangelis</h3>
-        <h3>Hypothesis</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/Japan1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Japan</h3>
-        <h3>Adolescent Sex</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/BryanFerry1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Bryan Ferry</h3>
-        <h3>The Bride Stripped Bare</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/GilScottHeron1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Gil Scott-Heron / Brian Jackson</h3>
-        <h3>Secrets</h3>
-	    <h3>3½</h3>
-      <li> 
-		<img src="images/1978/SiouxsieAndTheBanshees1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Siouxsie & The Banshees</h3>
-        <h3>The Scream</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/Wings1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Wings</h3>
-        <h3>London Town</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/Scorpions1978.jpg" width="100" height="100" alt=""/>
-        <h3>Scorpions</h3>
-        <h3>Taken by Force</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/BillEvans1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Bill Evans</h3>
-        <h3>New Conversations</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/SuziQuatro1978.jpg" width="100" height="100" alt=""/>
-        <h3>Suzi Quatro</h3>
-        <h3>If You Knew Suzi</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/JohnCooperClarke1978.jpg" width="100" height="100" alt=""/>
-        <h3>John Cooper Clarke</h3>
-        <h3>Disguise in Love</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/Toto1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Toto</h3>
-        <h3>Toto</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/Prince1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Prince</h3>
-        <h3>For You</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/JudasPriest1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Judas Priest</h3>
-        <h3>Stained Class</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/BlackSabbath1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Black Sabbath</h3>
-        <h3>Never Say Die!</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/Sweet1978.jpg" width="100" height="100" alt=""/>
-        <h3>Sweet</h3>
-        <h3>Level Headed</h3>
-	    <h3>3¼</h3>
-      <li> 
-		<img src="images/1978/VytautasKernagis1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Vytautas Kernagis</h3>
-        <h3>Vytautas Kernagis</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/Sham691978.jpeg" width="100" height="100" alt=""/>
-        <h3>Sham 69</h3>
-        <h3>That's Life</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/TubewayArmy1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Tubeway Army</h3>
-        <h3>Tubeway Army</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/HaruomiHosono1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Haruomi Hosono / Shigeru Suzuki / Tatsuro Yamashita</h3>
-        <h3>Pacific</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/JimMorrison1978.jpg" width="100" height="100" alt=""/>
-        <h3>Jim Morrison</h3>
-        <h3>An American Prayer</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/JudasPriest1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Judas Priest</h3>
-        <h3>Killing Machine</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/HerbEllis1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Herb Ellis / Remo Palmier</h3>
-        <h3>Windflower</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/JethroTull1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Jethro Tull</h3>
-        <h3>Heavy Horses</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/TheMisfits1978.jpg" width="100" height="100" alt=""/>
-        <h3>The Misfits</h3>
-        <h3>Bullet</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/Vangelis1978-2.jpg" width="100" height="100" alt=""/>
-        <h3>Vangelis</h3>
-        <h3>The Dragon</h3>
-	    <h3>3</h3>
-      <li> 
-		<img src="images/1978/TomPetty1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Tom Petty & The Heartbreakers</h3>
-        <h3>You're Gonna Get It!</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/AlternativeTV1978.jpg" width="100" height="100" alt=""/>
-        <h3>Alternative TV</h3>
-        <h3>The Image Has Cracked</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/CaetanoVeloso1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Caetano Veloso</h3>
-        <h3>Muito (Dentro da Estrela Azulada)</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/CliffRichard1978-2.jpg" width="100" height="100" alt=""/>
-        <h3>Cliff Richard</h3>
-        <h3>Small Corners</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/RickJames1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Rick James & The Stone City Band</h3>
-        <h3>Come Get It!</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/Genesis1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Genesis</h3>
-        <h3>...And Then There Were Three...</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/FairportConvention1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Fairport Convention</h3>
-        <h3>Tipplers Tales</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/Sham691978-2.jpg" width="100" height="100" alt=""/>
-        <h3>Sham 69</h3>
-        <h3>Tell Us the Truth</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/TheSaints1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Saints</h3>
-        <h3>Eternally Yours</h3>
-	    <h3>2¾</h3>
-      <li> 
-		<img src="images/1978/ChicoBuarque1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Chico Buarque</h3>
-        <h3>Chico Buarque</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1978/GeinohYamashirogumi1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Geinoh Yamashirogumi</h3>
-        <h3>Ōgonrin Sanyō</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1978/Journey1978.jpg" width="100" height="100" alt=""/>
-        <h3>Journey</h3>
-        <h3>Infinity</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1978/TheWho1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Who</h3>
-        <h3>Who Are You</h3>
-	    <h3>2½</h3>
-      <li> 
-		<img src="images/1978/EnoMoebiusRoedelius1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Eno Moebius Roedelius</h3>
-        <h3>After the Heat</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/PharoahSanders1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Pharoah Sanders</h3>
-        <h3>Love Will Find a Way</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/BobDylan1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Bob Dylan</h3>
-        <h3>Street-Legal</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/BrunoSpoerri1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Bruno Spoerri</h3>
-        <h3>Voice of Taurus</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/Foreigner1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Foreigner</h3>
-        <h3>Double Vision</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/GaryMoore1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Gary Moore</h3>
-        <h3>Back on the Streets</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/BillEvans1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Bill Evans Trio</h3>
-        <h3>Crosscurrents</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/Boston1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Boston</h3>
-        <h3>Don't Look Back</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/TheSaints1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>The Saints</h3>
-        <h3>Prehistoric Sounds</h3>
-	    <h3>2¼</h3>
-      <li> 
-		<img src="images/1978/QuietRiot1978.jpg" width="100" height="100" alt=""/>
-        <h3>Quiet Riot</h3>
-        <h3>Quiet Riot</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/AceFrehley1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Ace Frehley</h3>
-        <h3>Ace Frehley</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/TownesVanZandt1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Townes Van Zandt</h3>
-        <h3>Flyin' Shoes</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/Heart1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Heart</h3>
-        <h3>Magazine</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/ChakaKhan1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Chaka Khan</h3>
-        <h3>Chaka</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/TinaTurner1978.jpg" width="100" height="100" alt=""/>
-        <h3>Tina Turner</h3>
-        <h3>Rough</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/PopolVuh1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Popol Vuh</h3>
-        <h3>Nosferatu: Brüder des Schattens - Söhne des Lichts</h3>
-	    <h3>2</h3>
-      <li> 
-		<img src="images/1978/XTC1978.jpeg" width="100" height="100" alt=""/>
-        <h3>XTC</h3>
-        <h3>White Music</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/TheResidents1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The Residents</h3>
-        <h3>Duck Stab / Buster & Glen</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/NeilYoung1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Neil Young</h3>
-        <h3>Comes a Time</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/HallAndOates1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Hall & Oates</h3>
-        <h3>Along the Red Ledge</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/Squeeze1978.jpg" width="100" height="100" alt=""/>
-        <h3>Squeeze</h3>
-        <h3>Squeeze</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/Heart1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Heart</h3>
-        <h3>Dog & Butterfly</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/CliffRichard1978.jpg" width="100" height="100" alt=""/>
-        <h3>Cliff Richard</h3>
-        <h3>Green Light</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/DustySpringfield1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Dusty Springfield</h3>
-        <h3>It Begins Again</h3>
-	    <h3>1¾</h3>
-      <li> 
-		<img src="images/1978/MomoeYamaguchi1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>Cosmos</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/MomoeYamaguchi1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>Dramatic</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/DollyParton1978.jpg" width="100" height="100" alt=""/>
-        <h3>Dolly Parton</h3>
-        <h3>Heartbreaker</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/TheOJays1978.jpeg" width="100" height="100" alt=""/>
-        <h3>The O'Jays</h3>
-        <h3>So Full of Love</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/REOSpeedwagon1978.jpeg" width="100" height="100" alt=""/>
-        <h3>REO Speedwagon</h3>
-        <h3>You Can Tune a Piano, But You Can't Tuna Fish</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/AliceCooper1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Alice Cooper</h3>
-        <h3>From the Inside</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/BillEvans1978-3.jpeg" width="100" height="100" alt=""/>
-        <h3>Bill Evans / Philly Joe Jones</h3>
-        <h3>Green Dolphin Street</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/GeneSimmons1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Gene Simmons</h3>
-        <h3>Gene Simmons</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/EltonJohn1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Elton John</h3>
-        <h3>A Single Man</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/MarianneFaithfull1978.jpg" width="100" height="100" alt=""/>
-        <h3>Marianne Faithfull</h3>
-        <h3>Faithless</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/CockSparrer1978.jpg" width="100" height="100" alt=""/>
-        <h3>Cock Sparrer</h3>
-        <h3>Cock Sparrer</h3>
-	    <h3>1½</h3>
-      <li> 
-		<img src="images/1978/Yes1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Yes</h3>
-        <h3>Tormato</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1978/GraceJones1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Grace Jones</h3>
-        <h3>Fame</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1978/XTC1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>XTC</h3>
-        <h3>Go 2</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1978/Can1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Can</h3>
-        <h3>Out of Reach</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1978/TatsuroYamashita1978.jpg" width="100" height="100" alt=""/>
-        <h3>Tatsuro Yamashita</h3>
-        <h3>Go Ahead!</h3>
-	    <h3>1¼</h3>
-      <li> 
-		<img src="images/1978/BoneyM1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Boney M.</h3>
-        <h3>Nightflight to Venus</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/JunkoYagami1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Junko Yagami</h3>
-        <h3>Omoide Wa Utsukushisugite</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/KCAndTheSunshineBand1978.jpeg" width="100" height="100" alt=""/>
-        <h3>KC and The Sunshine Band</h3>
-        <h3>Who Do Ya (Love)</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/PaulStanley1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Paul Stanley</h3>
-        <h3>Paul Stanley</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/Anri1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Anri</h3>
-        <h3>Apricot Jam</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/PinkLady1978-2.jpeg" width="100" height="100" alt=""/>
-        <h3>Pink Lady</h3>
-        <h3>Katsudo Daishashin</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/FrancoiseHardy1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Françoise Hardy</h3>
-        <h3>Musique Saoûle</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/Vangelis1978-3.jpg" width="100" height="100" alt=""/>
-        <h3>Vangelis</h3>
-        <h3>Beaubourg</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/Commodores1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Commodores</h3>
-        <h3>Natural High</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/MomoeYamaguchi1978-3.jpeg" width="100" height="100" alt=""/>
-        <h3>Momoe Yamaguchi</h3>
-        <h3>Hatachino Kinen Hi Manjushaka</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/MariyaTakeuchi1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Mariya Takeuchi</h3>
-        <h3>Beginning</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/TomJones1978.jpg" width="100" height="100" alt=""/>
-        <h3>Tom Jones</h3>
-        <h3>What a Night</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/Darts1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Darts</h3>
-        <h3>Everyone Plays Darts</h3>
-	    <h3>1</h3>
-      <li> 
-		<img src="images/1978/VanMorrison1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Van Morrison</h3>
-        <h3>Wavelength</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1978/PeterCriss1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Peter Criss</h3>
-        <h3>Peter Criss</h3>
-	    <h3>0¾</h3>
-      <li> 
-		<img src="images/1978/RingoStarr1978.jpeg" width="100" height="100" alt=""/>
-        <h3>Ringo Starr</h3>
-        <h3>Bad Boy</h3>
-	    <h3>0¾</h3>
-      </li><!-- Repeat for the rest of the albums -->
-    </ol>
-  </main>
-    
+<main><ol>
+<h1>1978: Albums of the Year</h1>
+
+<!-- ALBUM LIST STARTS HERE -->
+
+<li><div class="album"><div class="album-rating">9</div>
+  <div class="album-cover"><img src="images/1978/KateBush1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kate Bush</h3>
+    <h3>The Kick Inside</h3>
+    <h3>9</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¾</div>
+  <div class="album-cover"><img src="images/1978/Wire1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Wire</h3>
+    <h3>Chairs Missing</h3>
+    <h3>7¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7½</div>
+  <div class="album-cover"><img src="images/1978/Rush1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Rush</h3>
+    <h3>Hemispheres</h3>
+    <h3>7½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7¼</div>
+  <div class="album-cover"><img src="images/1978/ElvisCostello1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Elvis Costello</h3>
+    <h3>This Year's Model</h3>
+    <h3>7¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1978/Blondie1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Blondie</h3>
+    <h3>Parallel Lines</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1978/BruceSpringsteen1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bruce Springsteen</h3>
+    <h3>Darkness on the Edge of Town</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1978/BrianEno1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>Ambient 1: Music for Airports</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">7</div>
+  <div class="album-cover"><img src="images/1978/TalkingHeads1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Talking Heads</h3>
+    <h3>More Songs About Buildings and Food</h3>
+    <h3>7</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1978/Chic1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Chic</h3>
+    <h3>C'est Chic</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1978/Kraftwerk1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Kraftwerk</h3>
+    <h3>The Man-Machine</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¾</div>
+  <div class="album-cover"><img src="images/1978/ThePolice1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Police</h3>
+    <h3>Outlandos d'Amour</h3>
+    <h3>6¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6½</div>
+  <div class="album-cover"><img src="images/1978/TheCars1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Cars</h3>
+    <h3>The Cars</h3>
+    <h3>6½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1978/PublicImageLtd1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Public Image Ltd</h3>
+    <h3>Public Image</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6¼</div>
+  <div class="album-cover"><img src="images/1978/YellowMagicOrchestra1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Yellow Magic Orchestra</h3>
+    <h3>Yellow Magic Orchestra</h3>
+    <h3>6¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1978/TomWaits1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tom Waits</h3>
+    <h3>Blue Valentine</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1978/DireStraits1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Dire Straits</h3>
+    <h3>Dire Straits</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">6</div>
+  <div class="album-cover"><img src="images/1978/Blondie1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Blondie</h3>
+    <h3>Plastic Letters</h3>
+    <h3>6</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1978/RobbieBasho1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Robbie Basho</h3>
+    <h3>Visions of the Country</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¾</div>
+  <div class="album-cover"><img src="images/1978/KateBush1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Kate Bush</h3>
+    <h3>Lionheart</h3>
+    <h3>5¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1978/PereUbu1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pere Ubu</h3>
+    <h3>The Modern Dance</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1978/PattiSmith1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Patti Smith Group</h3>
+    <h3>Easter</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5½</div>
+  <div class="album-cover"><img src="images/1978/Ramones1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ramones</h3>
+    <h3>Road to Ruin</h3>
+    <h3>5½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/RyuichiSakamoto1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ryuichi Sakamoto</h3>
+    <h3>Thousand Knives of Ryuichi Sakamoto</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/TheJam1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Jam</h3>
+    <h3>All Mod Cons</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/Buzzcocks1978-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Buzzcocks</h3>
+    <h3>Another Music in a Different Kitchen</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/JeanMichelJarre1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jean Michel Jarre</h3>
+    <h3>Equinoxe</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/Funkadelic1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Funkadelic</h3>
+    <h3>One Nation Under a Groove</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/XRaySpex1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>X-Ray Spex</h3>
+    <h3>Germfree Adolescents</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5¼</div>
+  <div class="album-cover"><img src="images/1978/ThrobbingGristle1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Throbbing Gristle</h3>
+    <h3>D.o.A: The Third and Final Report of Throbbing Gristle</h3>
+    <h3>5¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1978/Magazine1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Magazine</h3>
+    <h3>Real Life</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1978/Buzzcocks1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Buzzcocks</h3>
+    <h3>Love Bites</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1978/JoyDivision1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Joy Division</h3>
+    <h3>An Ideal for Living</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1978/Devo1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Devo</h3>
+    <h3>Q: Are We Not Men? A: We Are Devo!</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">5</div>
+  <div class="album-cover"><img src="images/1978/TheRollingStones1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Rolling Stones</h3>
+    <h3>Some Girls</h3>
+    <h3>5</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1978/SteveReich1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Steve Reich</h3>
+    <h3>Music for 18 Musicians</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1978/BrianEno1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Brian Eno</h3>
+    <h3>Music for Films</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1978/Japan1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Japan</h3>
+    <h3>Obscure Alternatives</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1978/Moondog1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Moondog</h3>
+    <h3>H'art Songs</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¾</div>
+  <div class="album-cover"><img src="images/1978/PereUbu1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pere Ubu</h3>
+    <h3>Dub Housing</h3>
+    <h3>4¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1978/VanHalen1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Van Halen</h3>
+    <h3>Van Halen</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4½</div>
+  <div class="album-cover"><img src="images/1978/PeterGabriel1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>David Gilmour</h3>
+    <h3>David Gilmour</h3>
+    <h3>4½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1978/PeterGabriel1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Peter Gabriel</h3>
+    <h3>Peter Gabriel</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1978/Queen1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Queen</h3>
+    <h3>Jazz</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4¼</div>
+  <div class="album-cover"><img src="images/1978/Television1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Television</h3>
+    <h3>Adventure</h3>
+    <h3>4¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/PinkLady1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pink Lady</h3>
+    <h3>Hoshi Kara Kita Futari</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/BigStar1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Big Star</h3>
+    <h3>3rd</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/VariousNoNewYork1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Contortions / Teenage Jesus & The Jerks / Mars / D.N.A.</h3>
+    <h3>No New York</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/ACDC1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>AC/DC</h3>
+    <h3>Powerage</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/TomRobinsonBand1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Robinson Band</h3>
+    <h3>Power in the Darkness</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/TheClash1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Clash</h3>
+    <h3>Give 'Em Enough Rope</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">4</div>
+  <div class="album-cover"><img src="images/1978/SteveHackett1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Steve Hackett</h3>
+    <h3>Please Don't Touch</h3>
+    <h3>4</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1978/TangerineDream1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tangerine Dream</h3>
+    <h3>Cyclone</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1978/LouReed1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Lou Reed</h3>
+    <h3>Street Hassle</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¾</div>
+  <div class="album-cover"><img src="images/1978/DeadBoys1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Dead Boys</h3>
+    <h3>We Have Come for Your Children</h3>
+    <h3>3¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/TaekoOhnuki1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Taeko Ohnuki</h3>
+    <h3>Mignonne</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/Ultravox1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ultravox</h3>
+    <h3>Systems of Romance</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/PatMethenyGroup1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pat Metheny Group</h3>
+    <h3>Pat Metheny Group</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/Vangelis1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Vangelis</h3>
+    <h3>Hypothesis</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/Japan1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Japan</h3>
+    <h3>Adolescent Sex</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/BryanFerry1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bryan Ferry</h3>
+    <h3>The Bride Stripped Bare</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3½</div>
+  <div class="album-cover"><img src="images/1978/GilScottHeron1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gil Scott-Heron / Brian Jackson</h3>
+    <h3>Secrets</h3>
+    <h3>3½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/SiouxsieAndTheBanshees1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Siouxsie & The Banshees</h3>
+    <h3>The Scream</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/Wings1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Wings</h3>
+    <h3>London Town</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/Scorpions1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Scorpions</h3>
+    <h3>Taken by Force</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/BillEvans1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans</h3>
+    <h3>New Conversations</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/SuziQuatro1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Suzi Quatro</h3>
+    <h3>If You Knew Suzi</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/JohnCooperClarke1978.jpg" alt="" /></div><div class="album-text">
+    <h3>John Cooper Clarke</h3>
+    <h3>Disguise in Love</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/Toto1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Toto</h3>
+    <h3>Toto</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/Prince1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Prince</h3>
+    <h3>For You</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/JudasPriest1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Judas Priest</h3>
+    <h3>Stained Class</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/BlackSabbath1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Black Sabbath</h3>
+    <h3>Never Say Die!</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3¼</div>
+  <div class="album-cover"><img src="images/1978/Sweet1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Sweet</h3>
+    <h3>Level Headed</h3>
+    <h3>3¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/VytautasKernagis1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Vytautas Kernagis</h3>
+    <h3>Vytautas Kernagis</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/Sham691978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Sham 69</h3>
+    <h3>That's Life</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/TubewayArmy1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tubeway Army</h3>
+    <h3>Tubeway Army</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/HaruomiHosono1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Haruomi Hosono / Shigeru Suzuki / Tatsuro Yamashita</h3>
+    <h3>Pacific</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/JimMorrison1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Jim Morrison</h3>
+    <h3>An American Prayer</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/JudasPriest1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Judas Priest</h3>
+    <h3>Killing Machine</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/HerbEllis1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Herb Ellis / Remo Palmier</h3>
+    <h3>Windflower</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/JethroTull1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Jethro Tull</h3>
+    <h3>Heavy Horses</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/TheMisfits1978.jpg" alt="" /></div><div class="album-text">
+    <h3>The Misfits</h3>
+    <h3>Bullet</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">3</div>
+  <div class="album-cover"><img src="images/1978/Vangelis1978-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Vangelis</h3>
+    <h3>The Dragon</h3>
+    <h3>3</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/TomPetty1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Tom Petty & The Heartbreakers</h3>
+    <h3>You're Gonna Get It!</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/AlternativeTV1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Alternative TV</h3>
+    <h3>The Image Has Cracked</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/CaetanoVeloso1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Caetano Veloso</h3>
+    <h3>Muito (Dentro da Estrela Azulada)</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/CliffRichard1978-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Cliff Richard</h3>
+    <h3>Small Corners</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/RickJames1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Rick James & The Stone City Band</h3>
+    <h3>Come Get It!</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/Genesis1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Genesis</h3>
+    <h3>...And Then There Were Three...</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/FairportConvention1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Fairport Convention</h3>
+    <h3>Tipplers Tales</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/Sham691978-2.jpg" alt="" /></div><div class="album-text">
+    <h3>Sham 69</h3>
+    <h3>Tell Us the Truth</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¾</div>
+  <div class="album-cover"><img src="images/1978/TheSaints1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Saints</h3>
+    <h3>Eternally Yours</h3>
+    <h3>2¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1978/ChicoBuarque1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Chico Buarque</h3>
+    <h3>Chico Buarque</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1978/GeinohYamashirogumi1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Geinoh Yamashirogumi</h3>
+    <h3>Ōgonrin Sanyō</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1978/Journey1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Journey</h3>
+    <h3>Infinity</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/1978/TheWho1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Who</h3>
+    <h3>Who Are You</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/EnoMoebiusRoedelius1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Eno Moebius Roedelius</h3>
+    <h3>After the Heat</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/PharoahSanders1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pharoah Sanders</h3>
+    <h3>Love Will Find a Way</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/BobDylan1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bob Dylan</h3>
+    <h3>Street-Legal</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/BrunoSpoerri1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bruno Spoerri</h3>
+    <h3>Voice of Taurus</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/Foreigner1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Foreigner</h3>
+    <h3>Double Vision</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/GaryMoore1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gary Moore</h3>
+    <h3>Back on the Streets</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/BillEvans1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans Trio</h3>
+    <h3>Crosscurrents</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/Boston1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Boston</h3>
+    <h3>Don't Look Back</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2¼</div>
+  <div class="album-cover"><img src="images/1978/TheSaints1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Saints</h3>
+    <h3>Prehistoric Sounds</h3>
+    <h3>2¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/QuietRiot1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Quiet Riot</h3>
+    <h3>Quiet Riot</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/AceFrehley1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ace Frehley</h3>
+    <h3>Ace Frehley</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/TownesVanZandt1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Townes Van Zandt</h3>
+    <h3>Flyin' Shoes</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/Heart1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Heart</h3>
+    <h3>Magazine</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/ChakaKhan1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Chaka Khan</h3>
+    <h3>Chaka</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/TinaTurner1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Tina Turner</h3>
+    <h3>Rough</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/1978/PopolVuh1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Popol Vuh</h3>
+    <h3>Nosferatu: Brüder des Schattens - Söhne des Lichts</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/XTC1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>XTC</h3>
+    <h3>White Music</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/TheResidents1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The Residents</h3>
+    <h3>Duck Stab / Buster & Glen</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/NeilYoung1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Neil Young</h3>
+    <h3>Comes a Time</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/HallAndOates1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Hall & Oates</h3>
+    <h3>Along the Red Ledge</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/Squeeze1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Squeeze</h3>
+    <h3>Squeeze</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/Heart1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Heart</h3>
+    <h3>Dog & Butterfly</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/CliffRichard1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Cliff Richard</h3>
+    <h3>Green Light</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¾</div>
+  <div class="album-cover"><img src="images/1978/DustySpringfield1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Dusty Springfield</h3>
+    <h3>It Begins Again</h3>
+    <h3>1¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/MomoeYamaguchi1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>Cosmos</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/MomoeYamaguchi1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>Dramatic</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/DollyParton1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Dolly Parton</h3>
+    <h3>Heartbreaker</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/TheOJays1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>The O'Jays</h3>
+    <h3>So Full of Love</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/REOSpeedwagon1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>REO Speedwagon</h3>
+    <h3>You Can Tune a Piano, But You Can't Tuna Fish</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/AliceCooper1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Alice Cooper</h3>
+    <h3>From the Inside</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/BillEvans1978-3.jpeg" alt="" /></div><div class="album-text">
+    <h3>Bill Evans / Philly Joe Jones</h3>
+    <h3>Green Dolphin Street</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/GeneSimmons1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Gene Simmons</h3>
+    <h3>Gene Simmons</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/EltonJohn1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Elton John</h3>
+    <h3>A Single Man</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/MarianneFaithfull1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Marianne Faithfull</h3>
+    <h3>Faithless</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1½</div>
+  <div class="album-cover"><img src="images/1978/CockSparrer1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Cock Sparrer</h3>
+    <h3>Cock Sparrer</h3>
+    <h3>1½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1978/Yes1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Yes</h3>
+    <h3>Tormato</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1978/GraceJones1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Grace Jones</h3>
+    <h3>Fame</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1978/XTC1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>XTC</h3>
+    <h3>Go 2</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1978/Can1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Can</h3>
+    <h3>Out of Reach</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1¼</div>
+  <div class="album-cover"><img src="images/1978/TatsuroYamashita1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Tatsuro Yamashita</h3>
+    <h3>Go Ahead!</h3>
+    <h3>1¼</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/BoneyM1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Boney M.</h3>
+    <h3>Nightflight to Venus</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/JunkoYagami1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Junko Yagami</h3>
+    <h3>Omoide Wa Utsukushisugite</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/KCAndTheSunshineBand1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>KC and The Sunshine Band</h3>
+    <h3>Who Do Ya (Love)</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/PaulStanley1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Paul Stanley</h3>
+    <h3>Paul Stanley</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/Anri1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Anri</h3>
+    <h3>Apricot Jam</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/PinkLady1978-2.jpeg" alt="" /></div><div class="album-text">
+    <h3>Pink Lady</h3>
+    <h3>Katsudo Daishashin</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/FrancoiseHardy1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Françoise Hardy</h3>
+    <h3>Musique Saoûle</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/Vangelis1978-3.jpg" alt="" /></div><div class="album-text">
+    <h3>Vangelis</h3>
+    <h3>Beaubourg</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/Commodores1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Commodores</h3>
+    <h3>Natural High</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/MomoeYamaguchi1978-3.jpeg" alt="" /></div><div class="album-text">
+    <h3>Momoe Yamaguchi</h3>
+    <h3>Hatachino Kinen Hi Manjushaka</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/MariyaTakeuchi1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Mariya Takeuchi</h3>
+    <h3>Beginning</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/TomJones1978.jpg" alt="" /></div><div class="album-text">
+    <h3>Tom Jones</h3>
+    <h3>What a Night</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">1</div>
+  <div class="album-cover"><img src="images/1978/Darts1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Darts</h3>
+    <h3>Everyone Plays Darts</h3>
+    <h3>1</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1978/VanMorrison1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Van Morrison</h3>
+    <h3>Wavelength</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1978/PeterCriss1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Peter Criss</h3>
+    <h3>Peter Criss</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">0¾</div>
+  <div class="album-cover"><img src="images/1978/RingoStarr1978.jpeg" alt="" /></div><div class="album-text">
+    <h3>Ringo Starr</h3>
+    <h3>Bad Boy</h3>
+    <h3>0¾</h3>
+      </div></div></li>
+
+</ol></main>
+
+
+<!-- Modal -->
+
+<!--<div id="modal" class="modal-overlay">
+    <div class="modal-content">
+      <span id="modal-close" class="modal-close">&times;</span>
+      <p id="modal-text"></p>
+    </div></div> */-->
+
+
   <footer>
-    <p>&copy; 1978 Albums of the Year</p>
-</footer>
+    <p>© 1978 The Key of Life. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalText = document.getElementById('modal-text');
+    const modalClose = document.getElementById('modal-close');
+
+    // Show modal with review & rating on album click
+    document.querySelectorAll('.album').forEach(album => {
+      album.addEventListener('click', () => {
+        const review = album.getAttribute('data-review');
+        const rating = album.getAttribute('data-rating');
+        modalText.innerHTML = `<p>${review}</p><p><strong>Rating:</strong> ${rating}</p>`;
+        modal.classList.add('active');
+      });
+    });
+
+    // Close modal on clicking close button or outside modal-content
+    modalClose.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.classList.remove('active');
+      }
+    });
+  </script>
 </body>
 </html>
