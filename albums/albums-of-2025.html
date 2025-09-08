@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -27,10 +27,10 @@ body {
 }
 
 .site-title {
-  text-align: center;
-  font-size: 40px;
-  margin: 0 0 20px 0;
+  margin: 0;
+  font-size: 36px;
   font-weight: bold;
+  font-family: "Avenir Next Cyr Thin", sans-serif;
   font-style: normal;
 }
 
@@ -116,28 +116,28 @@ main ol {
   align-items: flex-start;
   margin-bottom: -55px;
   padding: 12px 20px;
-  border-top: 1px solid #242424;   /* thickness and colour of box's top border */
-  border-bottom: 1px solid #444;   /* thickness and colour of box's bottom border */
-  gap: 24px;                       /* gap between the album cover and the text to the right of it */
-  height: 100px;                   /* the height of the unhovered box */
-  overflow: hidden;                /* hides the text that overflows the box */
-  cursor: pointer;                 /* changes the cursor when hovering over the album box */
+  border-top: 1px solid #242424;    /* thickness and colour of box's top border */
+  border-bottom: 1px solid #444;    /* thickness and colour of box's bottom border */
+  gap: 24px;                          /* gap between the album cover and the text to the right of it */
+  height: 100px;                      /* the height of the unhovered box */
+  overflow: hidden;                   /* hides the text that overflows the box */
+  cursor: pointer;                    /* changes the cursor when hovering over the album box */
   position: relative;
-  background-color: #111;          /* changes the colour of the unhovered box */
-  border-radius: 8px;              /* rounds the box corners for a soft vignette effect */
+  background-color: #111;           /* changes the colour of the unhovered box */
+  border-radius: 8px;                 /* rounds the box corners for a soft vignette effect */
   z-index: 1;
-  width: 100%;                     /* the width of the album container box */
-  margin-left: 0%;                 /* offset of the album container box to make it centered */
+  width: 100%;                        /* the width of the album container box */
+  margin-left: 0%;                    /* offset of the album container box to make it centered */
   box-sizing: border-box;
   transition: 
-    height 1s ease, /* how low it takes for the hovered box to expand */
-    margin-bottom 1s ease, /* how quickly the boxes beneath move out of the when the hovered box is expanded */
-    background-color 2s ease; /* how long it takes to reach the new colour when hovered */
+    height 1s ease,                   /* how low it takes for the hovered box to expand */
+    margin-bottom 1s ease,            /* how quickly the boxes beneath move out of the when the hovered box is expanded */
+    background-color 2s ease;         /* how long it takes to reach the new colour when hovered */
 }
 
 .album:last-child:hover { /* HOVERED ALBUM BOX SETTINGS */
-  height: 146px;                                        /* the height of the hovered box */
-  margin-bottom: 10px;                                  /* how much space is left from the bottom of the hovered box until the next box */
+  height: 146px;                                          /* the height of the hovered box */
+  margin-bottom: 10px;                                    /* how much space is left from the bottom of the hovered box until the next box */
   z-index: 10;
   box-shadow: 0 10px 20px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
   border: 1px solid #ccc;                               /* changes the thickness and colour of the hovered box's border */
@@ -148,17 +148,17 @@ main ol {
   position: relative;
 }
 .album img { /* ALBUM IMAGE SETTINGS */
-  width: 120px; /* sets the image's horizontal size */
-  height: 120px; /* sets the image's vertical size */
-  border-radius: 12px; /* rounds the corners for a soft vignette effect */
-  transition: /* smoothly animates size/transform changes */
+  width: 120px;             /* sets the image's horizontal size */
+  height: 120px;            /* sets the image's vertical size */
+  border-radius: 12px;      /* rounds the corners for a soft vignette effect */
+  transition:               /* smoothly animates size/transform changes */
     width 0.4s ease,
     height 0.4s ease,
     transform 0.4s ease;
-  flex-shrink: 0; /* prevents the image from shrinking in flex box */
+  flex-shrink: 0;           /* prevents the image from shrinking in flex box */
 }
-.album:hover img { /* HOVERED ALBUM IMAGE SETTINGS */
-  transform: scale(1.1); /* scale by which the image enlarges when hovered */
+.album:hover img {          /* HOVERED ALBUM IMAGE SETTINGS */
+  transform: scale(1.1);    /* scale by which the image enlarges when hovered */
 }
 
 .album-rating {
@@ -214,14 +214,6 @@ main ol {
   width: 100%;                             /* ensures background spans full page */
 }
 
-.site-title {
-  margin: 0;
-  font-size: 36px;
-  font-weight: bold;
-  font-family: "Avenir Next Cyr Thin", sans-serif;
-  font-style: normal;
-}
-
 .nav-links { /* LINK TO OTHER YEARS SETTINGS */
   list-style-type: none;     /* remove bullet points */
   padding-left: 0;           /* remove left padding */
@@ -239,14 +231,14 @@ main ol {
   background-color: #rgba(0, 0, 0, 0.1);   /* dark background */
   color: #ccc;                             /* text color */
   border-radius: 8px;                      /* rounds the box corners for a soft vignette effect */
-  text-align: center;
-  font-size: 14px;
-  font-style: normal;
+  text-align: center;                      /* center the text */
+  font-size: 14px;                         /* font size */
+  font-style: normal;                      /* font style */
   font-weight: 300;
   text-decoration: none;                   /* remove underline */
   transition: background-color 2s, border-color 1s, color 0.3s;
 }
-.nav-links a:hover {
+.nav-links a:hover { /* LINK TO OTHER YEARS SETTINGS WHEN HOVERED */
   box-shadow: 0 0 10px rgba(255, 255, 255, 0.223);   /* changes the size and colour of the hovered box's shadow */
   background-color: #444;                            /* highlight on hover */
   border-color: #ccc;
@@ -1643,6 +1635,12 @@ main ol {
     <h3>2½</h3>
       </div></div></li>
 <li><div class="album"><div class="album-rating">2½</div>
+  <div class="album-cover"><img src="images/2025/TheBeths2025.jpg" alt="" /></div><div class="album-text">
+    <h3>The Beths</h3>
+    <h3>Straight Line Was a Lie</h3>
+    <h3>2½</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2½</div>
   <div class="album-cover"><img src="images/2025/NourishedByTime2025.jpg" alt="" /></div><div class="album-text">
     <h3>Nourished by Time</h3>
     <h3>The Passionate Ones</h3>
@@ -1688,12 +1686,6 @@ main ol {
   <div class="album-cover"><img src="images/2025/LawrenceEnglish2025.jpg" alt="" /></div><div class="album-text">
     <h3>Lawrence English</h3>
     <h3>Even the Horizon Knows Its Bounds</h3>
-    <h3>2½</h3>
-      </div></div></li>
-<li><div class="album"><div class="album-rating">2½</div>
-  <div class="album-cover"><img src="images/2025/TheBeths2025.jpg" alt="" /></div><div class="album-text">
-    <h3>The Beths</h3>
-    <h3>Straight Line Was a Lie</h3>
     <h3>2½</h3>
       </div></div></li>
 <li><div class="album"><div class="album-rating">2½</div>
@@ -2099,6 +2091,12 @@ main ol {
     <h3>2</h3>
       </div></div></li>
 <li><div class="album"><div class="album-rating">2</div>
+  <div class="album-cover"><img src="images/2025/MileyCyrus2025.jpg" alt=""/></div><div class="album-text">
+    <h3>Miley Cyrus</h3>
+    <h3>Something Beautiful</h3>
+    <h3>2</h3>
+      </div></div></li>
+<li><div class="album"><div class="album-rating">2</div>
   <div class="album-cover"><img src="images/2025/Sombr2025.jpg" alt=""/></div><div class="album-text">
     <h3>Sombr</h3>
     <h3>I Barely Know Her</h3>
@@ -2120,12 +2118,6 @@ main ol {
   <div class="album-cover"><img src="images/2025/Chuu2025.jpg" alt=""/></div><div class="album-text">
     <h3>Chuu</h3>
     <h3>Only Cry in the Rain</h3>
-    <h3>2</h3>
-      </div></div></li>
-<li><div class="album"><div class="album-rating">2</div>
-  <div class="album-cover"><img src="images/2025/MileyCyrus2025.jpg" alt=""/></div><div class="album-text">
-    <h3>Miley Cyrus</h3>
-    <h3>Something Beautiful</h3>
     <h3>2</h3>
       </div></div></li>
 <li><div class="album"><div class="album-rating">2</div>
