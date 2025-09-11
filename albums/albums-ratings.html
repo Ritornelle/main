@@ -27,38 +27,68 @@
 
     <script>
         // Array of paths to your HTML pages
-        const pages = ['page1.html', 'page2.html']; // Replace with actual paths to your pages
+        const pages = ['albums-of-2025.html', 'albums-of-2024.html', 'albums-of-2023']; // Replace with actual paths to your pages
 
-        async function fetchAlbumData() {
-            const albumList = document.getElementById('albumList');
+async function fetchAlbumData() {
+    const albumList = document.getElementById('albumList');
+    const allAlbums = []; // Array to collect all albums before sorting
 
-            for (const page of pages) {
-                try {
-                    const response = await fetch(page);
-                    if (!response.ok) throw new Error(`Failed to fetch ${page}`);
-                    const text = await response.text();
-                    const parser = new DOMParser();
-                    const doc = parser.parseFromString(text, 'text/html');
+    // Helper function to parse ratings with fractions to decimal
+    function parseRating(ratingText) {
+        const text = ratingText.trim();
+        
+        // Replace fraction symbols with decimal equivalents
+        let normalized = text
+            .replace(/¾/g, '.75')
+            .replace(/½/g, '.5')
+            .replace(/¼/g, '.25')
+            // Add more if needed, e.g., .replace(/⅓/g, '.\overline{3}') but approximate if desired
+        
+        // Now parse as float (handles decimals/integers too)
+        const rating = parseFloat(normalized);
+        
+        // Return only if valid
+        return isNaN(rating) ? null : rating;
+    }
 
-                    // Select all album elements
-                    const albums = doc.querySelectorAll('.album');
+    for (const page of pages) {
+        try {
+            const response = await fetch(page);
+            if (!response.ok) throw new Error(`Failed to fetch ${page}`);
+            const text = await response.text();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(text, 'text/html');
 
-                    albums.forEach(album => {
-                        const rating = album.querySelector('.album-rating').textContent;
-                        const artist = album.querySelector('.album-text h3:nth-child(1)').textContent;
-                        const albumName = album.querySelector('.album-text h3:nth-child(2)').textContent;
+            // Select all album elements
+            const albums = doc.querySelectorAll('.album');
 
-                        // Create list item for each album
-                        const li = document.createElement('li');
-                        li.className = 'album-item';
-                        li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: ${rating})`;
-                        albumList.appendChild(li);
-                    });
-                } catch (error) {
-                    console.error(`Error processing ${page}:`, error);
+            albums.forEach(album => {
+                const ratingText = album.querySelector('.album-rating').textContent.trim();
+                const artist = album.querySelector('.album-text h3:nth-child(1)').textContent.trim();
+                const albumName = album.querySelector('.album-text h3:nth-child(2)').textContent.trim();
+                const rating = parseRating(ratingText); // Use custom parser
+
+                // Only add if parsing succeeded
+                if (rating !== null) {
+                    allAlbums.push({ artist, albumName, rating, ratingText });
                 }
-            }
+            });
+        } catch (error) {
+            console.error(`Error processing ${page}:`, error);
         }
+    }
+
+    // Sort by rating descending (highest first)
+    allAlbums.sort((a, b) => b.rating - a.rating);
+
+    // Now append the sorted items to the list
+    allAlbums.forEach(({ artist, albumName, ratingText }) => {
+        const li = document.createElement('li');
+        li.className = 'album-item';
+        li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: ${ratingText})`;
+        albumList.appendChild(li);
+    });
+}
 
         // Run the function when the page loads
         window.onload = fetchAlbumData;
