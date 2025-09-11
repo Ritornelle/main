@@ -14,7 +14,7 @@
             padding: 0;
         }
         .album-item {
-            margin-bottom: 10px;
+            margin-bottom: 8px;
         }
         .album-item span {
             font-weight: bold;
@@ -85,7 +85,7 @@ async function fetchAlbumData() {
   //+++ const filteredAlbums = allAlbums.filter(album => album.rating === 5.25);
 
     // Now append the filtered items to the list
-    allAlbums.forEach(({ artist, albumName, ratingText }) => {
+    allAlbums.forEach(({ artist, albumName, ratingText }) => { // Change filteredAlbums to allAlbums to show all
         const li = document.createElement('li');
         li.className = 'album-item';
         li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: ${ratingText})`;
