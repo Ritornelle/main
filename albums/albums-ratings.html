@@ -27,7 +27,7 @@
 
     <script>
         // Array of paths to your HTML pages
-        const pages = ['albums-of-2025.html', 'albums-of-2024.html', 'albums-of-2023']; // Replace with actual paths to your pages
+        const pages = ['albums-of-2025.html', 'albums-of-2024.html', 'albums-of-2023', 'albums-of-2022']; // Replace with actual paths to your pages
 
 async function fetchAlbumData() {
     const albumList = document.getElementById('albumList');
@@ -78,10 +78,13 @@ async function fetchAlbumData() {
         }
     }
 
-    // Sort by rating descending (highest first)
+    // Sort by rating descending (highest first) - keeps order stable for same ratings
     allAlbums.sort((a, b) => b.rating - a.rating);
 
-    // Now append the sorted items to the list
+    // Filter to only show entries with rating exactly 5¼ (5.25)
+  //+++ const filteredAlbums = allAlbums.filter(album => album.rating === 5.25);
+
+    // Now append the filtered items to the list
     allAlbums.forEach(({ artist, albumName, ratingText }) => {
         const li = document.createElement('li');
         li.className = 'album-item';
