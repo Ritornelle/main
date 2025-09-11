@@ -27,7 +27,7 @@
 
     <script>
         // Array of paths to your HTML pages
-        const pages = ['https://ritornelle.github.io/main/albums/albums-of-2025.html', 'albums-of-2024.html']; // Replace with actual paths to your pages
+        const pages = ['page1.html', 'page2.html']; // Replace with actual paths to your pages
 
         async function fetchAlbumData() {
             const albumList = document.getElementById('albumList');
@@ -44,10 +44,7 @@
                     const albums = doc.querySelectorAll('.album');
 
                     albums.forEach(album => {
-                        const rating = album.querySelector('.album-rating').textContent.trim();
-                        if (rating !== '7¼') {
-                        return;  // Skip this album if rating is not 7¼
-                        const ratingNum = parseInt(rating, 10);
+                        const rating = album.querySelector('.album-rating').textContent;
                         const artist = album.querySelector('.album-text h3:nth-child(1)').textContent;
                         const albumName = album.querySelector('.album-text h3:nth-child(2)').textContent;
 
