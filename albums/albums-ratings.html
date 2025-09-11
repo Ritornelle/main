@@ -25,53 +25,46 @@
     <h1>Album Ratings</h1>
     <ul id="albumList" class="album-list"></ul>
 
-<script>
-    const pages = ['albums-of-2025.html', 'albums-of-2024.html']; // Replace with actual paths
+    <script>
+        // Array of paths to your HTML pages
+        const pages = ['https://ritornelle.github.io/main/albums/albums-of-2025.html', 'albums-of-2024.html']; // Replace with actual paths to your pages
 
-    async function fetchAlbumData() {
-        const albumList = document.getElementById('albumList');
+        async function fetchAlbumData() {
+            const albumList = document.getElementById('albumList');
 
-        for (const page of pages) {
-            try {
-                const response = await fetch(page);
-                if (!response.ok) throw new Error(`Failed to fetch ${page}`);
-                const text = await response.text();
+            for (const page of pages) {
+                try {
+                    const response = await fetch(page);
+                    if (!response.ok) throw new Error(`Failed to fetch ${page}`);
+                    const text = await response.text();
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(text, 'text/html');
 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(text, 'text/html');
+                    // Select all album elements
+                    const albums = doc.querySelectorAll('.album');
 
-                const albums = doc.querySelectorAll('.album');
+                    albums.forEach(album => {
+                        const rating = album.querySelector('.album-rating').textContent.trim();
+                        if (rating !== '7¼') {
+                        return;  // Skip this album if rating is not 7¼
+                        const ratingNum = parseInt(rating, 10);
+                        const artist = album.querySelector('.album-text h3:nth-child(1)').textContent;
+                        const albumName = album.querySelector('.album-text h3:nth-child(2)').textContent;
 
-                albums.forEach(album => {
-                    let rating = album.querySelector('.album-rating').textContent;
-
-                    // Normalize rating for safer comparison
-                    rating = rating
-                        .normalize('NFKC')       // Normalize Unicode forms
-                        .replace(/\s+/g, '')     // Remove *all* whitespace, including NBSP
-                        .toLowerCase();          // Just in case of letter ratings later
-
-                    if (rating !== '7¼') return; // Skip albums that aren't exactly 7¼
-
-                    // Extract artist and album info
-                    const artist = album.querySelector('.album-text h3:nth-child(1)')?.textContent.trim() || 'Unknown Artist';
-                    const albumName = album.querySelector('.album-text h3:nth-child(2)')?.textContent.trim() || 'Unknown Album';
-
-                    // Create and append list item
-                    const li = document.createElement('li');
-                    li.className = 'album-item';
-                    li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: 7¼)`;
-                    albumList.appendChild(li);
-                });
-
-            } catch (error) {
-                console.error(`Error processing ${page}:`, error);
+                        // Create list item for each album
+                        const li = document.createElement('li');
+                        li.className = 'album-item';
+                        li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: ${rating})`;
+                        albumList.appendChild(li);
+                    });
+                } catch (error) {
+                    console.error(`Error processing ${page}:`, error);
+                }
             }
         }
-    }
 
-    window.onload = fetchAlbumData;
-</script>
-
+        // Run the function when the page loads
+        window.onload = fetchAlbumData;
+    </script>
 </body>
 </html>
