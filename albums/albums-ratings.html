@@ -57,8 +57,7 @@ async function fetchAlbumData() {
         let normalized = text
             .replace(/¾/g, '.75')
             .replace(/½/g, '.5')
-            .replace(/¼/g, '.25')
-            // Add more if needed, e.g., .replace(/⅓/g, '.\overline{3}') but approximate if desired
+            .replace(/¼/g, '.25');
         
         // Now parse as float (handles decimals/integers too)
         const rating = parseFloat(normalized);
@@ -102,20 +101,29 @@ async function fetchAlbumData() {
         return a.artist.localeCompare(b.artist); // Secondary: alphabetical by artist
     });
 
-    // Filter to only show entries with rating exactly 5¼ (5.25)
-  //+++ const filteredAlbums = allAlbums.filter(album => album.rating === 5.25);
+    // Now append the items to the list, adding a blank line between rating changes
+    let previousRating = null;
+    allAlbums.forEach(({ artist, albumName, ratingText, rating }, index) => {
+        // Add a blank line if the rating has changed (and it's not the first item)
+        if (previousRating !== null && rating !== previousRating) {
+            const blankLi = document.createElement('li');
+            blankLi.style.height = '1em'; // Adjust height for spacing
+            albumList.appendChild(blankLi);
+        }
 
-    // Now append the filtered items to the list
-    allAlbums.forEach(({ artist, albumName, ratingText }) => { // Change filteredAlbums to allAlbums to show all
+        // Create and append the album item
         const li = document.createElement('li');
         li.className = 'album-item';
         li.innerHTML = `<span>${artist}</span> - ${albumName} (Rating: ${ratingText})`;
         albumList.appendChild(li);
+
+        // Update the previous rating
+        previousRating = rating;
     });
 }
 
         // Run the function when the page loads
         window.onload = fetchAlbumData;
-    </script>
+</script>
 </body>
 </html>
